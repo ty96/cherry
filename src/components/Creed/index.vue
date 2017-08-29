@@ -65,4 +65,14 @@
     margin: auto;
     display: block;
   }
+
+  @media (max-width: 1366px) {
+    .creed h1 {
+      margin: 60px 120px -60px;
+    }
+
+    .box {
+      padding: 100px 120px 12px;
+    }
+  }
 </style>

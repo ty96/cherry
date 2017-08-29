@@ -33,13 +33,13 @@
   }
 
   .card img {
-    width: 210px;
-    height: 210px;
+    width: 240px;
+    height: 240px;
     display: inline-block;
   }
 
   .detail {
-    width: 250px;
+    width: 260px;
     padding-left: 20px;
     display: inline-block;
     vertical-align: top;
@@ -48,7 +48,7 @@
   .detail h4 {
     color: #444;
     font-size: 20px;
-    margin-top: -8px;
+    margin-top: 10px;
   }
 
   .detail p {
@@ -67,5 +67,16 @@
     padding: 0 14px;
     margin: 3px 6px 3px 0;
     border: 2px solid #fef5f5;
+  }
+
+  @media (max-width: 1366px) {
+    .card img {
+      width: 210px;
+      height: 210px;
+    }
+
+    .detail h4 {
+      margin-top: -8px;
+    }
   }
 </style>

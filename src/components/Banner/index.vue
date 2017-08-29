@@ -55,6 +55,10 @@
     display: inline-block;
   }
 
+  .swiper img {
+    width: 100%;
+  }
+
   .pagination {
     position: absolute;
     left: 50%;

@@ -1,7 +1,6 @@
 <template>
   <div>
-    <CHeader @showOrder="showOrder"></CHeader>
-    <Order :show="order" :form="true"></Order>
+    <CHeader></CHeader>
     <CTitle
       :height="360"
       :unique="true"
@@ -23,7 +22,6 @@
   import Service from './Service'
   import CFooter from './CFooter'
   import Shot from './Shot'
-  import Order from './Order'
 
   export default {
     name: 'hello',
@@ -37,19 +35,11 @@
       Wechat,
       Service,
       CFooter,
-      Shot,
-      Order
-    },
-
-    methods: {
-      showOrder (bool) {
-        this.order = bool
-      }
+      Shot
     },
 
     data () {
       return {
-        order: false,
         images: [
           'http://toxni.com/content/images/2017/07/--.png',
           'http://toxni.com/content/images/2017/07/--.png',

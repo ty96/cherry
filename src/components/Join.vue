@@ -1,7 +1,6 @@
 <template>
   <div>
-    <CHeader @showOrder="showOrder"></CHeader>
-    <Order :show="order" :form="true"></Order>
+    <CHeader></CHeader>
     <CTitle
       title="人才招聘"
       desc="招聘优秀人才，让樱桃家居不断成长"
@@ -21,11 +20,9 @@
   import Service from './Service'
   import CFooter from './CFooter'
   import Recruit from './Recruit'
-  import Order from './Order'
 
   export default {
     name: 'join',
-
     components: {
       CHeader,
       CTitle,
@@ -35,19 +32,10 @@
       Wechat,
       Service,
       CFooter,
-      Recruit,
-      Order
+      Recruit
     },
-
-    methods: {
-      showOrder (bool) {
-        this.order = bool
-      }
-    },
-
     data () {
       return {
-        order: false,
         data: [
           {
             name: '家具顾问',

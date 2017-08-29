@@ -58,4 +58,10 @@
     text-align: left;
     margin: 30px auto 100px;
   }
+
+  @media (max-width: 1366px) {
+    .order {
+      padding: 0 120px;
+    }
+  }
 </style>

@@ -60,8 +60,11 @@
 
 <style scoped>
   .order {
-    z-index: -1;
+    z-index: 2;
+    width: 100%;
     padding: 20px 150px;
+    background: rgba(255, 255, 255, 0.9);
+    box-sizing: border-box;
     border-top: 1px solid #f6f6f6;
     transition: marginTop 1s ease 0s;
   }
@@ -74,6 +77,7 @@
   .type a {
     width: 160px;
     display: inline-block;
+    line-height: 1;
   }
 
   .type img {
@@ -91,6 +95,7 @@
 
   .form {
     text-align: right;
+    color: #636363;
   }
 
   .form span {

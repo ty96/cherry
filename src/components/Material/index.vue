@@ -51,7 +51,7 @@
   }
 
   .card {
-    width: 560px;
+    width: 500px;
     margin-top: 30px;
     margin-bottom: 66px;
   }
@@ -60,7 +60,7 @@
     width: 180px;
     height: 180px;
     display: inline-block;
-    margin-right: 60px;
+    margin-right: 30px;
   }
 
   .card > div {
@@ -75,8 +75,13 @@
   .card p {
     color: #999;
     font-size: 16px;
-    width: 300px;
+    width: 280px;
     text-indent: 2em;
   }
 
+  @media (max-width: 1366px) {
+    .material {
+      padding: 40px 120px;
+    }
+  }
 </style>

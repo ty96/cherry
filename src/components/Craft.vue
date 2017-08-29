@@ -1,7 +1,6 @@
 <template>
   <div>
-    <CHeader @showOrder="showOrder"></CHeader>
-    <Order :show="order" :form="true"></Order>
+    <CHeader></CHeader>
     <CTitle
       title="工艺"
       desc="来自樱桃家具的工艺保证，还原最优质实木体验"
@@ -27,7 +26,6 @@
   import Wood from './Wood'
   import Shot from './Shot'
   import Material from './Material'
-  import Order from './Order'
 
   export default {
     name: 'hello',
@@ -44,14 +42,7 @@
       CStyle,
       Wood,
       Shot,
-      Material,
-      Order
-    },
-
-    methods: {
-      showOrder (bool) {
-        this.order = bool
-      }
+      Material
     },
 
     data () {

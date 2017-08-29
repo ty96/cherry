@@ -101,4 +101,15 @@
   .price p {
     color: #b2b2b2;
   }
+
+  @media (max-width: 1366px) {
+    .shot {
+      padding: 40px 120px;
+    }
+
+    .images img {
+      width: 210px;
+      height: 210px;
+    }
+  }
 </style>

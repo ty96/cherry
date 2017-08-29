@@ -30,7 +30,10 @@
     </div>
     <div class="menu">
       <a href="#/">首页</a>
-      <a href="#/products">家具产品</a>
+      <a @mouseover="showOrder" @mouseout="hideOrder">
+        家具产品
+        <Order :show="order" :form="false" class="order"></Order>
+      </a>
       <a href="#/cases">案例</a>
       <a href="#/craft">工艺</a>
       <a href="#/join">人才招聘</a>
@@ -41,15 +44,34 @@
 </template>
 
 <script>
+  import Order from '../Order'
+
   export default {
-    name: 'footer'
+    name: 'footer',
+    components: {
+      Order
+    },
+    methods: {
+      showOrder () {
+        this.order = true
+      },
+      hideOrder () {
+        this.order = false
+      }
+    },
+
+    data () {
+      return {
+        order: false
+      }
+    }
   }
 </script>
 
 <style scoped>
   .about {
     display: flex;
-    padding: 64px 160px 80px;
+    padding: 64px 150px 80px;
     justify-content: space-between;
     align-items: baseline;
     background: #f7f7f7;
@@ -121,17 +143,37 @@
   .menu {
     text-align: center;
     background: #fcfcfc;
-    padding: 18px 0 24px;
+    padding-bottom: 4px;
+    position: relative;
   }
 
   .menu a {
     color: #636363;
     padding: 0 36px;
-    border-right: solid 1px #ccc;
+    height: 64px;
+    line-height: 64px;
+    position: relative;
   }
 
-  .menu a:last-child {
-    border: none;
+  .menu a:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    height: 14px;
+    width: 1px;
+    background: #ccc;
+    margin: 25px 0;
+  }
+
+  .menu a:last-child:after {
+    display: none;
+  }
+
+  .order {
+    bottom: 64px;
+    left: 0;
+    z-index: 9;
+    position: absolute;
   }
 
   .copyright {
@@ -141,4 +183,10 @@
     margin: 20px auto 25px;
   }
 
+
+  @media (max-width: 1366px) {
+    .about {
+      padding: 64px 120px 80px;
+    }
+  }
 </style>

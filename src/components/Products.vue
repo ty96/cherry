@@ -1,7 +1,6 @@
 <template>
   <div>
-    <CHeader @showOrder="showOrder"></CHeader>
-    <Order :show="order" :form="true"></Order>
+    <CHeader></CHeader>
     <CTitle
       title="家具产品"
       desc="源自樱桃木的魅力，展现真实木质纹理效果"
@@ -17,9 +16,9 @@
     >
       <a v-for="(item, index) in data.slice(i * 4 - 4, i * 4)" :href="'#/goods/' + item.id" :key="index"><Item :data="item"></Item></a>
       <template v-if="data.slice(i * 4 - 4, i * 4).length % 4">
-        <Item class="blank"></Item>
-        <Item class="blank"></Item>
-        <Item class="blank"></Item>
+        <Item class="blank" v-if="data.slice(i * 4 - 4, i * 4).length % 4 <= 3"></Item>
+        <Item class="blank" v-if="data.slice(i * 4 - 4, i * 4).length % 4 <= 2"></Item>
+        <Item class="blank" v-if="data.slice(i * 4 - 4, i * 4).length % 4 <= 1"></Item>
       </template>
     </div>
     <CFooter></CFooter>
@@ -36,11 +35,9 @@
   import Service from './Service'
   import CFooter from './CFooter'
   import Item from './Item'
-  import Order from './Order'
 
   export default {
     name: 'products',
-
     components: {
       CHeader,
       CTitle,
@@ -50,16 +47,8 @@
       Wechat,
       Service,
       CFooter,
-      Item,
-      Order
+      Item
     },
-
-    methods: {
-      showOrder (bool) {
-        this.order = bool
-      }
-    },
-
     data () {
       return {
         order: false,
@@ -192,5 +181,11 @@
 
   .pink {
     background: #fef5f5;
+  }
+
+  @media (max-width: 1366px) {
+    .items {
+      padding: 0 120px;
+    }
   }
 </style>

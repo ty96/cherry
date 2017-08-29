@@ -73,10 +73,14 @@
   .more {
     margin-top: 140px;
   }
-</style>
 
-<style>
   .pink {
     background: #fef5f5;
+  }
+
+  @media (max-width: 1366px) {
+    .shop {
+      padding: 82px 120px;
+    }
   }
 </style>

@@ -1,7 +1,6 @@
 <template>
   <div>
-    <CHeader @showOrder="showOrder"></CHeader>
-    <Order :show="order" :form="true"></Order>
+    <CHeader></CHeader>
     <CTitle
       title="案例"
       desc="樱桃家具成功案例，让你感受不同的视觉盛宴"
@@ -27,7 +26,6 @@
   import Service from './Service'
   import CFooter from './CFooter'
   import Card from './Card'
-  import Order from './Order'
 
   export default {
     name: 'cases',
@@ -41,14 +39,7 @@
       Wechat,
       Service,
       CFooter,
-      Card,
-      Order
-    },
-
-    methods: {
-      showOrder (bool) {
-        this.order = bool
-      }
+      Card
     },
 
     data () {
@@ -159,5 +150,11 @@
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: flex-start;
+  }
+
+  @media (max-width: 1366px) {
+    .cards {
+      padding: 30px 120px;
+    }
   }
 </style>

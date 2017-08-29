@@ -112,4 +112,19 @@
     margin: 70px;
     text-align: center;
   }
+
+  @media (max-width: 1366px) {
+    .swiper img {
+      width: 380px;
+      height: 210px;
+    }
+
+    .box {
+      margin-left: -200px;
+    }
+
+    .arr {
+      top: 43%;
+    }
+  }
 </style>

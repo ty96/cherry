@@ -1,33 +1,52 @@
 <template>
-  <div class="header">
-    <div>
-      <a href="#/">首页</a>
-      <a href="#/products">家具产品</a>
-      <a href="#/cases">案例</a>
+  <div>
+    <div class="header">
+      <div>
+        <a href="#/">首页</a>
+        <a href="" @mouseover="showOrder" @mouseout="hideOrder">
+          家具产品
+          <Order :show="order" :form="false" class="menu"></Order>
+        </a>
+        <a href="#/cases">案例</a>
+      </div>
+      <a class="logo" href="#/"><img src="../../assets/logo.png"></a>
+      <div>
+        <a href="#/craft">工艺</a>
+        <a href="#/about">关于</a>
+        <a class="admin" @click="toggleSelect"><img src="./assets/images/admin.svg"></a>
+      </div>
     </div>
-    <a class="logo" href="#/"><img src="../../assets/logo.png"></a>
-    <div>
-      <a href="#/craft">工艺</a>
-      <a href="#/about">关于</a>
-      <a class="admin" @click="showOrder"><img src="./assets/images/admin.svg"></a>
-    </div>
+    <Order :show="form" :form="true" class="menu"></Order>
   </div>
 </template>
 
 <script>
+  import Order from '../Order'
+
   export default {
     name: 'header',
+    components: {
+      Order
+    },
 
     methods: {
       showOrder () {
-        this.order = !this.order
-        this.$emit('showOrder', this.order)
+        this.form = false
+        this.order = true
+      },
+      hideOrder () {
+        this.order = false
+      },
+      toggleSelect () {
+        this.order = false
+        this.form = !this.form
       }
     },
 
     data () {
       return {
-        order: false
+        order: false,
+        form: false
       }
     },
 
@@ -46,10 +65,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
   }
 
   .header a {
     width: 80px;
+    height: 100px;
+    line-height: 100px;
     margin: 0 20px;
     text-align: center;
     display: inline-block;
@@ -63,5 +85,12 @@
   .admin img {
     width: 24px;
     height: 24px;
+  }
+
+  .menu {
+    top: 100px;
+    left: 0;
+    z-index: 9;
+    position: absolute;
   }
 </style>

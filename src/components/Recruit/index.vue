@@ -78,4 +78,10 @@
     font-size: 16px;
     margin: 20px 0 28px;
   }
+
+  @media (max-width: 1366px) {
+    .join {
+      padding: 12px 120px 20px;
+    }
+  }
 </style>

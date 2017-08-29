@@ -1,7 +1,6 @@
 <template>
   <div>
-    <CHeader @showOrder="showOrder"></CHeader>
-    <Order :show="order" :form="true"></Order>
+    <CHeader></CHeader>
     <Banner></Banner>
     <Creed></Creed>
     <Sale></Sale>
@@ -21,7 +20,6 @@
   import Wechat from './Wechat'
   import Service from './Service'
   import CFooter from './CFooter'
-  import Order from './Order'
 
   export default {
     name: 'hello',
@@ -34,21 +32,7 @@
       Shop,
       Wechat,
       Service,
-      CFooter,
-      Order
-    },
-
-    methods: {
-      showOrder (bool) {
-        this.order = bool
-      }
-    },
-
-    data () {
-      return {
-        order: false,
-        select: false
-      }
+      CFooter
     }
   }
 </script>

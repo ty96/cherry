@@ -6,7 +6,7 @@
       <p>可选木材材质：</p>
       <Wood :select="1" class="type"></Wood>
       <p>可选尺寸：<span>{{size}}</span></p>
-      <a @click="showOrder"><CButton text="购买咨询"></CButton></a>
+      <a><CButton text="购买咨询"></CButton></a>
       <span class="price">{{price}}</span>
     </div>
     <img :src="image">
@@ -24,17 +24,8 @@
       Wood,
       CButton
     },
-
-    methods: {
-      showOrder () {
-        this.select = !this.select
-        this.$emit('showSelect', this.select)
-      }
-    },
-
     data () {
       return {
-        select: false,
         price: '￥1199',
         size: '1延米 2延米',
         name: '黑凤梨 原素系列柜式实木茶几',
@@ -84,5 +75,11 @@
     font-size: 36px;
     float: right;
     margin-right: 72px;
+  }
+
+  @media (max-width: 1366px) {
+    .show {
+      padding: 40px 120px;
+    }
   }
 </style>

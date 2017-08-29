@@ -83,4 +83,26 @@
     max-width: 540px;
     line-height: 1.8em;
   }
+
+  @media (max-width: 1366px) {
+    .style {
+      padding: 40px 120px;
+      background: #fef5f5;
+    }
+
+    .tri img {
+      width: 300px;
+      height: 200px;
+    }
+
+    .double img {
+      width: 458px;
+      height: 200px;
+    }
+
+    .tri p,
+    .double p {
+      max-width: 458px;
+    }
+  }
 </style>

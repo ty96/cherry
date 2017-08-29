@@ -98,7 +98,6 @@
 </script>
 
 <style scoped>
-
   .container {
     padding: 40px 150px;
   }
@@ -162,4 +161,13 @@
     font-size: 16px;
   }
 
+  @media (max-width: 1366px) {
+    .container {
+      padding: 40px 120px;
+    }
+
+    .tips {
+      padding: 40px 120px;
+    }
+  }
 </style>
