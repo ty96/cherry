@@ -1,30 +1,62 @@
 <template>
-  <div class="service">
-    <h1>服务流程</h1>
-    <div class="order">
-      <div>
-        <img src="./assets/images/paper.svg">
-        <p>通过网页或电话预约服务，记录基本联系信息。</p>
+  <div
+    class="service"
+    :style="{'background': fix ? '#fef5f5' : 'white'}"
+  >
+    <template v-if="!fix">
+      <h1>服务流程</h1>
+      <div class="order">
+        <div>
+          <img src="./assets/images/paper.svg">
+          <p>通过网页或电话预约服务，记录基本联系信息。</p>
+        </div>
+        <div>
+          <img src="./assets/images/ruler.svg">
+          <p>樱桃团队上门进行专业测量，为您的需求量“房”定制。</p>
+        </div>
+        <div>
+          <img src="./assets/images/copy.svg">
+          <p>提供多种优质解决方案，您可到店内与我们共同确定合适之选。</p>
+        </div>
+        <div>
+          <img src="./assets/images/tools.svg">
+          <p>家装材料准备，樱桃团队将进场施工，完毕后将享受最优售后服务。</p>
+        </div>
       </div>
-      <div>
-        <img src="./assets/images/ruler.svg">
-        <p>樱桃团队上门进行专业测量，为您的需求量“房”定制。</p>
+    </template>
+    <template v-else="!fix">
+      <h1>维护保养</h1>
+      <div class="order">
+        <div>
+          <img src="./assets/images/paper.svg">
+          <p>通过网页或电话预约服务，记录基本联系信息。</p>
+        </div>
+        <div>
+          <img src="./assets/images/leaf.svg">
+          <p>樱桃团队上门进行专业测量，为您的需求量“房”定制。</p>
+        </div>
+        <div>
+          <img src="./assets/images/ruler.svg">
+          <p>提供多种优质解决方案，您可到店内与我们共同确定合适之选。</p>
+        </div>
+        <div>
+          <img src="./assets/images/tri.svg">
+          <p>家装材料准备，樱桃团队将进场施工，完毕后将享受最优售后服务。</p>
+        </div>
       </div>
-      <div>
-        <img src="./assets/images/copy.svg">
-        <p>提供多种优质解决方案，您可到店内与我们共同确定合适之选。</p>
-      </div>
-      <div>
-        <img src="./assets/images/tools.svg">
-        <p>家装材料准备，樱桃团队将进场施工，完毕后将享受最优售后服务。</p>
-      </div>
-    </div>
+    </template>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'service'
+    name: 'service',
+    props: {
+      fix: {
+        type: Boolean,
+        default: false
+      }
+    }
   }
 </script>
 
@@ -37,7 +69,7 @@
     color: #444444;
     font-size: 32px;
     text-align: center;
-    margin: 72px 0 60px;
+    padding: 72px 0 60px;
   }
 
   .order {

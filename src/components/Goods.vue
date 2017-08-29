@@ -4,6 +4,7 @@
     <Show></Show>
     <Params></Params>
     <div class="intro" v-html="intro"></div>
+    <Service :fix="true"></Service>
     <CFooter></CFooter>
   </div>
 </template>

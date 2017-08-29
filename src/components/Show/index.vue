@@ -6,7 +6,7 @@
       <p>可选木材材质：</p>
       <Wood :select="1" class="type"></Wood>
       <p>可选尺寸：<span>{{size}}</span></p>
-      <a><CButton text="购买咨询"></CButton></a>
+      <a @click="buy"><CButton text="购买咨询"></CButton></a>
       <span class="price">{{price}}</span>
     </div>
     <img :src="image">
@@ -23,6 +23,11 @@
     components: {
       Wood,
       CButton
+    },
+    methods: {
+      buy () {
+        document.getElementById('admin').click()
+      }
     },
     data () {
       return {

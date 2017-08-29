@@ -74,6 +74,8 @@
           'http://toxni.com/content/images/2017/07/--.png',
           'http://toxni.com/content/images/2017/07/--.png',
           'http://toxni.com/content/images/2017/07/--.png',
+          'http://toxni.com/content/images/2017/07/--.png',
+          'http://toxni.com/content/images/2017/07/--.png',
           'http://toxni.com/content/images/2017/07/--.png'
         ],
         title: '工艺实拍',

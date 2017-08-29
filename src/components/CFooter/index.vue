@@ -30,10 +30,6 @@
     </div>
     <div class="menu">
       <a href="#/">首页</a>
-      <a @mouseover="showOrder" @mouseout="hideOrder">
-        家具产品
-        <Order :show="order" :form="false" class="order"></Order>
-      </a>
       <a href="#/cases">案例</a>
       <a href="#/craft">工艺</a>
       <a href="#/join">人才招聘</a>
@@ -44,27 +40,8 @@
 </template>
 
 <script>
-  import Order from '../Order'
-
   export default {
-    name: 'footer',
-    components: {
-      Order
-    },
-    methods: {
-      showOrder () {
-        this.order = true
-      },
-      hideOrder () {
-        this.order = false
-      }
-    },
-
-    data () {
-      return {
-        order: false
-      }
-    }
+    name: 'footer'
   }
 </script>
 
@@ -144,7 +121,6 @@
     text-align: center;
     background: #fcfcfc;
     padding-bottom: 4px;
-    position: relative;
   }
 
   .menu a {
@@ -167,13 +143,6 @@
 
   .menu a:last-child:after {
     display: none;
-  }
-
-  .order {
-    bottom: 64px;
-    left: 0;
-    z-index: 9;
-    position: absolute;
   }
 
   .copyright {

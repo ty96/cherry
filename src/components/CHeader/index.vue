@@ -13,7 +13,7 @@
       <div>
         <a href="#/craft">工艺</a>
         <a href="#/about">关于</a>
-        <a class="admin" @click="toggleSelect"><img src="./assets/images/admin.svg"></a>
+        <a class="admin" id="admin" @click="toggleSelect"><img src="./assets/images/admin.svg"></a>
       </div>
     </div>
     <Order :show="form" :form="true" class="menu"></Order>
@@ -80,6 +80,10 @@
 
   .logo {
     height: 75px;
+  }
+
+  .logo img {
+    margin-top: 12px;
   }
 
   .admin img {
