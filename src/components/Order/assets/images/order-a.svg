@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 3 Copy 4</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="26.25" y="29.375" width="6.875" height="1.25"></rect>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="首页---家具展开" transform="translate(-150.000000, -120.000000)">
+            <g id="menu" transform="translate(0.000000, 100.000000)">
+                <g id="Group-3-Copy-4" transform="translate(150.000000, 20.000000)">
+                    <g id="Group-10">
+                        <path d="M36.5,39 L3.5,39 L3.5,21.25 L3.5,20.25 L2.5,20.25 L1,20.25 L1,18.5 L39,18.5 L39,20.25 L37.5,20.25 L36.5,20.25 L36.5,21.25 L36.5,39 Z" id="Combined-Shape" stroke="#FFB8B8" stroke-width="2"></path>
+                        <rect id="Rectangle-15" fill="#FFB8B8" x="3.75" y="20" width="32.5" height="1.25"></rect>
+                        <rect id="Rectangle-16" fill="#FFB8B8" opacity="0.4" x="5.625" y="23.125" width="17.5" height="13.75"></rect>
+                        <rect id="Rectangle-16" fill="#FFB8B8" opacity="0.4" x="23.125" y="2.5" width="14.375" height="4.375"></rect>
+                        <rect id="Rectangle-16-Copy" fill="#FFB8B8" opacity="0.4" x="7.5" y="2.5" width="14.375" height="4.375"></rect>
+                        <rect id="Rectangle-17" stroke="#FFB8B8" stroke-width="2" x="26" y="24.125" width="7.375" height="11.75"></rect>
+                        <rect id="Rectangle-19" fill="#FFB8B8" x="12.5" y="25" width="3.75" height="1.25"></rect>
+                        <rect id="Rectangle-19" fill="#FFB8B8" x="12.5" y="5" width="3.75" height="1.25"></rect>
+                        <rect id="Rectangle-19-Copy-3" fill="#FFB8B8" x="28.75" y="5" width="3.75" height="1.25"></rect>
+                        <rect id="Rectangle-19-Copy" fill="#FFB8B8" x="28.125" y="25" width="3.125" height="1.25"></rect>
+                        <rect id="Rectangle-19-Copy-2" fill="#FFB8B8" x="28.125" y="31.875" width="3.125" height="1.25"></rect>
+                        <g id="Rectangle-18">
+                            <use fill="#D8D8D8" fill-rule="evenodd" xlink:href="#path-1"></use>
+                            <rect stroke="#FFB8B8" stroke-width="1" x="26.75" y="29.875" width="5.875" height="1"></rect>
+                        </g>
+                        <path d="M7.35150685,14.75 L19.5234931,14.75 C19.4556162,15.146775 19.3558063,15.5365154 19.2199208,15.8988766 C18.7670828,17.1064447 18.0430831,17.75 16.875,17.75 L10,17.75 C8.83191692,17.75 8.10791724,17.1064447 7.65507918,15.8988766 C7.51919374,15.5365154 7.41938384,15.146775 7.35150778,14.7500001 L7.35150685,14.75 Z" id="Rectangle-20" stroke="#FFB8B8" stroke-width="2"></path>
+                        <rect id="Rectangle-21" stroke="#FFB8B8" x="1.125" y="14.875" width="5.25" height="1"></rect>
+                        <rect id="Rectangle-22" stroke="#FFB8B8" stroke-width="2" x="6" y="1" width="33" height="7.375"></rect>
+                        <polygon id="Path-18" fill-opacity="0.4" fill="#FFB8B8" points="26.25 17.8125 27.8125 12.1875 33.4375 12.1875 35 17.8125"></polygon>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

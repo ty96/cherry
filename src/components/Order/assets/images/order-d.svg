@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="40px" height="41px" viewBox="0 0 40 41" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 3 Copy 7</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="首页---家具展开" transform="translate(-869.000000, -120.000000)">
+            <g id="menu" transform="translate(0.000000, 100.000000)">
+                <g id="Group-3-Copy-7" transform="translate(870.000000, 20.000000)">
+                    <polyline id="Path-20" stroke="#FFB8B8" stroke-width="2" points="1.875 39.375 11.875 39.375 11.875 30 21.875 30 21.875 20.625 31.875 20.625 31.875 11.25 38.75 11.25"></polyline>
+                    <polyline id="Path-20" stroke-opacity="0.4" stroke="#FFB8B8" stroke-width="3" points="1.25 40 1.25 38.125 10.625 38.125 10.625 28.75 20.625 28.75 20.625 19.375 30.625 19.375 30.625 10 38.75 10"></polyline>
+                    <polygon id="Rectangle-31" fill="#FFE3E3" points="6.25 19.375 8.75 17.5 8.75 37.5 6.25 37.5"></polygon>
+                    <polygon id="Rectangle-31" fill="#FFE3E3" points="14.375 11.7578125 16.875 10 16.875 28.75 14.375 28.75"></polygon>
+                    <polygon id="Rectangle-31" fill="#FFE3E3" points="22.5 4.0234375 25 2.5 25 18.75 22.5 18.75"></polygon>
+                    <path d="M1.5625,24.0625 L25.3125,1.5625" id="Line" stroke="#FFB8B8" stroke-width="2" stroke-linecap="square"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
