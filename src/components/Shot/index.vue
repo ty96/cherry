@@ -4,7 +4,7 @@
       {{title}}
     </h1>
     <template v-if="!price">
-      <swiper :options="swiperOption" :not-next-tick="notNextTick" class="box">
+      <swiper :options="swiperOption" class="box">
         <swiper-slide v-for="(image, index) in images" class="swiper" :key="index" :style="{'width': width}">
           <img :src="image">
         </swiper-slide>

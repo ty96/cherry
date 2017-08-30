@@ -1,6 +1,6 @@
 <template>
   <div class="banner">
-    <swiper :options="swiperOption" :not-next-tick="notNextTick">
+    <swiper :options="swiperOption">
       <swiper-slide v-for="(slide, index) in swiperSlides" class="swiper" :key="index">
         <img src="./banner.jpg">
       </swiper-slide>

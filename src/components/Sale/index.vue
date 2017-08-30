@@ -2,7 +2,7 @@
   <div class="sale">
     <h1>优品热卖</h1>
     <div class="box">
-      <swiper :options="swiperOption" :not-next-tick="notNextTick">
+      <swiper :options="swiperOption">
         <swiper-slide class="swiper" v-for="(slide, index) in swiperSlides" :key="index">
           <img src="./banner.jpg">
         </swiper-slide>
