@@ -5,15 +5,27 @@ import Products from '@/components/Products'
 import Cases from '@/components/Cases'
 import Craft from '@/components/Craft'
 import About from '@/components/About'
-import Admin from '@/components/Admin'
 import Join from '@/components/Join'
 import Detail from '@/components/Detail'
 import Goods from '@/components/Goods'
+import HomeA from '@/components/HomeA'
+import ProductsA from '@/components/ProductsA'
+import CasesA from '@/components/CasesA'
+import CraftA from '@/components/CraftA'
+import AboutA from '@/components/AboutA'
+import JoinA from '@/components/JoinA'
+import DetailA from '@/components/DetailA'
+import GoodsA from '@/components/GoodsA'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
+    {
+      path: '*',
+      name: 'Home',
+      component: Home
+    },
     {
       path: '/',
       name: 'Home',
@@ -40,11 +52,6 @@ export default new Router({
       component: About
     },
     {
-      path: '/admin',
-      name: 'Admin',
-      component: Admin
-    },
-    {
       path: '/join',
       name: 'Join',
       component: Join
@@ -58,6 +65,46 @@ export default new Router({
       path: '/goods/:id',
       name: 'Goods',
       component: Goods
+    },
+    {
+      path: '/admin/home',
+      name: 'HomeA',
+      component: HomeA
+    },
+    {
+      path: '/admin/products',
+      name: 'ProductsA',
+      component: ProductsA
+    },
+    {
+      path: '/admin/cases',
+      name: 'CasesA',
+      component: CasesA
+    },
+    {
+      path: '/admin/craft',
+      name: 'CraftA',
+      component: CraftA
+    },
+    {
+      path: '/admin/about',
+      name: 'AboutA',
+      component: AboutA
+    },
+    {
+      path: '/admin/join',
+      name: 'JoinA',
+      component: JoinA
+    },
+    {
+      path: '/admin/detail/:id',
+      name: 'DetailA',
+      component: DetailA
+    },
+    {
+      path: '/admin/goods/:id',
+      name: 'GoodsA',
+      component: GoodsA
     }
   ]
 })
