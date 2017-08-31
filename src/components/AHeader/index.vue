@@ -7,13 +7,14 @@
       <a href="#/admin/craft">工艺</a>
       <a href="#/admin/about">关于</a>
       <a href="#/admin/order">访客记录</a>
-      <div class="form">
+      <div v-if="!name" class="form">
         <span>账号</span>
         <input v-model="username">
         <span>密码</span>
         <input v-model="password" type="password">
         <a @click="login"><CButton text="登入" :small="true" color="#aaa"></CButton></a>
       </div>
+      <span v-else="!name" class="name">Admin</span>
     </div>
   </div>
 </template>
@@ -34,7 +35,8 @@
     data () {
       return {
         username: '',
-        password: ''
+        password: '',
+        name: false
       }
     },
     methods: {
@@ -49,13 +51,15 @@
             body: formData
           })
             .then((res) => {
+              console.log(res)
               return res.json()
             })
             .then((data) => {
               if (data.body.msg) {
                 alert(data.body.msg)
+              } else {
+                this.name = true
               }
-              // TODO refresh()
             })
         }
       }
@@ -89,7 +93,7 @@
     flex: 1;
     text-align: right;
     color: #636363;
-    width: 800px;
+    width: 500px;
   }
 
   .form span {
@@ -105,5 +109,11 @@
     font-size: 14px;
     color: #636363;
     text-align: center;
+  }
+
+  .name {
+    color: #feafaf;
+    min-width: 500px;
+    text-align: right;
   }
 </style>
