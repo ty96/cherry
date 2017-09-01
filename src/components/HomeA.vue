@@ -138,7 +138,7 @@
       },
       upload () {
         let formData = new FormData()
-        const image = this.$refs.bannerInput.image
+        const image = this.$refs.bannerInput.file
         formData.append('image', image)
         fetch(`${root}backend/banner/upload/`, {
           method: 'POST',
