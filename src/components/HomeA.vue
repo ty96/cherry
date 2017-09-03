@@ -160,7 +160,7 @@
 <style scoped>
   h1 {
     font-size: 20px;
-    padding: 40px 150px;
+    padding: 80px 150px 20px;
     color: #444;
   }
 
@@ -236,15 +236,8 @@
     }
 
     h1 {
-      padding: 30px 120px;
+      padding: 80px 120px 20px;
     }
   }
 
-</style>
-
-<style>
-  .btn {
-    color: #444;
-    width: 80px;
-  }
 </style>

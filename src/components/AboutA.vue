@@ -17,28 +17,28 @@
 
     <h1>人才招聘</h1>
     <div class="hr">
-      <input placeholder="添加人才名称" class="type">
+      <input placeholder="添加人才名称" class="type" v-model="name">
       <div>
         <div class="require">
-          <input placeholder="添加要求大项">
-          <textarea placeholder="添加要求描述"></textarea>
+          <input placeholder="添加要求大项" v-model="titleA">
+          <textarea placeholder="添加要求描述" v-model="descA"></textarea>
         </div>
         <div class="require">
-          <input placeholder="添加要求大项">
-          <textarea placeholder="添加要求描述"></textarea>
+          <input placeholder="添加要求大项" v-model="titleB">
+          <textarea placeholder="添加要求描述" v-model="descB"></textarea>
         </div>
         <div class="require">
-          <input placeholder="添加要求大项">
-          <textarea placeholder="添加要求描述"></textarea>
+          <input placeholder="添加要求大项" v-model="titleC">
+          <textarea placeholder="添加要求描述" v-model="descC"></textarea>
         </div>
         <div class="require">
-          <input placeholder="添加要求大项">
-          <textarea placeholder="添加要求描述"></textarea>
+          <input placeholder="添加要求大项" v-model="titleD">
+          <textarea placeholder="添加要求描述" v-model="descD"></textarea>
         </div>
       </div>
     </div>
 
-    <p class="button"><CButton color="pink" text="添加新人才"></CButton></p>
+    <p class="button" @click="confirm"><CButton color="pink" text="添加新人才"></CButton></p>
   </div>
 </template>
 
@@ -77,6 +77,20 @@
         content: '<h2>I am Example</h2>',
         editorOption: {
           // something config
+        },
+
+        name: '',
+        titleA: '',
+        titleB: '',
+        titleC: '',
+        titleD: '',
+        descA: '',
+        descB: '',
+        descC: '',
+        descD: '',
+
+        recruitment: {
+          list: []
         }
       }
     },
@@ -87,6 +101,60 @@
         let formData = new FormData()
         formData.append('body', this.content)
         fetch(`${root}backend/about/save/`, {
+          method: 'POST',
+          credentials: 'include',
+          body: formData
+        })
+          .then((res) => {
+            return res.json()
+          })
+          .then((data) => {
+            console.log(data)
+            // TODO refresh()
+          })
+      },
+      confirm () {
+        let content = []
+        let tempItem = {}
+
+        tempItem.name = this.name
+
+        if (this.titleA) {
+          let tempObj = {}
+          tempObj.title = this.titleA
+          tempObj.desc = this.descA
+          content.push(tempObj)
+        }
+
+        if (this.titleB) {
+          let tempObj = {}
+          tempObj.title = this.titleB
+          tempObj.desc = this.descB
+          content.push(tempObj)
+        }
+
+        if (this.titleC) {
+          let tempObj = {}
+          tempObj.title = this.titleC
+          tempObj.desc = this.descC
+          content.push(tempObj)
+        }
+
+        if (this.titleD) {
+          let tempObj = {}
+          tempObj.title = this.titleD
+          tempObj.desc = this.descD
+          content.push(tempObj)
+        }
+
+        tempItem.content = content
+
+        this.recruitment.list.push(tempItem)
+        this.recruitment = JSON.stringify(this.recruitment)
+
+        let formData = new FormData()
+        formData.append('recruitment', this.recruitment)
+        fetch(`${root}backend/recruitment/save/`, {
           method: 'POST',
           credentials: 'include',
           body: formData

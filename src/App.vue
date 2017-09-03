@@ -37,4 +37,9 @@ a:visited {
 #app {
   font-family: serif;
 }
+
+.btn {
+  color: #444;
+  width: 80px;
+}
 </style>

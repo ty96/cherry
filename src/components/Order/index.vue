@@ -27,21 +27,48 @@
     </div>
     <div class="form" v-else="form">
       <span>姓名</span>
-      <input>
+      <input v-model="name">
       <span>电话</span>
-      <input>
-      <CButton text="预订" :small="true"></CButton>
+      <input v-model="tel">
+      <a @click=""><CButton text="预订" :small="true"></CButton></a>
     </div>
   </div>
 </template>
 
 <script>
   import CButton from '../CButton'
+  import { root } from '../../utils'
   export default {
     name: 'order',
 
     components: {
       CButton
+    },
+
+    data () {
+      return {
+        name: '',
+        tel: ''
+      }
+    },
+
+    methods: {
+      submit () {
+        let formData = new FormData()
+        formData.append('body', this.content)
+        fetch(`${root}backend/about/save/`, {
+          method: 'POST',
+          credentials: 'include',
+          body: formData
+        })
+          .then((res) => {
+            return res.json()
+          })
+          .then((data) => {
+            console.log(data)
+            // TODO refresh()
+          })
+      }
     },
 
     props: {

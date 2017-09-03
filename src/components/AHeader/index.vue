@@ -6,7 +6,7 @@
       <a href="#/admin/cases">案例</a>
       <a href="#/admin/craft">工艺</a>
       <a href="#/admin/about">关于</a>
-      <a href="#/admin/order">访客记录</a>
+      <a href="#/admin/visitors">访客记录</a>
       <div
         v-if="!name" class="form"
         :style="{'visibility': showLogin ? 'visible' : 'hidden'}"
@@ -22,7 +22,7 @@
         class="name"
         :style="{'visibility': showLogin ? 'visible' : 'hidden'}"
       >
-        Admin
+        Admin<a @click="logout">Logout</a>
       </span>
     </div>
   </div>
@@ -81,10 +81,28 @@
               if (data.body.msg) {
                 alert(data.body.msg)
               } else {
+                alert('Login Succeeded.')
                 this.name = true
               }
             })
         }
+      },
+      logout () {
+        fetch(`${root}backend/logout/`, {
+          method: 'POST',
+          credentials: 'include'
+        })
+          .then((res) => {
+            return res.json()
+          })
+          .then((data) => {
+            if (!data.error) {
+              alert('Logout Succeeded.')
+              this.name = false
+            } else {
+              alert('Logout Failed.')
+            }
+          })
       }
     }
   }

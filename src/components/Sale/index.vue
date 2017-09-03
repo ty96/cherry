@@ -73,7 +73,7 @@
   }
 
   .box {
-    margin-left: -210px;
+    margin-left: 270px;
   }
 
   .swiper img {
