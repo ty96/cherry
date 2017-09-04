@@ -25,6 +25,7 @@
         Admin<a @click="logout">Logout</a>
       </span>
     </div>
+    <div class="mask" @click="warning" v-if="!name"></div>
   </div>
 </template>
 
@@ -103,6 +104,9 @@
               alert('Logout Failed.')
             }
           })
+      },
+      warning () {
+        alert('请先登录')
       }
     }
   }
@@ -151,6 +155,17 @@
     font-size: 14px;
     color: #636363;
     text-align: center;
+  }
+
+  .mask {
+    position: absolute;
+    z-index: 100000;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 100px;
+    cursor: not-allowed;
+    background: rgba(0, 0, 0, 0);
   }
 
   .name {

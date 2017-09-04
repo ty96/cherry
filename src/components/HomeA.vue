@@ -3,31 +3,17 @@
     <AHeader></AHeader>
     <h1>首页 Banner</h1>
     <div class="box">
-      <div>
-        <img src="../assets/banner.jpg">
-        <button>Remove</button>
-        <button>Download</button>
-      </div>
-      <div>
-        <img src="../assets/banner.jpg">
-        <button>Remove</button>
-        <button>Download</button>
-      </div>
-      <div>
-        <img src="../assets/banner.jpg">
-        <button>Remove</button>
-        <button>Download</button>
-      </div>
-      <div>
-        <img src="../assets/banner.jpg">
-        <button>Remove</button>
-        <button>Download</button>
+      <div v-for="(item, index) in banner" :key="index">
+        <img :src="item">
+        <button @click="del(item, 'banner')">Remove</button>
+        <a :download="item" :href="item"><button>Download</button></a>
       </div>
       <div class="select">
-        <span class="upload" v-if="uploadBanner" @click="upload">上传</span>
+        <span class="upload" v-if="uploadBanner" @click="upload('banner')">上传</span>
         <picture-input
           ref="bannerInput"
-          @change="onChange"
+          @change="onChange('bannerInput')"
+          @remove="onRemove"
           width="180"
           height="90"
           margin="0"
@@ -46,35 +32,26 @@
         >
         </picture-input>
       </div>
+      <div class="blank"></div>
+      <div class="blank"></div>
+      <div class="blank"></div>
+      <div class="blank"></div>
+      <div class="blank"></div>
+      <div class="blank"></div>
     </div>
 
     <h1>优品热卖</h1>
     <div class="box">
-      <div>
-        <img src="../assets/banner.jpg">
-        <button>Remove</button>
-        <button>Download</button>
-      </div>
-      <div>
-        <img src="../assets/banner.jpg">
-        <button>Remove</button>
-        <button>Download</button>
-      </div>
-      <div>
-        <img src="../assets/banner.jpg">
-        <button>Remove</button>
-        <button>Download</button>
-      </div>
-      <div>
-        <img src="../assets/banner.jpg">
-        <button>Remove</button>
-        <button>Download</button>
+      <div v-for="(item, index) in sale" :key="index">
+        <img :src="item">
+        <button @click="del(item, 'hotsale')">Remove</button>
+        <a :download="item" :href="item"><button>Download</button></a>
       </div>
       <div class="select">
-        <span class="upload" v-if="uploadSale">上传</span>
+        <span class="upload" v-if="uploadSale" @click="upload('hotsale')">上传</span>
         <picture-input
           ref="saleInput"
-          @change="onChange"
+          @change="onChange('saleInput')"
           width="180"
           height="90"
           margin="0"
@@ -92,6 +69,12 @@
         >
         </picture-input>
       </div>
+      <div class="blank"></div>
+      <div class="blank"></div>
+      <div class="blank"></div>
+      <div class="blank"></div>
+      <div class="blank"></div>
+      <div class="blank"></div>
     </div>
   </div>
 </template>
@@ -114,7 +97,9 @@
     data () {
       return {
         uploadBanner: false,
-        uploadSale: false
+        uploadSale: false,
+        banner: [],
+        sale: []
       }
     },
     components: {
@@ -128,19 +113,50 @@
       CFooter,
       PictureInput
     },
+    mounted () {
+      this.request()
+    },
     methods: {
-      onChange () {
-        if (this.$refs.bannerInput.image) {
-          this.uploadBanner = true
+      request () {
+        fetch(`${root}client/homeIndex/`, {
+          method: 'GET',
+          credentials: 'include'
+        })
+          .then((res) => {
+            return res.json()
+          })
+          .then((data) => {
+            if (!data.error) {
+              this.banner = data.body.banner
+              this.sale = data.body.hotsale
+            }
+          })
+      },
+      onChange (type) {
+        if (this.$refs[type].image) {
+          if (type === 'bannerInput') {
+            this.uploadBanner = true
+          } else if (type === 'saleInput') {
+            this.uploadSale = true
+          }
         } else {
           alert('您的浏览器不支持 FileReader API')
         }
       },
-      upload () {
+      onRemove () {
+        this.uploadBanner = false
+        this.uploadSale = false
+      },
+      upload (type) {
         let formData = new FormData()
-        const image = this.$refs.bannerInput.file
-        formData.append('image', image)
-        fetch(`${root}backend/banner/upload/`, {
+        if (type === 'banner') {
+          const image = this.$refs.bannerInput.file
+          formData.append('image', image)
+        } else if (type === 'hotsale') {
+          const image = this.$refs.saleInput.file
+          formData.append('image', image)
+        }
+        fetch(`${root}backend/${type}/upload/`, {
           method: 'POST',
           credentials: 'include',
           body: formData
@@ -149,9 +165,32 @@
             return res.json()
           })
           .then((data) => {
-            console.log(data)
-            // TODO refresh()
+            if (!data.error) {
+              alert('上传成功！')
+              window.location.reload()
+            }
           })
+      },
+      del (item, type) {
+        if (confirm('确定删除吗？')) {
+          let formData = new FormData()
+          const filename = item.split('/').pop()
+          formData.append('filename', filename)
+          fetch(`${root}backend/${type}/delete/`, {
+            method: 'POST',
+            credentials: 'include',
+            body: formData
+          })
+            .then((res) => {
+              return res.json()
+            })
+            .then((data) => {
+              if (!data.error) {
+                alert('删除成功')
+                window.location.reload()
+              }
+            })
+        }
       }
     }
   }
@@ -167,8 +206,8 @@
   .box {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
     padding: 20px 150px;
+    justify-content: space-between;
   }
 
   .box img {
@@ -180,6 +219,7 @@
     width: 180px;
     height: 90px;
     text-align: center;
+    margin: 40px 10px;
   }
 
   .box button {
@@ -210,6 +250,11 @@
 
   .select {
     position: relative;
+  }
+
+  .box .blank {
+    height: 0;
+    margin: 0 10px;
   }
 
   .upload {

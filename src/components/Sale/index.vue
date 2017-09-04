@@ -3,8 +3,8 @@
     <h1>优品热卖</h1>
     <div class="box">
       <swiper :options="swiperOption">
-        <swiper-slide class="swiper" v-for="(slide, index) in swiperSlides" :key="index">
-          <img src="./banner.jpg">
+        <swiper-slide class="swiper" v-for="(item, index) in sale" :key="index">
+          <img :src="item">
         </swiper-slide>
       </swiper>
     </div>
@@ -21,6 +21,8 @@
   } from 'vue-awesome-swiper'
 
   import CButton from '../CButton'
+  import { root } from '../../utils'
+  import 'whatwg-fetch'
 
   export default {
     name: 'sale',
@@ -29,6 +31,26 @@
       CButton,
       swiper,
       swiperSlide
+    },
+
+    mounted () {
+      this.request()
+    },
+    methods: {
+      request () {
+        fetch(`${root}client/homeIndex/`, {
+          method: 'GET',
+          credentials: 'include'
+        })
+          .then((res) => {
+            return res.json()
+          })
+          .then((data) => {
+            if (!data.error) {
+              this.sale = data.body.hotsale
+            }
+          })
+      }
     },
 
     data () {
@@ -47,7 +69,7 @@
           slidesPerView: 2,
           speed: 1000
         },
-        swiperSlides: [1, 2, 3, 4, 5]
+        sale: []
       }
     }
   }

@@ -29,8 +29,8 @@
       <span>姓名</span>
       <input v-model="name">
       <span>电话</span>
-      <input v-model="tel">
-      <a @click=""><CButton text="预订" :small="true"></CButton></a>
+      <input v-model="tel" type="number">
+      <a @click="submit"><CButton text="预订" :small="true"></CButton></a>
     </div>
   </div>
 </template>
@@ -38,6 +38,7 @@
 <script>
   import CButton from '../CButton'
   import { root } from '../../utils'
+  import 'whatwg-fetch'
   export default {
     name: 'order',
 
@@ -54,20 +55,28 @@
 
     methods: {
       submit () {
-        let formData = new FormData()
-        formData.append('body', this.content)
-        fetch(`${root}backend/about/save/`, {
-          method: 'POST',
-          credentials: 'include',
-          body: formData
-        })
-          .then((res) => {
-            return res.json()
+        if (this.tel.length >= 7 && this.name) {
+          let formData = new FormData()
+          formData.append('name', this.name)
+          formData.append('telephone', this.tel)
+          fetch(`${root}client/homeOrder/`, {
+            method: 'POST',
+            credentials: 'include',
+            body: formData
           })
-          .then((data) => {
-            console.log(data)
-            // TODO refresh()
-          })
+            .then((res) => {
+              return res.json()
+            })
+            .then((data) => {
+              if (!data.error) {
+                alert('预定成功 我们的客服会尽快联系您')
+                this.name = ''
+                this.tel = ''
+              }
+            })
+        } else {
+          alert('请输入正确的电话和姓名')
+        }
       }
     },
 
@@ -135,5 +144,6 @@
     font-size: 16px;
     color: #636363;
     text-align: center;
+    outline: none;
   }
 </style>

@@ -4,10 +4,30 @@
     <CTitle
       :height="360"
       :unique="true"
-      title="实木的优雅简美风"
-      desc="以白色为之，再搭配少部分小面积亮眼的颜色，兼顾了整体观感和谐，又不会显得寡淡"
+      :title="data.title"
+      :esc="data.desc1"
     ></CTitle>
-    <Shot :images="images" :small="true" :title="title" :price="price" :info="info" :desc="desc"></Shot>
+    <p class="desc">{{data.desc2}}</p>
+    <div class="house">
+      <img :src="data.house && data.house.image">
+      <div>
+        <h2>客户户型</h2>
+        <p>{{data.house && data.house.desc}}</p>
+      </div>
+    </div>
+    <h1>细节定制 & 实例</h1>
+    <Shot
+      v-for="(item, index) in (data.instances || [])"
+      :key="index"
+      :images="item.images"
+      :small="true"
+      :title="item.title"
+      :price="item.price"
+      :info="item.price_desc"
+      :desc="item.desc"
+    ></Shot>
+    <h1>樱桃建议</h1>
+    <p class="advise">{{data.advise}}</p>
     <CFooter></CFooter>
   </div>
 </template>
@@ -22,6 +42,8 @@
   import Service from './Service'
   import CFooter from './CFooter'
   import Shot from './Shot'
+  import 'whatwg-fetch'
+  import { root } from '../utils'
 
   export default {
     name: 'hello',
@@ -37,24 +59,88 @@
       CFooter,
       Shot
     },
-
+    mounted () {
+      this.request()
+    },
+    methods: {
+      request () {
+        fetch(`${root}client/caseDetail/?cid=${this.$route.params.id}`, {
+          method: 'GET',
+          credentials: 'include'
+        })
+          .then((res) => {
+            return res.json()
+          })
+          .then((data) => {
+            if (!data.error) {
+              this.data = data.body
+            }
+          })
+      }
+    },
     data () {
       return {
-        images: [
-          'http://toxni.com/content/images/2017/07/--.png',
-          'http://toxni.com/content/images/2017/07/--.png',
-          'http://toxni.com/content/images/2017/07/--.png',
-          'http://toxni.com/content/images/2017/07/--.png'
-        ],
-        title: '实木厨房家具 美纳你的烹饪习惯',
-        desc: 'M小姐别出心裁的将厨房“一分为二”，用窄边玻璃门作隔断，区分了中厨区与西厨区。双“一字型”的橱柜是为了配合户型而设计，充分利用了厨房内的空间。两边都有窗，让整个厨房的采光十分好。在中厨区有这样的金属挂杆和挂件，可以收纳一些常用的工具，也可以起到装饰的效果。将垃圾桶隐藏在橱柜里的设计，美观加成！垃圾桶的上面的拉篮还可以放一些当日就烧的菜与葱姜蒜这类。',
-        price: '¥ 30,000',
-        info: '包含厨房区域所有家具'
+        data: {}
       }
     }
   }
 </script>
 
-<style>
+<style scoped>
+  .desc {
+    font-size: 16px;
+    width: 640px;
+    text-align: center;
+    margin: 80px auto;
+    color: #636363;
+  }
 
+  h1 {
+    font-size: 28px;
+    padding: 30px 150px;
+  }
+
+  .house {
+    margin: 60px 150px;
+  }
+
+  .house img {
+    flex: 0;
+    width: 360px;
+    height: 360px;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 120px;
+  }
+
+  .house > div {
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  .house h2 {
+    color: #444;
+    font-size: 28px;
+  }
+
+  .house p {
+    text-indent: 2em;
+  }
+
+  .advise {
+    color: #999;
+    font-size: 16px;
+    text-indent: 2em;
+    margin: 10px 150px 60px;
+  }
+
+  @media (max-width: 1366px) {
+    h1 {
+      padding: 30px 120px;
+    }
+
+    .house {
+      margin: 60px 120px;
+    }
+  }
 </style>

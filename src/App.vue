@@ -5,41 +5,42 @@
 </template>
 
 <script>
-export default {
-  name: 'app'
-}
+  import 'whatwg-fetch'
+  export default {
+    name: 'app'
+  }
 </script>
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-}
+  * {
+    margin: 0;
+    padding: 0;
+  }
 
-body {
-  min-width: 1280px;
-  overflow-x: scroll;
-}
+  body {
+    min-width: 1280px;
+    overflow-x: scroll;
+  }
 
-a {
-  cursor: pointer;
-}
+  a {
+    cursor: pointer;
+  }
 
-a,
-a:hover,
-a:focus,
-a:active,
-a:visited {
-  color: #636363;
-  text-decoration: none;
-}
+  a,
+  a:hover,
+  a:focus,
+  a:active,
+  a:visited {
+    color: #636363;
+    text-decoration: none;
+  }
 
-#app {
-  font-family: serif;
-}
+  #app {
+    font-family: serif;
+  }
 
-.btn {
-  color: #444;
-  width: 80px;
-}
+  .btn {
+    color: #444;
+    width: 80px;
+  }
 </style>

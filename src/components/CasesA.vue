@@ -16,7 +16,7 @@
         <div>
           <input placeholder="标题@label label label" v-model="input[index]">
           <button @click="showDetail(index)">Edit</button>
-          <button @click="delItem">Del</button>
+          <button @click="delItem(index)">Del</button>
 
           <textarea v-model="desc1[index]">
             这里填充简介，上面填充标题和 label。标题与 label 用 @ 分割，label 与 label 之间用空格分割，形如『标题@label babel』即可。
@@ -58,6 +58,7 @@
           size="10"
           buttonClass="btn"
           removeButtonClass="btn"
+          :prefill="image[now]"
           :plain="true"
           :removable="true"
           :customStrings="{
@@ -254,7 +255,8 @@
         instance: [],
         insTitle: [],
         images: [],
-        cid: -1
+        cid: -1,
+        data: []
       }
     },
     components: {
@@ -268,7 +270,30 @@
       CButton,
       PictureInput
     },
+    mounted () {
+      this.request()
+    },
     methods: {
+      request () {
+        fetch(`${root}client/caseIndex/`, {
+          method: 'GET',
+          credentials: 'include'
+        })
+          .then((res) => {
+            return res.json()
+          })
+          .then((data) => {
+            if (!data.error) {
+              this.data = data.body
+              for (let i = 0; i < this.data.length; i++) {
+                this.total = this.data.length
+                this.image[i] = this.data[i].image_cover
+                this.desc1[i] = this.data[i].desc
+                this.input[i] = this.data[i].title + '@' + this.data[i].labels.join(' ')
+              }
+            }
+          })
+      },
       del (e) {
         const image = e.target.parentNode.parentNode.childNodes[0].src.split('/').pop()
         let formData = new FormData()
@@ -336,14 +361,50 @@
       },
       showDetail (i) {
         this.now = i
-        this.detail = true
+        this.cid = this.data[i].cid
+        fetch(`${root}client/caseDetail/?cid=${this.cid}`, {
+          method: 'GET',
+          credentials: 'include'
+        })
+          .then((res) => {
+            return res.json()
+          })
+          .then((data) => {
+            if (!data.error) {
+              this.desc2 = data.body.desc2
+              this.houseDesc = data.body.style.desc
+              this.houseImage = data.body.style.image
+              this.suggestion = data.body.advise
+              this.detail = true
+            }
+          })
       },
       appendItem () {
-        this.total++
+        this.now = this.total + 1
+        this.cid = -1
+        this.detail = true
       },
       delItem (e) {
-        let parent = e.target.parentNode.parentNode
-        parent.style.display = confirm('确定删除该项吗？') ? 'none' : 'inline-block'
+        if (confirm('确定删除该项吗？')) {
+          let formData = new FormData()
+          const cid = this.data[e].cid
+          formData.append('cid', cid)
+          fetch(`${root}backend/case/delete/`, {
+            method: 'POST',
+            credentials: 'include',
+            body: formData
+          })
+            .then((res) => {
+              return res.json()
+            })
+            .then((data) => {
+              if (!data.error) {
+                alert('删除成功！')
+                window.location.reload()
+              }
+              // TODO refresh()
+            })
+        }
       },
       save () {
         let info = {}
@@ -372,15 +433,15 @@
           ins.desc = this.instance[i]
           ins.price = this.price[i]
           ins.price_desc = this.priceInfo[i]
-          ins.images = this.images[i]
+          ins.images = this.images[i] || ['', '', '', '']
           info.instances.push(ins)
         }
-        info.advice = this.suggestion
+        info.advise = this.suggestion
 
         let formData = new FormData()
         formData.append('info', JSON.stringify(info))
 
-        if (info.image_cover) {
+        if (!info.image_cover) {
           fetch(this.cid > -1 ? `${root}backend/case/modified/` : `${root}backend/case/new/`, {
             method: 'POST',
             credentials: 'include',
@@ -392,7 +453,7 @@
             .then((data) => {
               console.log(data)
               this.hideDetail()
-              // TODO refresh()
+              window.location.reload()
             })
         } else {
           alert('请先点击图片右上角上传图片 题图为必选项 未成功上传的图片不会保存')
@@ -404,6 +465,7 @@
       delInstance (e) {
         let parent = e.target.parentNode.parentNode
         parent.style.display = confirm('确定删除该项吗？') ? 'none' : 'block'
+        this.insNum--
       }
     }
   }

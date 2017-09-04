@@ -1,8 +1,8 @@
 <template>
   <div class="banner">
     <swiper :options="swiperOption">
-      <swiper-slide v-for="(slide, index) in swiperSlides" class="swiper" :key="index">
-        <img src="./banner.jpg">
+      <swiper-slide v-for="(item, index) in banner" class="swiper" :key="index">
+        <img :src="item">
       </swiper-slide>
     </swiper>
     <div class="pagination"></div>
@@ -16,6 +16,8 @@
     swiper,
     swiperSlide
   } from 'vue-awesome-swiper'
+  import { root } from '../../utils'
+  import 'whatwg-fetch'
 
   export default {
     name: 'banner',
@@ -25,8 +27,29 @@
       swiperSlide
     },
 
+    mounted () {
+      this.request()
+    },
+    methods: {
+      request () {
+        fetch(`${root}client/homeIndex/`, {
+          method: 'GET',
+          credentials: 'include'
+        })
+          .then((res) => {
+            return res.json()
+          })
+          .then((data) => {
+            if (!data.error) {
+              this.banner = data.body.banner
+            }
+          })
+      }
+    },
+
     data () {
       return {
+        banner: [],
         swiperOption: {
           autoplay: 2500,
           setWrapperSize: true,
@@ -38,8 +61,7 @@
           paginationClickable: true,
           loop: true,
           speed: 1000
-        },
-        swiperSlides: [1, 2, 3, 4, 5]
+        }
       }
     }
   }

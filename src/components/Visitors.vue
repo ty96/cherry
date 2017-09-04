@@ -1,45 +1,30 @@
 <template>
   <div class="box">
     <AHeader></AHeader>
-
     <h1>
       访客记录
-      <select class="drop">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-      </select>
     </h1>
-
     <table>
       <tr>
         <th>预约时间</th>
         <th>预约电话</th>
         <th>访客姓名</th>
         <th>已回访</th>
-
       </tr>
-      <tr>
-        <td>10:00</td>
-        <td>13111112222</td>
-        <td>徐锐</td>
-        <td><input type="checkbox"></td>
-      </tr>
-      <tr>
-        <td>10:00</td>
-        <td>13111112222</td>
-        <td>徐锐</td>
-        <td><input type="checkbox"></td>
-      </tr>
-      <tr>
-        <td>10:00</td>
-        <td>13111112222</td>
-        <td>徐锐</td>
-        <td><input type="checkbox"></td>
+      <tr v-for="(item, index) in list">
+        <td>{{item.order_time}}</td>
+        <td>{{item.phonenum}}</td>
+        <td>{{item.name}}</td>
+        <td><input type="checkbox" :checked="item.reply" :disabled="item.reply" @click="checkClick(item)"></td>
       </tr>
     </table>
 
+    <pager
+      :total-page="total"
+      :init-page="now"
+      @go-page="goPage"
+    >
+    </pager>
 
     <p class="button" @click="confirm"><CButton color="#333" text="提交改动"></CButton></p>
   </div>
@@ -51,6 +36,7 @@
   import { quillEditor } from 'vue-quill-editor'
   import 'whatwg-fetch'
   import { root } from '../utils'
+  import pager from 'vue-simple-pager'
 
   export default {
     name: 'admin',
@@ -58,30 +44,69 @@
     components: {
       AHeader,
       quillEditor,
-      CButton
+      CButton,
+      pager
     },
 
     data () {
       return {
+        list: [],
+        total: 1,
+        now: 1,
+        checkList: []
       }
+    },
+    mounted () {
+      this.getList(1)
     },
 
     methods: {
-      submit () {
-        let formData = new FormData()
-        formData.append('body', this.content)
-        fetch(`${root}backend/about/save/`, {
-          method: 'POST',
-          credentials: 'include',
-          body: formData
+      confirm () {
+        if (confirm('确定标记所选？提交后不可撤销。')) {
+          for (let i = 0; i < this.checkList.length; i++) {
+            let formData = new FormData()
+            formData.append('phonenum', this.checkList[i])
+            fetch(`${root}backend/contact/mark/`, {
+              method: 'POST',
+              credentials: 'include',
+              body: formData
+            })
+              .then((res) => {
+                return res.json()
+              })
+              .then((data) => {
+                if (!data.error && (i + 1 === this.checkList.length)) {
+                  alert('标记成功')
+                  window.location.reload()
+                }
+              })
+          }
+        }
+      },
+      getList (num) {
+        fetch(`${root}backend/contact/get/?page=${num}`, {
+          method: 'GET',
+          credentials: 'include'
         })
           .then((res) => {
             return res.json()
           })
           .then((data) => {
-            console.log(data)
+            if (!data.error) {
+              this.list = data.body.contacts
+              this.total = data.body.total_page
+              this.now = num
+            }
             // TODO refresh()
           })
+      },
+      goPage (e) {
+        this.getList(e.page)
+      },
+      checkClick (item) {
+        if (!item.reply) {
+          this.checkList.push(item.phonenum)
+        }
       }
     }
   }
@@ -97,13 +122,6 @@
   .button {
     margin: 30px 0;
     text-align: center;
-  }
-
-  .drop {
-    display: inline-block;
-    line-height: 20px;
-    margin: 0 20px;
-    vertical-align: middle;
   }
 
   table {

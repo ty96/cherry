@@ -6,10 +6,9 @@
       desc="樱桃家具成功案例，让你感受不同的视觉盛宴"
     ></CTitle>
     <div class="cards">
-      <a v-for="(item, index) in data" :href="'#/detail/' + item.id" :ket="index">
+      <a v-for="(item, index) in data" :href="'#/detail/' + item.cid" :key="index">
         <Card :data="item"></Card>
       </a>
-
       <Card v-if="data.length % 2" style="visibility: hidden"></Card>
     </div>
     <CFooter></CFooter>
@@ -26,6 +25,8 @@
   import Service from './Service'
   import CFooter from './CFooter'
   import Card from './Card'
+  import 'whatwg-fetch'
+  import { root } from '../utils'
 
   export default {
     name: 'cases',
@@ -42,102 +43,30 @@
       Card
     },
 
+    mounted () {
+      this.request()
+    },
+    methods: {
+      request () {
+        fetch(`${root}client/caseIndex/`, {
+          method: 'GET',
+          credentials: 'include'
+        })
+          .then((res) => {
+            return res.json()
+          })
+          .then((data) => {
+            if (!data.error) {
+              this.data = data.body
+            }
+          })
+      }
+    },
+
     data () {
       return {
         order: false,
-        data: [
-          {
-            labels: [
-              '简美',
-              '大户型',
-              '衣帽间',
-              '浴室柜',
-              '吧台'
-            ],
-            desc: '以白色为之,再搭配少部分小面积亮眼的颜色,兼顾了整体观感和谐,又不会显得寡淡',
-            title: '实木的优雅简美风',
-            image_cover: 'http://toxni.com/content/images/2017/07/--.png',
-            cid: 2
-          },
-          {
-            labels: [
-              '简美',
-              '大户型',
-              '衣帽间',
-              '浴室柜',
-              '吧台'
-            ],
-            desc: '以白色为之,再搭配少部分小面积亮眼的颜色,兼顾了整体观感和谐,又不会显得寡淡',
-            title: '实木的优雅简美风',
-            image_cover: 'http://toxni.com/content/images/2017/07/--.png',
-            cid: 2
-          },
-          {
-            labels: [
-              '简美',
-              '大户型',
-              '衣帽间',
-              '浴室柜',
-              '吧台'
-            ],
-            desc: '以白色为之,再搭配少部分小面积亮眼的颜色,兼顾了整体观感和谐,又不会显得寡淡',
-            title: '实木的优雅简美风',
-            image_cover: 'http://toxni.com/content/images/2017/07/--.png',
-            cid: 2
-          },
-          {
-            labels: [
-              '简美',
-              '大户型',
-              '衣帽间',
-              '浴室柜',
-              '吧台'
-            ],
-            desc: '以白色为之,再搭配少部分小面积亮眼的颜色,兼顾了整体观感和谐,又不会显得寡淡',
-            title: '实木的优雅简美风',
-            image_cover: 'http://toxni.com/content/images/2017/07/--.png',
-            cid: 2
-          },
-          {
-            labels: [
-              '简美',
-              '大户型',
-              '衣帽间',
-              '浴室柜',
-              '吧台'
-            ],
-            desc: '以白色为之,再搭配少部分小面积亮眼的颜色,兼顾了整体观感和谐,又不会显得寡淡',
-            title: '实木的优雅简美风',
-            image_cover: 'http://toxni.com/content/images/2017/07/--.png',
-            cid: 2
-          },
-          {
-            labels: [
-              '简美',
-              '大户型',
-              '衣帽间',
-              '浴室柜',
-              '吧台'
-            ],
-            desc: '以白色为之,再搭配少部分小面积亮眼的颜色,兼顾了整体观感和谐,又不会显得寡淡',
-            title: '实木的优雅简美风',
-            image_cover: 'http://toxni.com/content/images/2017/07/--.png',
-            cid: 2
-          },
-          {
-            labels: [
-              '简美',
-              '大户型',
-              '衣帽间',
-              '浴室柜',
-              '吧台'
-            ],
-            desc: '以白色为之,再搭配少部分小面积亮眼的颜色,兼顾了整体观感和谐,又不会显得寡淡',
-            title: '实木的优雅简美风',
-            image_cover: 'http://toxni.com/content/images/2017/07/--.png',
-            cid: 2
-          }
-        ]
+        data: []
       }
     }
   }

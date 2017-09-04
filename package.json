@@ -16,6 +16,7 @@
     "vue-picture-input": "^1.13.2",
     "vue-quill-editor": "^2.3.0",
     "vue-router": "^2.6.0",
+    "vue-simple-pager": "^1.0.3",
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
