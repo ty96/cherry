@@ -47,6 +47,7 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    align-items: flex-start;
     margin-bottom: -66px;
   }
 
@@ -61,10 +62,12 @@
     height: 180px;
     display: inline-block;
     margin-right: 30px;
+    vertical-align: top;
   }
 
   .card > div {
     display: inline-block;
+    vertical-align: top;
   }
 
   .card h4 {

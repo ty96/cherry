@@ -140,7 +140,7 @@
     height: 50px;
     line-height: 50px;
     text-align: center;
-    top: 36%;
+    top: 40%;
     position: absolute;
     font-size: 16px;
     font-weight: 900;

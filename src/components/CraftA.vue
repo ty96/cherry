@@ -62,7 +62,7 @@
         </div>
       </div>
     </div>
-    <p class="button" @click="submit">
+    <p class="button" @click="">
       <CButton color="pink" text="新增项目"></CButton>
       <CButton color="#333" text="提交改动"></CButton>
     </p>
@@ -70,25 +70,10 @@
 
     <h1>工艺实拍</h1>
     <div class="box">
-      <div>
-        <img src="../assets/banner.jpg">
+      <div v-for="(item, index) in data.craftShot" :key="index">
+        <img :src="item">
         <a @click="del"><button>Remove</button></a>
-        <a href="../assets/banner.jpg" download="banner.jpg"><button>Download</button></a>
-      </div>
-      <div>
-        <img src="../assets/banner.jpg">
-        <a @click="del"><button>Remove</button></a>
-        <a href="../assets/banner.jpg" download="banner.jpg"><button>Download</button></a>
-      </div>
-      <div>
-        <img src="../assets/banner.jpg">
-        <a @click="del"><button>Remove</button></a>
-        <a href="../assets/banner.jpg" download="banner.jpg"><button>Download</button></a>
-      </div>
-      <div>
-        <img src="../assets/banner.jpg">
-        <a @click="del"><button>Remove</button></a>
-        <a href="../assets/banner.jpg" download="banner.jpg"><button>Download</button></a>
+        <a :href="item" :download="item"><button>Download</button></a>
       </div>
       <div class="select">
         <span class="upload" v-if="uploadBanner" @click="upload">上传</span>
@@ -113,6 +98,12 @@
         >
         </picture-input>
       </div>
+      <div class="blank"></div>
+      <div class="blank"></div>
+      <div class="blank"></div>
+      <div class="blank"></div>
+      <div class="blank"></div>
+      <div class="blank"></div>
     </div>
   </div>
 </template>
@@ -135,7 +126,8 @@
     data () {
       return {
         uploadBanner: false,
-        uploadSale: false
+        uploadSale: false,
+        data: {}
       }
     },
     components: {
@@ -149,23 +141,44 @@
       CButton,
       PictureInput
     },
+    mounted () {
+      this.request()
+    },
     methods: {
-      del (e) {
-        const image = e.target.parentNode.parentNode.childNodes[0].src.split('/').pop()
-        let formData = new FormData()
-        formData.append('filename', image)
-        fetch(`${root}backend/shot/delete/`, {
-          method: 'POST',
-          credentials: 'include',
-          body: formData
+      request () {
+        fetch(`${root}client/accessoryDetail/`, {
+          method: 'GET',
+          credentials: 'include'
         })
           .then((res) => {
             return res.json()
           })
           .then((data) => {
-            console.log(data)
-            // TODO refresh()
+            if (!data.error) {
+              this.data = data.body
+            }
           })
+      },
+      del (e) {
+        if (confirm('确认删除吗？')) {
+          const image = e.target.parentNode.parentNode.childNodes[0].src.split('/').pop()
+          let formData = new FormData()
+          formData.append('filename', image)
+          fetch(`${root}backend/shot/delete/`, {
+            method: 'POST',
+            credentials: 'include',
+            body: formData
+          })
+            .then((res) => {
+              return res.json()
+            })
+            .then((data) => {
+              if (!data.error) {
+                alert('删除成功！')
+                window.location.reload()
+              }
+            })
+        }
       },
       onChange () {
         if (this.$refs.bannerInput.image) {
@@ -187,13 +200,12 @@
             return res.json()
           })
           .then((data) => {
-            console.log(data)
-            // TODO refresh()
+            if (!data.error) {
+              alert('上传成功！')
+              window.location.reload()
+            }
           })
       }
-    },
-    mounted () {
-      console.log('this is my editor', this.editor)
     }
   }
 </script>
@@ -277,6 +289,7 @@
   .box div {
     width: 180px;
     height: 180px;
+    margin-bottom: 80px;
     text-align: center;
   }
 
@@ -284,6 +297,11 @@
     color: #444;
     width: 80px;
     margin: 7px 2px;
+  }
+
+  .box .blank {
+    height: 0;
+    margin: 0 10px;
   }
 
   .banner {
