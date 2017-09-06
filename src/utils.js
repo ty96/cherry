@@ -1,1 +1,1 @@
-export const root = 'http://182.61.36.54/api/'
+export const root = 'http://www.beinghouse.com/api/'
