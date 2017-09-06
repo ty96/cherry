@@ -25,7 +25,10 @@
         Admin<a @click="logout">Logout</a>
       </span>
     </div>
-    <div class="mask" @click="warning" v-if="!name"></div>
+    <div class="mask" @click="warning" v-if="!name">
+      <img src="../../assets/logo.png">
+      <h1>后台管理系统</h1>
+    </div>
   </div>
 </template>
 
@@ -41,6 +44,7 @@
     },
     created () {
       window.scrollTo(0, 0)
+      this.noScroll(true)
 
       fetch(`${root}backend/state/`, {
         method: 'GET',
@@ -53,6 +57,7 @@
           this.showLogin = true
           if (data.body.state) {
             this.name = true
+            this.noScroll(false)
           }
         })
     },
@@ -65,6 +70,14 @@
       }
     },
     methods: {
+      noScroll (bool) {
+        let body = document.getElementsByTagName('body')[0]
+        let html = document.getElementsByTagName('html')[0]
+        body.style.overflowY = bool ? 'hidden' : 'scroll'
+        html.style.overflowY = bool ? 'hidden' : 'scroll'
+        body.style.height = bool ? '100%' : 'auto'
+        html.style.height = bool ? '100%' : 'auto'
+      },
       login () {
         let formData = new FormData()
         formData.append('username', this.username)
@@ -83,7 +96,9 @@
                 alert(data.body.msg)
               } else {
                 alert('Login Succeeded.')
+                this.noScroll(false)
                 this.name = true
+                window.location.reload()
               }
             })
         }
@@ -100,6 +115,7 @@
             if (!data.error) {
               alert('Logout Succeeded.')
               this.name = false
+              window.location.reload()
             } else {
               alert('Logout Failed.')
             }
@@ -165,7 +181,29 @@
     bottom: 0;
     top: 100px;
     cursor: not-allowed;
-    background: rgba(0, 0, 0, 0);
+    background: white;
+  }
+
+  .mask img {
+    width: 100px;
+    position: fixed;
+    margin-left: -50px;
+    margin-top: -50px;
+    left: 50%;
+    top: 40%;
+  }
+
+
+  .mask h1 {
+    width: 400px;
+    position: fixed;
+    margin-left: -200px;
+    margin-top: -50px;
+    left: 50%;
+    top: 55%;
+    color: #fedfdf;
+    text-align: center;
+    font-size: 28px;
   }
 
   .name {

@@ -236,7 +236,7 @@
     data () {
       return {
         now: 0,
-        total: 3,
+        total: 0,
         insNum: 2,
         uploadBtn: '',
         uploadSuc: '',
@@ -285,8 +285,8 @@
           .then((data) => {
             if (!data.error) {
               this.data = data.body
+              this.total = this.data.length
               for (let i = 0; i < this.data.length; i++) {
-                this.total = this.data.length
                 this.image[i] = this.data[i].image_cover
                 this.desc1[i] = this.data[i].desc
                 this.input[i] = this.data[i].title + '@' + this.data[i].labels.join(' ')
@@ -441,7 +441,7 @@
         let formData = new FormData()
         formData.append('info', JSON.stringify(info))
 
-        if (!info.image_cover) {
+        if (info.image_cover) {
           fetch(this.cid > -1 ? `${root}backend/case/modified/` : `${root}backend/case/new/`, {
             method: 'POST',
             credentials: 'include',
