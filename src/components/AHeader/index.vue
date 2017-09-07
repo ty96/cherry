@@ -73,8 +73,8 @@
       noScroll (bool) {
         let body = document.getElementsByTagName('body')[0]
         let html = document.getElementsByTagName('html')[0]
-        body.style.overflowY = bool ? 'hidden' : 'scroll'
-        html.style.overflowY = bool ? 'hidden' : 'scroll'
+        body.style.overflowY = bool ? 'hidden' : 'visible'
+        html.style.overflowY = bool ? 'hidden' : 'visible'
         body.style.height = bool ? '100%' : 'auto'
         html.style.height = bool ? '100%' : 'auto'
       },
@@ -174,7 +174,7 @@
   }
 
   .mask {
-    position: absolute;
+    position: fixed;
     z-index: 100000;
     left: 0;
     right: 0;
@@ -192,7 +192,6 @@
     left: 50%;
     top: 40%;
   }
-
 
   .mask h1 {
     width: 400px;
