@@ -1,15 +1,15 @@
 <template>
   <div class="sale">
     <h1>优品热卖</h1>
-    <div class="box">
+    <div class="box" :style="{'margin-left': margin - 60 + 'px'}">
       <swiper :options="swiperOption">
         <swiper-slide class="swiper" v-for="(item, index) in sale" :key="index">
           <img :src="item">
         </swiper-slide>
       </swiper>
     </div>
-    <div class="arr prev" :style="{'left': margin + 'px'}" slot="button-prev">&lt;</div>
-    <div class="arr next" :style="{'right': margin + 'px'}"  slot="button-next">&gt;</div>
+    <div class="arr prev" :style="{'left': margin - 60 + 'px'}" slot="button-prev">&lt;</div>
+    <div class="arr next" :style="{'right': margin - 60 + 'px'}"  slot="button-next">&gt;</div>
     <a href="#/products"><p class="more"><CButton text="更多优品"></CButton></p></a>
   </div>
 </template>
@@ -55,7 +55,7 @@
 
     data () {
       return {
-        margin: ((window.innerWidth - 180) / 6).toFixed(0) - 38,
+        margin: window.innerWidth <= 1366 ? parseInt((window.innerWidth - 1140) / 8) + 190 : parseInt((window.innerWidth - 1260) / 8) + 210,
         swiperOption: {
           autoplay: 2500,
           setWrapperSize: true,
@@ -63,7 +63,7 @@
           prevButton: '.prev',
           nextButton: '.next',
           spaceBetween: 60,
-          width: ((window.innerWidth - 180) / 3).toFixed(0) * 2 + 60,
+          width: window.innerWidth / 3 * 2,
           loop: true,
           loopAdditionalSlides: 5,
           slidesPerView: 2,
@@ -84,6 +84,7 @@
   }
 
   .swiper {
+    text-align: center;
     display: inline-block;
   }
 
@@ -94,13 +95,10 @@
     text-align: center;
   }
 
-  .box {
-    margin-left: 270px;
-  }
-
   .swiper img {
     width: 420px;
     height: 240px;
+    margin-right: -60px;
   }
 
   .arr {
@@ -139,10 +137,6 @@
     .swiper img {
       width: 380px;
       height: 210px;
-    }
-
-    .box {
-      margin-left: -200px;
     }
 
     .arr {
