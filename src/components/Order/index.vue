@@ -55,7 +55,7 @@
 
     methods: {
       submit () {
-        if (this.tel.length >= 7 && this.name) {
+        if ((/^1[34578]\d{9}$/.test(this.tel)) && this.name) {
           let formData = new FormData()
           formData.append('name', this.name)
           formData.append('telephone', this.tel)
