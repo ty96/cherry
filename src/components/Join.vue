@@ -5,7 +5,7 @@
       title="人才招聘"
       desc="招聘优秀人才，让樱桃家居不断成长"
     ></CTitle>
-    <Recruit v-for="(item, index) in data" :data="item" :pink="index % 2" :id="item.id" :key="index"></Recruit>
+    <Recruit v-for="(item, index) in data" :data="item" :pink="index % 2" :id="item.id" :key="index" v-if="item.name"></Recruit>
     <CFooter></CFooter>
   </div>
 </template>
@@ -20,6 +20,8 @@
   import Service from './Service'
   import CFooter from './CFooter'
   import Recruit from './Recruit'
+  import 'whatwg-fetch'
+  import { root } from '../utils'
 
   export default {
     name: 'join',
@@ -36,47 +38,24 @@
     },
     data () {
       return {
-        data: [
-          {
-            name: '家具顾问',
-            detail: [
-              {
-                title: '职责内容',
-                desc: '1. 客户接待：捕捉客户置家需求，达成高端家居用品销售工作；<br>2. 设计服务：深入了解客户生活方式，为顾客提供专业的个性化软装设计，并通过设计使家具及家居用品呈现顾客满意的效果；<br>3. 客情维护：与客户形成长期稳定、良好的互动关系，成为客户值得信赖的家居顾问，持续提升客户满意度，维护品牌美誉度。'
-              },
-              {
-                title: '职责内容',
-                desc: '1. 客户接待：捕捉客户置家需求，达成高端家居用品销售工作；<br>2. 设计服务：深入了解客户生活方式，为顾客提供专业的个性化软装设计，并通过设计使家具及家居用品呈现顾客满意的效果；<br>3. 客情维护：与客户形成长期稳定、良好的互动关系，成为客户值得信赖的家居顾问，持续提升客户满意度，维护品牌美誉度。'
-              }
-            ]
-          },
-          {
-            name: '家具顾问',
-            detail: [
-              {
-                title: '职责内容',
-                desc: '1. 客户接待：捕捉客户置家需求，达成高端家居用品销售工作；<br>2. 设计服务：深入了解客户生活方式，为顾客提供专业的个性化软装设计，并通过设计使家具及家居用品呈现顾客满意的效果；<br>3. 客情维护：与客户形成长期稳定、良好的互动关系，成为客户值得信赖的家居顾问，持续提升客户满意度，维护品牌美誉度。'
-              },
-              {
-                title: '职责内容',
-                desc: '1. 客户接待：捕捉客户置家需求，达成高端家居用品销售工作；<br>2. 设计服务：深入了解客户生活方式，为顾客提供专业的个性化软装设计，并通过设计使家具及家居用品呈现顾客满意的效果；<br>3. 客情维护：与客户形成长期稳定、良好的互动关系，成为客户值得信赖的家居顾问，持续提升客户满意度，维护品牌美誉度。'
-              }
-            ]
-          },
-          {
-            name: '家具顾问',
-            detail: [
-              {
-                title: '职责内容',
-                desc: '1. 客户接待：捕捉客户置家需求，达成高端家居用品销售工作；<br>2. 设计服务：深入了解客户生活方式，为顾客提供专业的个性化软装设计，并通过设计使家具及家居用品呈现顾客满意的效果；<br>3. 客情维护：与客户形成长期稳定、良好的互动关系，成为客户值得信赖的家居顾问，持续提升客户满意度，维护品牌美誉度。'
-              },
-              {
-                title: '职责内容',
-                desc: '1. 客户接待：捕捉客户置家需求，达成高端家居用品销售工作；<br>2. 设计服务：深入了解客户生活方式，为顾客提供专业的个性化软装设计，并通过设计使家具及家居用品呈现顾客满意的效果；<br>3. 客情维护：与客户形成长期稳定、良好的互动关系，成为客户值得信赖的家居顾问，持续提升客户满意度，维护品牌美誉度。'
-              }
-            ]
-          }
-        ]
+        data: []
+      }
+    },
+    mounted () {
+      this.request()
+    },
+    methods: {
+      request () {
+        fetch(`${root}client/recruitment/`, {
+          method: 'GET',
+          credentials: 'include'
+        })
+          .then((res) => {
+            return res.json()
+          })
+          .then((data) => {
+            this.data = data.body
+          })
       }
     }
   }
