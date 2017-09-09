@@ -1,7 +1,7 @@
 <template>
   <div
     class="service"
-    :style="{'background': fix ? '#fef5f5' : 'white'}"
+    :style="{'background': fix && !admin ? '#fef5f5' : 'white'}"
   >
     <template v-if="!fix">
       <h1>服务流程</h1>
@@ -25,23 +25,27 @@
       </div>
     </template>
     <template v-else="!fix">
-      <h1>维护保养</h1>
-      <div class="order">
+      <h1 v-if="!admin">维护保养</h1>
+      <div class="order" :class="{'inner': admin}">
         <div>
           <img src="./assets/images/paper.svg">
-          <p>通过网页或电话预约服务，记录基本联系信息。</p>
+          <p v-if="!admin">{{data.part1}}</p>
+          <input v-if="admin" v-model="maintain.part1" @change="save">
         </div>
         <div>
           <img src="./assets/images/leaf.svg">
-          <p>樱桃团队上门进行专业测量，为您的需求量“房”定制。</p>
+          <p v-if="!admin">{{data.part2}}</p>
+          <input v-if="admin" v-model="maintain.part2" @change="save">
         </div>
         <div>
           <img src="./assets/images/ruler.svg">
-          <p>提供多种优质解决方案，您可到店内与我们共同确定合适之选。</p>
+          <p v-if="!admin">{{data.part3}}</p>
+          <input v-if="admin" v-model="maintain.part3" @change="save">
         </div>
         <div>
           <img src="./assets/images/tri.svg">
-          <p>家装材料准备，樱桃团队将进场施工，完毕后将享受最优售后服务。</p>
+          <p v-if="!admin">{{data.part4}}</p>
+          <input v-if="admin" v-model="maintain.part4" @change="save">
         </div>
       </div>
     </template>
@@ -51,10 +55,41 @@
 <script>
   export default {
     name: 'service',
+    data () {
+      return {
+        maintain: {
+          part1: '',
+          part2: '',
+          part3: '',
+          part4: ''
+        }
+      }
+    },
+    methods: {
+      save () {
+        this.$emit('maintainSave', this.maintain)
+      }
+    },
+    mounted () {
+      this.maintain.part1 = this.data.part1 || ''
+      this.maintain.part2 = this.data.part2 || ''
+      this.maintain.part3 = this.data.part3 || ''
+      this.maintain.part4 = this.data.part4 || ''
+    },
     props: {
       fix: {
         type: Boolean,
         default: false
+      },
+      admin: {
+        type: Boolean,
+        default: false
+      },
+      data: {
+        type: Object,
+        default: function () {
+          return {}
+        }
       }
     }
   }
@@ -79,8 +114,23 @@
     align-items: baseline;
   }
 
+  .inner {
+    padding: 0;
+  }
+
   .order > div {
     max-width: 240px;
+    text-align: center;
+  }
+
+  .order input {
+    width: 180px;
+    height: 30px;
+    margin: 20px 0;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid #ccc;
+    padding: 0 15px;
     text-align: center;
   }
 
@@ -94,6 +144,10 @@
   @media (max-width: 1366px) {
     .order {
       padding: 0 120px;
+    }
+
+    .inner {
+      padding: 0;
     }
   }
 </style>

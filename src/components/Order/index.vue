@@ -4,23 +4,23 @@
     :style="{'display': !show ? 'none' : 'block'}"
   >
     <div class="type" v-if="!form">
-      <a>
+      <a href="#/products/橱柜" @click="refresh('#/products/橱柜')">
         <img src="./assets/images/order-a.svg">
         <span>橱柜</span>
       </a>
-      <a>
+      <a href="#/products/衣柜" @click="refresh('#/products/衣柜')">
         <img src="./assets/images/order-b.svg">
         <span>衣柜</span>
       </a>
-      <a>
+      <a href="#/products/原木门" @click="refresh('#/products/原木门')">
         <img src="./assets/images/order-c.svg">
         <span>原木门</span>
       </a>
-      <a>
+      <a href="#/products/楼梯" @click="refresh('#/products/楼梯')">
         <img src="./assets/images/order-d.svg">
         <span>楼梯</span>
       </a>
-      <a>
+      <a href="#/products/家饰" @click="refresh('#/products/家饰')">
         <img src="./assets/images/order-e.svg">
         <span>家饰</span>
       </a>
@@ -77,6 +77,10 @@
         } else {
           alert('请输入正确的电话和姓名')
         }
+      },
+      refresh (href) {
+        window.location.hash = href
+        window.location.reload()
       }
     },
 

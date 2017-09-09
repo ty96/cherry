@@ -19,7 +19,7 @@
 
     <p>{{desc}}</p>
     <div v-if="price" class="price">
-      <h4>参考价 <span>{{price}}</span></h4>
+      <h4>参考价 <span>￥{{price}}</span></h4>
       <div class="divider"></div>
       <p>{{info}}</p>
     </div>

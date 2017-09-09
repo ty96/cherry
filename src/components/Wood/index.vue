@@ -1,30 +1,26 @@
 <template>
   <div class="wood">
     <h1 v-if="!select">精选材质</h1>
-    <div class="box">
-      <div v-if="!select || select === 1">
+    <div class="box" :class="{'type': select}">
+      <div v-if="!select || select.indexOf('橡胶木') + 1">
         <img src="./assets/images/1.png">
         <p>橡胶木</p>
       </div>
-      <div v-if="!select || select === 2">
+      <div v-if="!select || select.indexOf('白橡木') + 1">
         <img src="./assets/images/2.png">
         <p>白橡木</p>
       </div>
-      <div v-if="!select || select === 3">
+      <div v-if="!select || select.indexOf('樱桃木') + 1">
         <img src="./assets/images/3.png">
         <p>樱桃木</p>
       </div>
-      <div v-if="!select || select === 4">
-        <img src="./assets/images/4.png">
-        <p>橡胶木</p>
-      </div>
-      <div v-if="!select || select === 5">
-        <img src="./assets/images/5.png">
-        <p>白橡木</p>
-      </div>
-      <div v-if="!select || select === 6">
-        <img src="./assets/images/6.png">
-        <p>樱桃木</p>
+      <div v-if="
+        select
+        && !(select.indexOf('橡胶木') + 1)
+        && !(select.indexOf('白橡木') + 1)
+        && !(select.indexOf('樱桃木') + 1)
+      ">
+        <p>暂无</p>
       </div>
     </div>
   </div>
@@ -36,8 +32,8 @@
 
     props: {
       select: {
-        type: Number,
-        default: 0
+        type: String,
+        default: ''
       }
     }
   }
@@ -62,9 +58,19 @@
     margin: auto;
   }
 
+  .type {
+    width: auto;
+    display: block;
+  }
+
   .box > div {
     width: 72px;
     text-align: center;
+  }
+
+  .type > div {
+    display: inline-block;
+    vertical-align: top;
   }
 
   .box img {

@@ -1,7 +1,7 @@
 <template>
   <div>
     <AHeader></AHeader>
-    <h1>配件细节</h1>
+    <h1>案例详情</h1>
     <div class="cards">
       <div class="card" v-for="(item, index) in total">
         <div class="select">
@@ -86,6 +86,7 @@
           size="10"
           buttonClass="btn"
           removeButtonClass="btn"
+          :prefill="houseImage"
           :plain="true"
           :removable="true"
           :customStrings="{
@@ -125,6 +126,7 @@
                 size="10"
                 buttonClass="btn"
                 removeButtonClass="btn"
+                :prefill="images[index] ? images[index][0] : ''"
                 :plain="true"
                 :removable="true"
                 :customStrings="{
@@ -149,6 +151,7 @@
                 size="10"
                 buttonClass="btn"
                 removeButtonClass="btn"
+                :prefill="images[index] ? images[index][1] : ''"
                 :plain="true"
                 :removable="true"
                 :customStrings="{
@@ -173,6 +176,7 @@
                 size="10"
                 buttonClass="btn"
                 removeButtonClass="btn"
+                :prefill="images[index] ? images[index][2] : ''"
                 :plain="true"
                 :removable="true"
                 :customStrings="{
@@ -197,6 +201,7 @@
                 size="10"
                 buttonClass="btn"
                 removeButtonClass="btn"
+                :prefill="images[index] ? images[index][3] : ''"
                 :plain="true"
                 :removable="true"
                 :customStrings="{
@@ -322,7 +327,7 @@
         let formData = new FormData()
         const image = this.$refs[e].file || this.$refs[e][0].file
         formData.append('image', image)
-        fetch(`${root}backend/shot/upload/`, {
+        fetch(`${root}backend/case/upload/`, {
           method: 'POST',
           credentials: 'include',
           body: formData
@@ -332,23 +337,23 @@
           })
           .then((data) => {
             if (!data.error) {
-              let arr = []
               let num = e.match(/[0-9]/) || 0
+              if (!this.images[num]) {
+                this.images[num] = []
+              }
               if (e.indexOf('main') !== -1) {
                 this.image[num] = data.body.url
-                console.log(this.image)
               } else if (e.indexOf('house') !== -1) {
                 this.houseImage = data.body.url
               } else if (e.indexOf('insA') !== -1) {
-                arr[0] = data.body.url
+                this.images[num][0] = data.body.url
               } else if (e.indexOf('insB') !== -1) {
-                arr[1] = data.body.url
+                this.images[num][1] = data.body.url
               } else if (e.indexOf('insC') !== -1) {
-                arr[2] = data.body.url
+                this.images[num][2] = data.body.url
               } else if (e.indexOf('insD') !== -1) {
-                arr[3] = data.body.url
+                this.images[num][3] = data.body.url
               }
-              this.images[num] = arr
               this.uploadBtn.replace(e, '')
               this.uploadSuc = this.uploadSuc + e
               console.log(this.images)
@@ -374,6 +379,14 @@
               this.desc2 = data.body.desc2
               this.houseDesc = data.body.style.desc
               this.houseImage = data.body.style.image
+              this.insNum = data.body.instances.length
+              for (let i = 0; i < this.insNum; i++) {
+                this.insTitle[i] = data.body.instances[i].title
+                this.instance[i] = data.body.instances[i].desc
+                this.price[i] = data.body.instances[i].price
+                this.priceInfo[i] = data.body.instances[i].price_desc
+                this.images[i] = data.body.images
+              }
               this.suggestion = data.body.advise
               this.detail = true
             }
@@ -412,7 +425,7 @@
         let instances = []
 
         info.title = this.input[this.now] && this.input[this.now].split('@')[0] || ''
-        info.labels = this.input[this.now] && this.input[this.now].split('@')[1].split(' ') || []
+        info.labels = this.input[this.now].split('@')[1] && this.input[this.now].split('@')[1].split(' ') || []
         info.desc1 = this.desc1[this.now] || ''
         info.desc2 = this.desc2
         info.image_cover = this.image[this.now] || ''
@@ -564,6 +577,7 @@
     box-sizing: border-box;
     left: 0;
     top: 0;
+    z-index: -1;
   }
 
   .select {

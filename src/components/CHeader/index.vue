@@ -3,7 +3,7 @@
     <div class="header">
       <div>
         <a href="#/">首页</a>
-        <a href="" @mouseover="showOrder" @mouseout="hideOrder">
+        <a href="#/products/橱柜" @mouseover="showOrder" @mouseout="hideOrder">
           家具产品
           <Order :show="order" :form="false" class="menu"></Order>
         </a>
@@ -89,6 +89,7 @@
   .admin img {
     width: 24px;
     height: 24px;
+    margin-bottom: -5px;
   }
 
   .menu {

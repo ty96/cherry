@@ -4,7 +4,7 @@
 
     <h1>关于我们 - 简介</h1>
     <quill-editor
-      class="eidtor"
+      class="editor"
       ref="myTextEditor"
       v-model="content"
       :config="editorOption"
@@ -75,9 +75,7 @@
     data () {
       return {
         content: '<h2>I am Example</h2>',
-        editorOption: {
-          // something config
-        },
+        editorOption: {},
 
         name: '',
         titleA: '',
@@ -197,7 +195,7 @@
 </script>
 
 <style scoped>
-  .eidtor {
+  .editor {
     height: 500px;
     margin: 0 150px 100px;
   }
@@ -264,7 +262,7 @@
   }
 
   @media(max-width: 1366px) {
-    .eidtor {
+    .editor {
       margin: 0 120px 100px;
     }
 

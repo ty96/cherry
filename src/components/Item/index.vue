@@ -3,7 +3,7 @@
     <img :src="data.image">
     <div class="detail">
       <h4>{{data.name}}</h4>
-      <h5>{{data.price}}</h5>
+      <h5>￥{{data.price}}</h5>
       <div class="divider"></div>
       <p>{{data.intro}}</p>
     </div>
@@ -35,6 +35,10 @@
   .item img {
     width: 240px;
     height: 240px;
+  }
+
+  .detail {
+    width: 240px;
   }
 
   .detail h4 {

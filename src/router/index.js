@@ -14,8 +14,6 @@ import CasesA from '@/components/CasesA'
 import CraftA from '@/components/CraftA'
 import AboutA from '@/components/AboutA'
 import JoinA from '@/components/JoinA'
-import DetailA from '@/components/DetailA'
-import GoodsA from '@/components/GoodsA'
 import Visitors from '@/components/Visitors'
 
 Vue.use(Router)
@@ -28,7 +26,7 @@ export default new Router({
       component: Home
     },
     {
-      path: '/products',
+      path: '/products/:id',
       name: 'Products',
       component: Products
     },
@@ -96,16 +94,6 @@ export default new Router({
       path: '/admin/visitors',
       name: 'visitors',
       component: Visitors
-    },
-    {
-      path: '/admin/detail/:id',
-      name: 'DetailA',
-      component: DetailA
-    },
-    {
-      path: '/admin/goods/:id',
-      name: 'GoodsA',
-      component: GoodsA
     }
   ]
 })

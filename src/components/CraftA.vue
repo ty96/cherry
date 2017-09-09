@@ -3,12 +3,13 @@
     <AHeader></AHeader>
     <h1>配件细节</h1>
     <div class="cards">
-      <div class="card">
+      <div class="card" v-for="(item,index) in data.accessoryDetail" :key="index">
         <div class="select">
-          <span class="upload" v-if="uploadBanner" @click="upload">上传</span>
+          <span class="upload" v-if="uploadBtn.indexOf('detail' + index) + 1" @click="upload('craftdetail', 'detail' + index, index)">上传</span>
+          <span class="success" v-if="uploadSuc.indexOf('detail' + index) + 1">成功</span>
           <picture-input
-            ref="bannerInput"
-            @change="onChange"
+            :ref="'detail' + index"
+            @change="onChange('detail' + index)"
             width="180"
             height="180"
             margin="0"
@@ -18,6 +19,7 @@
             size="10"
             buttonClass="btn"
             removeButtonClass="btn"
+            :prefill="data.accessoryDetail[index].image"
             :plain="true"
             :removable="true"
             :customStrings="{
@@ -28,16 +30,17 @@
           </picture-input>
         </div>
         <div>
-          <input>
-          <textarea></textarea>
+          <input v-model="data.accessoryDetail[index].title">
+          <textarea v-model="data.accessoryDetail[index].desc"></textarea>
         </div>
       </div>
       <div class="card">
         <div class="select">
-          <span class="upload" v-if="uploadBanner" @click="upload">上传</span>
+          <span class="upload" v-if="uploadBtn.indexOf('new') + 1" @click="upload('craftdetail', 'new')">上传</span>
+          <span class="success" v-if="uploadSuc.indexOf('new') + 1">成功</span>
           <picture-input
-            ref="bannerInput"
-            @change="onChange"
+            :ref="'new'"
+            @change="onChange('new')"
             width="180"
             height="180"
             margin="0"
@@ -50,21 +53,20 @@
             :plain="true"
             :removable="true"
             :customStrings="{
-            change: 'Change',
-            remove: 'Remove'
-          }"
+              change: 'Change',
+              remove: 'Remove'
+            }"
           >
           </picture-input>
         </div>
         <div>
-          <input>
-          <textarea></textarea>
+          <input v-model="newItem.title">
+          <textarea v-model="newItem.desc"></textarea>
         </div>
       </div>
     </div>
-    <p class="button" @click="">
-      <CButton color="pink" text="新增项目"></CButton>
-      <CButton color="#333" text="提交改动"></CButton>
+    <p class="button">
+      <a @click="submit"><CButton color="#333" text="提交改动"></CButton></a>
     </p>
 
 
@@ -76,10 +78,10 @@
         <a :href="item" :download="item"><button>Download</button></a>
       </div>
       <div class="select">
-        <span class="upload" v-if="uploadBanner" @click="upload">上传</span>
+        <span class="upload" v-if="uploadBanner" @click="upload('shot', 'bannerInput')">上传</span>
         <picture-input
           ref="bannerInput"
-          @change="onChange"
+          @change="onChange('bannerInput')"
           width="180"
           height="180"
           margin="0"
@@ -127,7 +129,14 @@
       return {
         uploadBanner: false,
         uploadSale: false,
-        data: {}
+        data: {},
+        uploadSuc: '',
+        uploadBtn: '',
+        newItem: {
+          title: '',
+          desc: '',
+          url: ''
+        }
       }
     },
     components: {
@@ -161,7 +170,7 @@
       },
       del (e) {
         if (confirm('确认删除吗？')) {
-          const image = e.target.parentNode.parentNode.childNodes[0].src.split('/').pop()
+          const image = e.target.parentNode.parentNode.childNodes[0].src.split('/').pop().split('?')[0]
           let formData = new FormData()
           formData.append('filename', image)
           fetch(`${root}backend/shot/delete/`, {
@@ -180,18 +189,56 @@
             })
         }
       },
-      onChange () {
-        if (this.$refs.bannerInput.image) {
+      onChange (e) {
+        if (this.$refs[e].image) {
           this.uploadBanner = true
+          this.uploadBtn = this.uploadBtn + e
         } else {
           alert('您的浏览器不支持 FileReader API')
         }
       },
-      upload () {
+      upload (type, e, index) {
         let formData = new FormData()
-        const image = this.$refs.bannerInput.file
+        console.log(this.$refs[e])
+        const image = this.$refs[e].file
         formData.append('image', image)
-        fetch(`${root}backend/shot/upload/`, {
+        fetch(`${root}backend/${type}/upload/`, {
+          method: 'POST',
+          credentials: 'include',
+          body: formData
+        })
+          .then((res) => {
+            return res.json()
+          })
+          .then((data) => {
+            if (!data.error) {
+              if (type === 'shot') {
+                alert('上传成功！')
+                window.location.reload()
+              } else {
+                if (e === 'new') {
+                  this.newItem.url = data.body.url
+                } else {
+                  this.data.accessoryDetail[index].image = data.body.url
+                }
+                this.uploadSuc = this.uploadSuc + e
+              }
+            }
+          })
+      },
+      submit () {
+        let formData = new FormData()
+        let details = {}
+        details.list = this.data.accessoryDetail
+        for (let i = 0; i < details.list.length; i++) {
+          details.list[i].url = details.list[i].image
+        }
+        if (this.newItem.url) {
+          details.list.push(this.newItem)
+        }
+        details = JSON.stringify(details)
+        formData.append('details', details)
+        fetch(`${root}backend/craftdetail/save/`, {
           method: 'POST',
           credentials: 'include',
           body: formData
@@ -289,7 +336,7 @@
   .box div {
     width: 180px;
     height: 180px;
-    margin-bottom: 80px;
+    margin: 0 20px 80px;
     text-align: center;
   }
 
@@ -328,7 +375,8 @@
     position: relative;
   }
 
-  .upload {
+  .upload,
+  .success {
     content: "上传";
     color: white;
     line-height: 30px;
@@ -344,6 +392,12 @@
     z-index: 100003;
     background: rgba(0, 0, 0, 0.5);
     cursor: pointer;
+  }
+
+  .success {
+    color: white;
+    background: green;
+    cursor: not-allowed;
   }
 
   @media(max-width: 1366px) {

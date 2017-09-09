@@ -60,6 +60,7 @@
 
   .detail span {
     display: inline-block;
+    vertical-align: top;
     height: 30px;
     line-height: 30px;
     font-size: 14px;
