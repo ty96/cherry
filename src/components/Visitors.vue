@@ -63,24 +63,26 @@
     methods: {
       confirm () {
         if (confirm('确定标记所选？提交后不可撤销。')) {
-          for (let i = 0; i < this.checkList.length; i++) {
-            let formData = new FormData()
-            formData.append('phonenum', this.checkList[i])
-            fetch(`${root}backend/contact/mark/`, {
-              method: 'POST',
-              credentials: 'include',
-              body: formData
-            })
-              .then((res) => {
-                return res.json()
-              })
-              .then((data) => {
-                if (!data.error && (i + 1 === this.checkList.length)) {
-                  alert('标记成功')
-                  window.location.reload()
-                }
-              })
+          let formData = new FormData()
+          let obj = {
+            phonenum: []
           }
+          obj.phonenum = this.checkList
+          formData.append('info', JSON.stringify(obj))
+          fetch(`${root}backend/contact/mark/`, {
+            method: 'POST',
+            credentials: 'include',
+            body: formData
+          })
+            .then((res) => {
+              return res.json()
+            })
+            .then((data) => {
+              if (!data.error) {
+                alert('标记成功')
+                window.location.reload()
+              }
+            })
         }
       },
       getList (num) {

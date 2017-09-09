@@ -16,7 +16,7 @@
     <p class="button" @click="submit"><CButton color="#333" text="提交改动"></CButton></p>
 
     <h1>人才招聘</h1>
-    <div class="hr" v-for="(item, index) in data" v-if="item.name">
+    <div class="hr" v-for="(item, index) in data" :style="{'background': index % 2 ? '#fef5f5' : 'white'}">
       <input placeholder="添加人才名称" class="type" :value="item.name" @change="change('name', index)" :ref="'name' + index">
       <div>
         <div class="require">
@@ -100,6 +100,7 @@
       return {
         content: '<h2>I am Example</h2>',
         editorOption: {},
+        showAdd: false,
         name: '',
         titleA: '',
         titleB: '',
@@ -183,7 +184,7 @@
         }
       },
       remove (i) {
-        this.data[i] = {}
+        this.data.splice(i, 1)
         this.confirm()
       },
       add () {
@@ -285,7 +286,8 @@
   }
 
   .hr {
-    margin: -10px 150px 80px;
+    margin: -10px 0 80px;
+    padding: 40px 150px 0;
   }
 
   .hr > div {
@@ -296,15 +298,16 @@
 
   .type {
     display: block;
-    border: none;
-    border-bottom: 1px solid #ccc;
+    border: 1px solid #eee;
     outline: none;
     color: #666;
     height: 40px;
-    width: 200px;
-    font-size: 28px;
+    width: 160px;
+    font-size: 20px;
     line-height: 40px;
     padding: 0 10px;
+    border-radius: 10px;
+    text-align: center;
   }
 
   h1 {
@@ -321,12 +324,14 @@
     margin: 30px 0;
     font-size: 18px;
     display: block;
-    border: none;
-    border-bottom: 1px solid #ccc;
+    border: 1px solid #eee;
     outline: none;
     color: #666;
     padding: 0 10px;
-    width: 140px;
+    width: 160px;
+    height: 30px;
+    border-radius: 10px;
+    text-align: center;
   }
 
   .require textarea {
@@ -336,8 +341,9 @@
     font-size: 16px;
     outline: none;
     color: #666;
-    border-color: #ccc;
+    border-color: #eee;
     padding: 10px;
+    border-radius: 10px;
   }
 
   .button {
@@ -355,7 +361,7 @@
     }
 
     .hr {
-      margin: -10px 120px 80px;
+      padding: 40px 120px 0;
     }
 
     h1 {

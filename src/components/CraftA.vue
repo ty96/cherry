@@ -70,7 +70,7 @@
     </p>
 
 
-    <h1>工艺实拍</h1>
+    <h1 class="pink">工艺实拍</h1>
     <div class="box">
       <div v-for="(item, index) in data.craftShot" :key="index">
         <img :src="item">
@@ -193,6 +193,8 @@
         if (this.$refs[e].image) {
           this.uploadBanner = true
           this.uploadBtn = this.uploadBtn + e
+        } else {
+//          alert('您的浏览器不支持 FileReader API')
         }
       },
       upload (type, e, index) {
@@ -322,8 +324,8 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    padding: 20px 150px;
-    margin-bottom: 160px;
+    padding: 20px 150px 180px;
+    background: #fef5f5;
   }
 
   .box img {
@@ -334,7 +336,7 @@
   .box div {
     width: 180px;
     height: 180px;
-    margin-bottom: 80px;
+    margin: 0 20px 80px;
     text-align: center;
   }
 
@@ -390,6 +392,10 @@
     z-index: 100003;
     background: rgba(0, 0, 0, 0.5);
     cursor: pointer;
+  }
+
+  .pink {
+    background: #fef5f5;
   }
 
   .success {

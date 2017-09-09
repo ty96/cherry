@@ -138,6 +138,7 @@
     justify-content: space-between;
     align-items: center;
     position: relative;
+    border-bottom: 1px solid #eee;
   }
 
   .header a {
