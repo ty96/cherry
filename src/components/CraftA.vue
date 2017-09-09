@@ -193,8 +193,6 @@
         if (this.$refs[e].image) {
           this.uploadBanner = true
           this.uploadBtn = this.uploadBtn + e
-        } else {
-          alert('您的浏览器不支持 FileReader API')
         }
       },
       upload (type, e, index) {
@@ -336,7 +334,7 @@
   .box div {
     width: 180px;
     height: 180px;
-    margin: 0 20px 80px;
+    margin-bottom: 80px;
     text-align: center;
   }
 
