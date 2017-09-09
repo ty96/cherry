@@ -10,7 +10,7 @@
             <span>关注：</span>
             <a><img class="qq" src="./assets/images/qq.png"></a>
             <a><img src="./assets/images/wechat.png"></a>
-            <a><img src="./assets/images/weibo.png"></a>
+            <a href="http://weibo.com/u/6324661983/home?topnav=1&wvr=6"><img src="./assets/images/weibo.png"></a>
           </div>
         </div>
       </div>
