@@ -16,7 +16,29 @@
     <p class="button" @click="submit"><CButton color="#333" text="提交改动"></CButton></p>
 
     <h1>人才招聘</h1>
-    <div class="hr">
+    <div class="hr" v-for="(item, index) in data" v-if="item.name">
+      <input placeholder="添加人才名称" class="type" :value="item.name" @change="change('name', index)" :ref="'name' + index">
+      <div>
+        <div class="require">
+          <input placeholder="添加要求大项" :value="item.detail[0] ? item.detail[0].title : ''" @change="change('title', index, 0)" :ref="'titleA' + index">
+          <textarea placeholder="添加要求描述" :value="item.detail[0] ? item.detail[0].desc: ''" @change="change('desc', index, 0)" :ref="'descA' + index"></textarea>
+        </div>
+        <div class="require">
+          <input placeholder="添加要求大项" :value="item.detail[1] ? item.detail[1].title : ''" @change="change('title', index, 1)" :ref="'titleB' + index">
+          <textarea placeholder="添加要求描述" :value="item.detail[1] ? item.detail[1].desc : ''" @change="change('desc', index, 1)" :ref="'descB' + index"></textarea>
+        </div>
+        <div class="require">
+          <input placeholder="添加要求大项" :value="item.detail[2] ? item.detail[2].title : ''" @change="change('title', index, 2)" :ref="'titleC' + index">
+          <textarea placeholder="添加要求描述" :value="item.detail[2] ? item.detail[2].desc : ''" @change="change('desc', index, 2)" :ref="'descC' + index"></textarea>
+        </div>
+        <div class="require">
+          <input placeholder="添加要求大项" :value="item.detail[3] ? item.detail[3].title : ''" @change="change('title', index, 3)" :ref="'titleD' + index">
+          <textarea placeholder="添加要求描述" :value="item.detail[3] ? item.detail[3].desc : ''" @change="change('desc', index, 3)" :ref="'descD' + index"></textarea>
+        </div>
+      </div>
+      <p class="button"><a @click="remove(index)"><CButton :small="true" color="pink" text="移除"></CButton></a></p>
+    </div>
+    <div class="hr" v-if="showAdd">
       <input placeholder="添加人才名称" class="type" v-model="name">
       <div>
         <div class="require">
@@ -38,7 +60,10 @@
       </div>
     </div>
 
-    <p class="button" @click="confirm"><CButton color="pink" text="添加新人才"></CButton></p>
+    <p class="button">
+      <a @click="add"><CButton color="pink" :text="showAdd ? '移除' : '添加'"></CButton></a>
+      <a @click="confirm"><CButton color="#444" text="保存"></CButton></a>
+    </p>
   </div>
 </template>
 
@@ -57,7 +82,7 @@
   import { root } from '../utils'
 
   export default {
-    name: 'admin',
+    name: 'join-admin',
 
     components: {
       AHeader,
@@ -71,12 +96,10 @@
       quillEditor,
       CButton
     },
-
     data () {
       return {
         content: '<h2>I am Example</h2>',
         editorOption: {},
-
         name: '',
         titleA: '',
         titleB: '',
@@ -86,7 +109,7 @@
         descB: '',
         descC: '',
         descD: '',
-
+        data: [],
         recruitment: {
           list: []
         }
@@ -111,59 +134,122 @@
             // TODO refresh()
           })
       },
-      confirm () {
-        let content = []
-        let tempItem = {}
-
-        tempItem.name = this.name
-
-        if (this.titleA) {
-          let tempObj = {}
-          tempObj.title = this.titleA
-          tempObj.desc = this.descA
-          content.push(tempObj)
-        }
-
-        if (this.titleB) {
-          let tempObj = {}
-          tempObj.title = this.titleB
-          tempObj.desc = this.descB
-          content.push(tempObj)
-        }
-
-        if (this.titleC) {
-          let tempObj = {}
-          tempObj.title = this.titleC
-          tempObj.desc = this.descC
-          content.push(tempObj)
-        }
-
-        if (this.titleD) {
-          let tempObj = {}
-          tempObj.title = this.titleD
-          tempObj.desc = this.descD
-          content.push(tempObj)
-        }
-
-        tempItem.content = content
-
-        this.recruitment.list.push(tempItem)
-        this.recruitment = JSON.stringify(this.recruitment)
-
-        let formData = new FormData()
-        formData.append('recruitment', this.recruitment)
-        fetch(`${root}backend/recruitment/save/`, {
-          method: 'POST',
-          credentials: 'include',
-          body: formData
+      request () {
+        fetch(`${root}client/about/`, {
+          method: 'GET',
+          credentials: 'include'
         })
           .then((res) => {
             return res.json()
           })
           .then((data) => {
-            console.log(data)
-            // TODO refresh()
+            this.content = data.body.body
           })
+
+        fetch(`${root}client/recruitment/`, {
+          method: 'GET',
+          credentials: 'include'
+        })
+          .then((res) => {
+            return res.json()
+          })
+          .then((data) => {
+            this.data = data.body
+          })
+      },
+      change (type, index, subIndex) {
+        let value = ''
+        if (type === 'name') {
+          value = this.$refs['name' + index][0].value
+          this.data[index].name = value
+        } else {
+          value = this.$refs[type + this.numToLetter(subIndex) + index][0].value
+          if (!this.data[index].detail[subIndex]) {
+            this.data[index].detail[subIndex] = {}
+          }
+          this.data[index].detail[subIndex][type] = value
+        }
+        console.log(this.data)
+      },
+      numToLetter (i) {
+        if (i === 0) {
+          return 'A'
+        } else if (i === 1) {
+          return 'B'
+        } else if (i === 2) {
+          return 'C'
+        } else if (i === 3) {
+          return 'D'
+        }
+      },
+      remove (i) {
+        this.data[i] = {}
+        this.confirm()
+      },
+      add () {
+        this.showAdd = !this.showAdd
+      },
+      confirm () {
+        if (this.showAdd && !this.name) {
+          if (!confirm('大标题为空，新增条目将不会保存，确认吗？')) {
+            return void 0
+          }
+        } else {
+          let content = []
+          let tempItem = {}
+
+          tempItem.name = this.name
+
+          if (this.titleA) {
+            let tempObj = {}
+            tempObj.title = this.titleA
+            tempObj.desc = this.descA
+            content.push(tempObj)
+          }
+
+          if (this.titleB) {
+            let tempObj = {}
+            tempObj.title = this.titleB
+            tempObj.desc = this.descB
+            content.push(tempObj)
+          }
+
+          if (this.titleC) {
+            let tempObj = {}
+            tempObj.title = this.titleC
+            tempObj.desc = this.descC
+            content.push(tempObj)
+          }
+
+          if (this.titleD) {
+            let tempObj = {}
+            tempObj.title = this.titleD
+            tempObj.desc = this.descD
+            content.push(tempObj)
+          }
+
+          tempItem.content = content
+          this.recruitment.list = this.data
+          if (this.name) {
+            this.recruitment.list.push(tempItem)
+          }
+          this.recruitment = JSON.stringify(this.recruitment).replace(/detail/g, 'content').replace(/{},/g, '')
+
+          let formData = new FormData()
+          formData.append('recruitment', this.recruitment)
+          fetch(`${root}backend/recruitment/save/`, {
+            method: 'POST',
+            credentials: 'include',
+            body: formData
+          })
+            .then((res) => {
+              return res.json()
+            })
+            .then((data) => {
+              console.log(data)
+              window.location.reload()
+            })
+        }
       },
       onEditorBlur (editor) {
         console.log('editor blur!', editor)
@@ -187,9 +273,7 @@
       }
     },
     mounted () {
-      // you can use current editor object to do something(editor methods)
-      console.log('this is my editor', this.editor)
-      // this.editor to do something...
+      this.request()
     }
   }
 </script>
@@ -201,7 +285,7 @@
   }
 
   .hr {
-    margin: -10px 150px 20px;
+    margin: -10px 150px 80px;
   }
 
   .hr > div {
@@ -215,7 +299,7 @@
     border: none;
     border-bottom: 1px solid #ccc;
     outline: none;
-    color: #ccc;
+    color: #666;
     height: 40px;
     width: 200px;
     font-size: 28px;
@@ -240,7 +324,7 @@
     border: none;
     border-bottom: 1px solid #ccc;
     outline: none;
-    color: #ccc;
+    color: #666;
     padding: 0 10px;
     width: 140px;
   }
@@ -251,7 +335,7 @@
     height: 120px;
     font-size: 16px;
     outline: none;
-    color: #ccc;
+    color: #666;
     border-color: #ccc;
     padding: 10px;
   }
@@ -261,13 +345,17 @@
     text-align: center;
   }
 
+  .button a {
+    margin: auto 40px;
+  }
+
   @media(max-width: 1366px) {
     .editor {
       margin: 0 120px 100px;
     }
 
     .hr {
-      margin: -10px 120px 20px;
+      margin: -10px 120px 80px;
     }
 
     h1 {

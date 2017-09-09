@@ -45,7 +45,7 @@
       <div v-for="(item, index) in sale" :key="index">
         <img :src="item">
         <button @click="del(item, 'hotsale')">Remove</button>
-        <a :download="item" :href="item"><button>Download</button></a>
+        <a :download="item.split('?')[0]" :href="item.split('?')[0]"><button>Download</button></a>
       </div>
       <div class="select">
         <span class="upload" v-if="uploadSale" @click="upload('hotsale')">上传</span>
@@ -174,7 +174,7 @@
       del (item, type) {
         if (confirm('确定删除吗？')) {
           let formData = new FormData()
-          const filename = item.split('/').pop()
+          const filename = item.split('/').pop().split('?')[0]
           formData.append('filename', filename)
           fetch(`${root}backend/${type}/delete/`, {
             method: 'POST',
