@@ -15,13 +15,15 @@
         </div>
         <div>
           <input placeholder="标题@label label label" v-model="input[index]">
-          <button @click="showDetail(index)">编辑</button>
-          <button @click="delItem(index)">删除</button>
 
           <textarea v-model="desc1[index]">
             这里填充简介，上面填充标题和 label。标题与 label 用 @ 分割，label 与 label 之间用空格分割，形如『标题@label babel』即可。
           </textarea>
         </div>
+        <p class="button">
+          <a @click="showDetail(index)"><CButton text="编辑" color="#666" :small="true"></CButton></a>
+          <a @click="delItem(index)"><CButton text="删除" color="hotpink" :small="true"></CButton></a>
+        </p>
       </div>
     </div>
     <p class="button" @click="">
@@ -56,14 +58,14 @@
           style="margin: 0"
           accept="image/*"
           size="10"
-          buttonClass="btn"
+          buttonClass="btn changeBtn"
           removeButtonClass="btn"
           :prefill="image[now]"
           :plain="true"
           :removable="true"
           :customStrings="{
-            change: 'Change',
-            remove: 'Remove'
+            change: '更换',
+            remove: '移除'
           }"
         >
         </picture-input>
@@ -84,14 +86,14 @@
           style="margin: 0"
           accept="image/*"
           size="10"
-          buttonClass="btn"
+          buttonClass="btn changeBtn"
           removeButtonClass="btn"
           :prefill="houseImage"
           :plain="true"
           :removable="true"
           :customStrings="{
-            change: 'Change',
-            remove: 'Remove'
+            change: '更换',
+            remove: '移除'
           }"
         >
         </picture-input>
@@ -124,14 +126,14 @@
                 style="margin: 0"
                 accept="image/*"
                 size="10"
-                buttonClass="btn"
+                buttonClass="btn changeBtn"
                 removeButtonClass="btn"
                 :prefill="images[index] ? images[index][0] : ''"
                 :plain="true"
                 :removable="true"
                 :customStrings="{
-                  change: 'Change',
-                  remove: 'Remove'
+                  change: '更换',
+                  remove: '移除'
                 }"
               >
               </picture-input>
@@ -149,14 +151,14 @@
                 style="margin: 0"
                 accept="image/*"
                 size="10"
-                buttonClass="btn"
+                buttonClass="btn changeBtn"
                 removeButtonClass="btn"
                 :prefill="images[index] ? images[index][1] : ''"
                 :plain="true"
                 :removable="true"
                 :customStrings="{
-                  change: 'Change',
-                  remove: 'Remove'
+                  change: '更换',
+                  remove: '移除'
                 }"
               >
               </picture-input>
@@ -174,14 +176,14 @@
                 style="margin: 0"
                 accept="image/*"
                 size="10"
-                buttonClass="btn"
+                buttonClass="btn changeBtn"
                 removeButtonClass="btn"
                 :prefill="images[index] ? images[index][2] : ''"
                 :plain="true"
                 :removable="true"
                 :customStrings="{
-                  change: 'Change',
-                  remove: 'Remove'
+                  change: '更换',
+                  remove: '移除'
                 }"
               >
               </picture-input>
@@ -199,14 +201,14 @@
                 style="margin: 0"
                 accept="image/*"
                 size="10"
-                buttonClass="btn"
+                buttonClass="btn changeBtn"
                 removeButtonClass="btn"
                 :prefill="images[index] ? images[index][3] : ''"
                 :plain="true"
                 :removable="true"
                 :customStrings="{
-                  change: 'Change',
-                  remove: 'Remove'
+                  change: '更换',
+                  remove: '移除'
                 }"
               >
               </picture-input>
@@ -215,7 +217,7 @@
         </div>
       </div>
 
-      <p class="button" @click="addInstance"><CButton color="pink" text="增加一项"></CButton></p>
+      <p class="button add" @click="addInstance"><CButton color="pink" text="增加一项"></CButton></p>
       <p>樱桃建议: </p><input placeholder="户型描述" v-model="suggestion">
       <p class="submit" @click="save"><CButton color="#333" text="保存"></CButton></p>
     </div>
@@ -492,7 +494,7 @@
   }
 
   .button {
-    margin: 0 30px 30px;
+    margin: 30px 30px;
     text-align: center;
   }
 
@@ -524,7 +526,7 @@
   .card input {
     color: #636363;
     border: none;
-    width: 200px;
+    width: 280px;
     display: inline-block;
     height: 28px;
     line-height: 28px;
@@ -635,6 +637,10 @@
     margin: 15px 0;
   }
 
+  .detail .add {
+    margin-top: 50px;
+  }
+
   .detail input {
     width: 960px;
     height: 50px;
@@ -712,6 +718,14 @@
     float: right;
     width: 100px;
     margin-top: 5px;
+  }
+
+  .button {
+    margin: 40px 0;
+  }
+
+  .button span {
+    margin: 0 20px;
   }
 
   @media(max-width: 1366px) {

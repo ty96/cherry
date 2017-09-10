@@ -1,7 +1,7 @@
 <template>
   <div>
     <AHeader></AHeader>
-    <h1>案例详情
+    <h1>家具详情
       <select v-model="position" @change="changePosition">
         <option>橱柜</option>
         <option>衣柜</option>
@@ -23,14 +23,16 @@
         </div>
         <div>
           <input placeholder="标题@label label label" v-model="name[index]">
-          <button @click="showDetail(index)">编辑</button>
-          <button @click="delItem(index)">删除</button>
 
           <textarea v-model="intro[index]">
             这里填充简介，上面填充标题和 label。标题与 label 用 @ 分割，label 与 label 之间用空格分割，形如『标题@label babel』即可。
           </textarea>
-          <span>价格： </span><input placeholder="" type="number" v-model="price[index]">
+          <span>价格： </span><input class="priceInput" placeholder="" type="number" v-model="price[index]">
         </div>
+        <p class="button">
+          <a @click="showDetail(index)"><CButton text="编辑" color="#666" :small="true"></CButton></a>
+          <a @click="delItem(index)"><CButton text="删除" color="hotpink" :small="true"></CButton></a>
+        </p>
       </div>
     </div>
     <p class="button" @click="">
@@ -71,14 +73,14 @@
           style="margin: 0"
           accept="image/*"
           size="10"
-          buttonClass="btn"
+          buttonClass="btn changeBtn"
           removeButtonClass="btn"
           :prefill="image[now]"
           :plain="true"
           :removable="true"
           :customStrings="{
-            change: 'Change',
-            remove: 'Remove'
+            change: '更换',
+            remove: '移除'
           }"
         >
         </picture-input>
@@ -388,7 +390,7 @@
   .card input {
     color: #636363;
     border: none;
-    width: 200px;
+    width: 280px;
     display: inline-block;
     height: 28px;
     line-height: 28px;
@@ -397,6 +399,10 @@
     padding: 0 10px;
     border-bottom: 1px solid #ccc;
     outline: none;
+  }
+
+  .card .priceInput {
+    width: 210px;
   }
 
   .card button {
@@ -602,6 +608,14 @@
     float: right;
     width: 100px;
     margin-top: 5px;
+  }
+
+  .button {
+    margin: 40px 0;
+  }
+
+  .button span {
+    margin: 0 20px;
   }
 
   @media(max-width: 1366px) {

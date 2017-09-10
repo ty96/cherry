@@ -40,7 +40,24 @@
   }
 
   .btn {
-    color: #444;
-    width: 80px;
+    font-family: serif;
+    width: 65px;
+    border: 1px solid #636363;
+    font-size: 14px;
+    line-height: 26px;
+    text-align: center;
+    opacity: 0.6;
+    background: none;
+    color: #666;
+    margin: 1em 10px !important;
+  }
+
+  .changeBtn {
+    color: hotpink;
+    border: 1px solid hotpink;
+  }
+
+  .btn:hover {
+    opacity: 1;
   }
 </style>

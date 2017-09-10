@@ -30,9 +30,10 @@
           </picture-input>
         </div>
         <div>
-          <input v-model="data.accessoryDetail[index].title"><button @click="delItem(index)">删除</button>
+          <input v-model="data.accessoryDetail[index].title">
           <textarea v-model="data.accessoryDetail[index].desc"></textarea>
         </div>
+        <p class="delBtn"><a @click="delItem(index)"><CButton text="删除该项" :small="true" color="#666"></CButton></a></p>
       </div>
       <div class="card">
         <div class="select">
@@ -74,8 +75,8 @@
     <div class="box">
       <div v-for="(item, index) in data.craftShot" :key="index">
         <img :src="item">
-        <a @click="del"><button>Remove</button></a>
-        <a :href="item" :download="item"><button>Download</button></a>
+        <a @click="del"><CButton :small="true" color="hotpink" text="移除"></CButton></a>
+        <a :href="item" :download="item"><CButton :small="true" color="#666" text="下载"></CButton></a>
       </div>
       <div class="select">
         <span class="upload" v-if="uploadBanner" @click="upload('shot', 'bannerInput')">上传</span>
@@ -89,13 +90,13 @@
           style="margin: 0"
           accept="image/*"
           size="10"
-          buttonClass="btn"
+          buttonClass="btn changeBtn"
           removeButtonClass="btn"
           :plain="true"
           :removable="true"
           :customStrings="{
-            change: 'Change',
-            remove: 'Remove'
+            change: '更换',
+            remove: '移除'
           }"
         >
         </picture-input>
@@ -324,7 +325,7 @@
   .card input {
     color: #636363;
     border: none;
-    width: 240px;
+    width: 280px;
     display: inline-block;
     height: 28px;
     line-height: 28px;
@@ -431,9 +432,13 @@
     cursor: not-allowed;
   }
 
-  .card .newInput {
-    width: 280px;
-    display: block;
+  .delBtn {
+    text-align: center;
+    margin: 20px 0;
+  }
+
+  .box .button {
+    margin: 10px;
   }
 
   @media(max-width: 1366px) {

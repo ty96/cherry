@@ -5,8 +5,8 @@
     <div class="box">
       <div v-for="(item, index) in banner" :key="index">
         <img :src="item">
-        <button @click="del(item, 'banner')">Remove</button>
-        <a :download="item.split('?')[0]" :href="item.split('?')[0]"><button>Download</button></a>
+        <a><CButton @click="del(item, 'banner')" text="删除" color="hotpink" :small="true"></CButton></a>
+        <a :download="item.split('?')[0]" :href="item.split('?')[0]"><CButton text="下载" color="#666" :small="true"></CButton></a>
       </div>
       <div class="select">
         <span class="upload" v-if="uploadBanner" @click="upload('banner')">上传</span>
@@ -21,13 +21,13 @@
           style="margin: 0"
           accept="image/*"
           size="10"
-          buttonClass="btn"
+          buttonClass="btn changeBtn"
           removeButtonClass="btn"
           :plain="true"
           :removable="true"
           :customStrings="{
-            change: 'Change',
-            remove: 'Remove'
+            change: '更换',
+            remove: '移除'
           }"
         >
         </picture-input>
@@ -44,8 +44,8 @@
     <div class="box">
       <div v-for="(item, index) in sale" :key="index">
         <img :src="item">
-        <button @click="del(item, 'hotsale')">Remove</button>
-        <a :download="item.split('?')[0]" :href="item.split('?')[0]"><button>Download</button></a>
+        <a><CButton @click="del(item, 'banner')" text="删除" color="hotpink" :small="true"></CButton></a>
+        <a :download="item.split('?')[0]" :href="item.split('?')[0]"><CButton text="下载" color="#666" :small="true"></CButton></a>
       </div>
       <div class="select">
         <span class="upload" v-if="uploadSale" @click="upload('hotsale')">上传</span>
@@ -83,6 +83,7 @@
   import AHeader from './AHeader'
   import Banner from './Banner'
   import Creed from './Creed'
+  import CButton from './CButton'
   import Sale from './Sale'
   import Shop from './Shop'
   import Wechat from './Wechat'
@@ -106,6 +107,7 @@
       AHeader,
       Banner,
       Creed,
+      CButton,
       Sale,
       Shop,
       Wechat,
@@ -208,6 +210,10 @@
     flex-wrap: wrap;
     padding: 20px 150px;
     justify-content: space-between;
+  }
+
+  .box a span {
+    margin: 10px;
   }
 
   .box img {

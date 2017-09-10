@@ -43,6 +43,11 @@
     text-align: center;
     cursor: pointer;
     user-select: none;
+    opacity: 0.6;
+  }
+
+  .button:hover {
+    opacity: 1;
   }
 
   .small {
