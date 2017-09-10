@@ -6,7 +6,7 @@
       <div v-for="(item, index) in banner" :key="index">
         <img :src="item">
         <button @click="del(item, 'banner')">Remove</button>
-        <a :download="item" :href="item"><button>Download</button></a>
+        <a :download="item.split('?')[0]" :href="item.split('?')[0]"><button>Download</button></a>
       </div>
       <div class="select">
         <span class="upload" v-if="uploadBanner" @click="upload('banner')">上传</span>

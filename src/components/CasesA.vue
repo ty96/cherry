@@ -15,8 +15,8 @@
         </div>
         <div>
           <input placeholder="标题@label label label" v-model="input[index]">
-          <button @click="showDetail(index)">Edit</button>
-          <button @click="delItem(index)">Del</button>
+          <button @click="showDetail(index)">编辑</button>
+          <button @click="delItem(index)">删除</button>
 
           <textarea v-model="desc1[index]">
             这里填充简介，上面填充标题和 label。标题与 label 用 @ 分割，label 与 label 之间用空格分割，形如『标题@label babel』即可。
@@ -217,7 +217,7 @@
 
       <p class="button" @click="addInstance"><CButton color="pink" text="增加一项"></CButton></p>
       <p>樱桃建议: </p><input placeholder="户型描述" v-model="suggestion">
-      <p class="submit" @click="save"><CButton color="#333" text="保存 & 提交"></CButton></p>
+      <p class="submit" @click="save"><CButton color="#333" text="保存"></CButton></p>
     </div>
     <div class="mask" v-if="detail" @click="hideDetail"></div>
   </div>

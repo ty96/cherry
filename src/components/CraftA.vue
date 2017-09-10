@@ -30,7 +30,7 @@
           </picture-input>
         </div>
         <div>
-          <input v-model="data.accessoryDetail[index].title">
+          <input v-model="data.accessoryDetail[index].title"><button @click="delItem(index)">删除</button>
           <textarea v-model="data.accessoryDetail[index].desc"></textarea>
         </div>
       </div>
@@ -60,7 +60,7 @@
           </picture-input>
         </div>
         <div>
-          <input v-model="newItem.title">
+          <input v-model="newItem.title" class="newInput">
           <textarea v-model="newItem.desc"></textarea>
         </div>
       </div>
@@ -167,6 +167,33 @@
               this.data = data.body
             }
           })
+      },
+      delItem (index) {
+        let formData = new FormData()
+        let details = {}
+        if (confirm('确认删除吗？')) {
+          this.data.accessoryDetail.splice(index, 1)
+          details.list = this.data.accessoryDetail
+          for (let i = 0; i < details.list.length; i++) {
+            details.list[i].url = details.list[i].image
+          }
+          details = JSON.stringify(details)
+          formData.append('details', details)
+          fetch(`${root}backend/craftdetail/save/`, {
+            method: 'POST',
+            credentials: 'include',
+            body: formData
+          })
+            .then((res) => {
+              return res.json()
+            })
+            .then((data) => {
+              if (!data.error) {
+                alert('删除成功！')
+                window.location.reload()
+              }
+            })
+        }
       },
       del (e) {
         if (confirm('确认删除吗？')) {
@@ -297,8 +324,8 @@
   .card input {
     color: #636363;
     border: none;
-    width: 280px;
-    display: block;
+    width: 240px;
+    display: inline-block;
     height: 28px;
     line-height: 28px;
     font-size: 20px;
@@ -402,6 +429,11 @@
     color: white;
     background: green;
     cursor: not-allowed;
+  }
+
+  .card .newInput {
+    width: 280px;
+    display: block;
   }
 
   @media(max-width: 1366px) {
