@@ -131,8 +131,11 @@
             return res.json()
           })
           .then((data) => {
-            console.log(data)
-            // TODO refresh()
+            if (!data.error) {
+              alert('提交成功！')
+            } else {
+              alert('提交失败！')
+            }
           })
       },
       request () {
