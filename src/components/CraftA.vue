@@ -17,14 +17,14 @@
             style="margin: 0"
             accept="image/*"
             size="10"
-            buttonClass="btn"
+            buttonClass="btn changeBtn"
             removeButtonClass="btn"
             :prefill="data.accessoryDetail[index].image"
             :plain="true"
             :removable="true"
             :customStrings="{
-            change: 'Change',
-            remove: 'Remove'
+            change: '更换',
+            remove: '移除'
           }"
           >
           </picture-input>
@@ -49,13 +49,13 @@
             style="margin: 0"
             accept="image/*"
             size="10"
-            buttonClass="btn"
+            buttonClass="btn changeBtn"
             removeButtonClass="btn"
             :plain="true"
             :removable="true"
             :customStrings="{
-              change: 'Change',
-              remove: 'Remove'
+              change: '更换',
+              remove: '移除'
             }"
           >
           </picture-input>
@@ -434,7 +434,11 @@
 
   .delBtn {
     text-align: center;
-    margin: 20px 0;
+    margin: 80px 0 20px 0;
+  }
+
+  .delBtn span {
+    margin: 0;
   }
 
   .box .button {
