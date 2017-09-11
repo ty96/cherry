@@ -358,9 +358,7 @@
               }
               this.uploadBtn.replace(e, '')
               this.uploadSuc = this.uploadSuc + e
-              console.log(this.images)
             }
-            // TODO refresh()
           })
       },
       hideDetail () {
@@ -387,11 +385,12 @@
                 this.instance[i] = data.body.instances[i].desc
                 this.price[i] = data.body.instances[i].price
                 this.priceInfo[i] = data.body.instances[i].price_desc
-                this.images[i] = data.body.images
+                this.images[i] = data.body.instances[i].images
               }
               this.suggestion = data.body.advise
               this.detail = true
             }
+            console.log(this.images)
           })
       },
       appendItem () {
