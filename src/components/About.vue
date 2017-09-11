@@ -7,7 +7,7 @@
     ></CTitle>
     <Creed :unique="true"></Creed>
     <Shop :unique="true"></Shop>
-    <div class="desc" v-html="data"></div>
+    <div class="desc ql-editor" v-html="data"></div>
     <Wechat :join="true"></Wechat>
     <CFooter></CFooter>
   </div>

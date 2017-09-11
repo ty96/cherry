@@ -3,7 +3,7 @@
     <CHeader></CHeader>
     <Show :base="base" :data="base"></Show>
     <Params :data="params"></Params>
-    <div class="intro" v-html="intro"></div>
+    <div class="intro ql-editor" v-html="intro"></div>
     <Service :fix="true" :data="maintain"></Service>
 
     <h1>精选推荐</h1>
