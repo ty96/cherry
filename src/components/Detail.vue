@@ -5,14 +5,14 @@
       :height="360"
       :unique="true"
       :title="data.title"
-      :esc="data.desc1"
+      :desc="data.desc1"
     ></CTitle>
     <p class="desc">{{data.desc2}}</p>
     <div class="house">
-      <img :src="data.house && data.house.image">
+      <img :src="data.style && data.style.image">
       <div>
         <h2>客户户型</h2>
-        <p>{{data.house && data.house.desc}}</p>
+        <p>{{data.style && data.style.desc}}</p>
       </div>
     </div>
     <h1>细节定制 & 实例</h1>
@@ -102,10 +102,11 @@
 
   .house {
     margin: 60px 150px;
+    display: flex;
+    justify-content: space-between;
   }
 
   .house img {
-    flex: 0;
     width: 360px;
     height: 360px;
     display: inline-block;
@@ -114,6 +115,7 @@
   }
 
   .house > div {
+    flex: 1;
     display: inline-block;
     vertical-align: top;
   }

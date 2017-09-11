@@ -5,6 +5,11 @@
     <Params :data="params"></Params>
     <div class="intro" v-html="intro"></div>
     <Service :fix="true" :data="maintain"></Service>
+
+    <h1>精选推荐</h1>
+    <div class="items">
+      <Item v-for="(item, index) in rec" :key="index" :data="item" v-if="index < 4"></Item>
+    </div>
     <CFooter></CFooter>
   </div>
 </template>
@@ -17,6 +22,7 @@
   import Shop from './Shop'
   import Wechat from './Wechat'
   import Service from './Service'
+  import Item from './Item'
   import CFooter from './CFooter'
   import Shot from './Shot'
   import Params from './Params'
@@ -38,7 +44,8 @@
       CFooter,
       Shot,
       Params,
-      Show
+      Show,
+      Item
     },
 
     data () {
@@ -47,12 +54,14 @@
         intro: '',
         params: {},
         maintain: {},
-        base: {}
+        base: {},
+        rec: []
       }
     },
 
     mounted () {
       this.showDetail()
+      this.showRec()
     },
 
     methods: {
@@ -72,6 +81,20 @@
               this.maintain = data.body.maintain
             }
           })
+      },
+      showRec () {
+        fetch(`${root}client/furnitureRecommend/`, {
+          method: 'GET',
+          credentials: 'include'
+        })
+          .then((res) => {
+            return res.json()
+          })
+          .then((data) => {
+            if (!data.error) {
+              this.rec = data.body
+            }
+          })
       }
     }
   }
@@ -80,6 +103,21 @@
 <style scoped>
   .intro {
     padding: 40px 150px;
+  }
+
+  h1 {
+    color: #444444;
+    font-size: 32px;
+    text-align: center;
+    padding: 72px 0 60px;
+  }
+
+  .items {
+    padding: 0 150px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
   }
 
   @media (max-width: 1366px) {

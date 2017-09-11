@@ -7,7 +7,7 @@
       class="editor"
       ref="myTextEditor"
       v-model="content"
-      :config="editorOption"
+      :options="editorOption"
       @blur="onEditorBlur($event)"
       @focus="onEditorFocus($event)"
       @ready="onEditorReady($event)"
@@ -80,6 +80,11 @@
   import { quillEditor } from 'vue-quill-editor'
   import 'whatwg-fetch'
   import { root } from '../utils'
+  import Quill from 'quill'
+  import { ImageImport } from './QuillEditor/modules/ImageImport.js'
+  import { ImageResize } from './QuillEditor/modules/ImageResize.js'
+  Quill.register('modules/imageImport', ImageImport)
+  Quill.register('modules/imageResize', ImageResize)
 
   export default {
     name: 'join-admin',
@@ -98,8 +103,15 @@
     },
     data () {
       return {
-        content: '<h2>I am Example</h2>',
-        editorOption: {},
+        content: '',
+        editorOption: {
+          modules: {
+            imageImport: true,
+            imageResize: {
+              displaySize: true
+            }
+          }
+        },
         showAdd: false,
         name: '',
         titleA: '',
