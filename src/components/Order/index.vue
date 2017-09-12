@@ -72,6 +72,7 @@
                 alert('预定成功 我们的客服会尽快联系您')
                 this.name = ''
                 this.tel = ''
+                window.location.reload()
               }
             })
         } else {

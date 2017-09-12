@@ -9,7 +9,9 @@
 
       <h1>精选推荐</h1>
       <div class="items">
-        <Item v-for="(item, index) in rec" :key="index" :data="item" v-if="index < 4"></Item>
+        <a v-for="(item, index) in rec" :href="'#/goods/' + item.fid">
+          <Item :key="index" :data="item" v-if="index < 4"></Item>
+        </a>
       </div>
       <CFooter></CFooter>
     </div>

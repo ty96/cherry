@@ -10,7 +10,7 @@
     </div>
     <div class="arr prev" :style="{'left': margin - 60 + 'px'}" slot="button-prev">&lt;</div>
     <div class="arr next" :style="{'right': margin - 60 + 'px'}"  slot="button-next">&gt;</div>
-    <a href="#/products"><p class="more"><CButton text="更多优品"></CButton></p></a>
+    <a href="#/products/橱柜"><p class="more"><CButton text="更多优品"></CButton></p></a>
   </div>
 </template>
 

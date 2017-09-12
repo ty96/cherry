@@ -62,8 +62,9 @@
 
   .cherry img {
     width: 120px;
-    margin: 40px auto 0 auto;
+    margin: 20px auto 0 auto;
     display: block;
+    opacity: 0.4;
   }
 
   @media (max-width: 1366px) {
