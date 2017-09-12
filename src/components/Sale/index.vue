@@ -1,7 +1,7 @@
 <template>
   <div class="sale">
     <h1>优品热卖</h1>
-    <div class="box" :style="{'margin-left': margin - 60 + 'px'}">
+    <div class="box" :style="{'margin-left': width > 1280 ? margin - 60 : 147 + 'px'}">
       <swiper :options="swiperOption">
         <swiper-slide class="swiper" v-for="(item, index) in sale" :key="index">
           <img :src="item">
@@ -55,6 +55,7 @@
 
     data () {
       return {
+        width: window.innerWidth,
         margin: window.innerWidth <= 1366 ? parseInt((window.innerWidth - 1140) / 8) + 190 : parseInt((window.innerWidth - 1260) / 8) + 210,
         swiperOption: {
           autoplay: 2500,
@@ -63,7 +64,7 @@
           prevButton: '.prev',
           nextButton: '.next',
           spaceBetween: 60,
-          width: window.innerWidth / 3 * 2,
+          width: window.innerWidth > 1280 ? window.innerWidth / 3 * 2 : 853,
           loop: true,
           loopAdditionalSlides: 5,
           slidesPerView: 2,

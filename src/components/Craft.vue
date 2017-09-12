@@ -8,7 +8,7 @@
     <Wood></Wood>
     <Material :data="data.accessoryDetail"></Material>
     <CStyle></CStyle>
-    <Shot :images="data.craftShot" title="工艺实拍" :desc="desc"></Shot>
+    <Shot :images="data.craftShot" title="工艺实拍" :desc="data.desc"></Shot>
     <CFooter></CFooter>
   </div>
 </template>

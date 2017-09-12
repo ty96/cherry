@@ -1,16 +1,18 @@
 <template>
   <div class="goods">
     <CHeader></CHeader>
-    <Show :base="base" :data="base"></Show>
-    <Params :data="params"></Params>
-    <div class="intro ql-editor" v-html="intro"></div>
-    <Service :fix="true" :data="maintain"></Service>
+    <div :style="{'opacity': base.price ? 1 : 0}" class="loading">
+      <Show :base="base" :data="base"></Show>
+      <Params :data="params"></Params>
+      <div class="intro ql-editor" v-html="intro"></div>
+      <Service :fix="true" :data="maintain"></Service>
 
-    <h1>精选推荐</h1>
-    <div class="items">
-      <Item v-for="(item, index) in rec" :key="index" :data="item" v-if="index < 4"></Item>
+      <h1>精选推荐</h1>
+      <div class="items">
+        <Item v-for="(item, index) in rec" :key="index" :data="item" v-if="index < 4"></Item>
+      </div>
+      <CFooter></CFooter>
     </div>
-    <CFooter></CFooter>
   </div>
 </template>
 
@@ -103,6 +105,10 @@
 <style scoped>
   .intro {
     padding: 40px 150px;
+  }
+
+  .loading {
+    transition: opacity 1s ease 0s;
   }
 
   h1 {

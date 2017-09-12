@@ -99,7 +99,6 @@
               this.total = data.body.total_page
               this.now = num
             }
-            // TODO refresh()
           })
       },
       goPage (e) {

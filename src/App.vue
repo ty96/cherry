@@ -19,7 +19,7 @@
 
   body {
     min-width: 1280px;
-    overflow-x: scroll;
+    overflow-x: hidden;
   }
 
   a {

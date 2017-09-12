@@ -42,6 +42,7 @@
           .then((data) => {
             if (!data.error) {
               this.banner = data.body.banner
+              document.getElementsByTagName('body')[0].style.opacity = 1
             }
           })
       }

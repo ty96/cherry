@@ -41,7 +41,9 @@
     props: {
       images: {
         type: Array,
-        default: []
+        default: function () {
+          return []
+        }
       },
       title: {
         type: String,
