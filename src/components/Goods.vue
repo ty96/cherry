@@ -1,15 +1,18 @@
 <template>
   <div class="goods">
     <CHeader></CHeader>
-    <div :style="{'opacity': base.price ? 1 : 0}" class="loading">
+    <div :style="{'opacity': base.price ? 1 : 0}" class="opacity">
       <Show :base="base" :data="base"></Show>
       <Params :data="params"></Params>
       <div class="intro ql-editor" v-html="intro"></div>
+      <div class="loading" v-if="!intro">
+        <img src="../assets/loading.gif">
+      </div>
       <Service :fix="true" :data="maintain"></Service>
 
       <h1>精选推荐</h1>
       <div class="items">
-        <a v-for="(item, index) in rec" :href="'#/goods/' + item.fid">
+        <a v-for="(item, index) in rec" @click="goTo('#/goods/' + item.fid)">
           <Item :key="index" :data="item" v-if="index < 4"></Item>
         </a>
       </div>
@@ -69,6 +72,10 @@
     },
 
     methods: {
+      goTo (e) {
+        window.location.hash = e
+        window.location.reload()
+      },
       showDetail () {
         fetch(`${root}backend/furniture/get/?fid=${this.fid}`, {
           method: 'GET',
@@ -123,8 +130,19 @@
     padding: 40px 150px;
   }
 
-  .loading {
+  .opacity {
     transition: opacity 1s ease 0s;
+  }
+
+  .loading {
+    width: 320px;
+    text-align: center;
+    margin: 50px auto;
+  }
+
+  .loading img {
+    width: 100px;
+    margin-left: 25px;
   }
 
   h1 {
