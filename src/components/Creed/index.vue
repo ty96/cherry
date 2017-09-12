@@ -11,7 +11,7 @@
         <p>我们秉承产品细节从人性化功能设计到精益配件及环保材料，时刻践行追求卓越标准，不断力求完美，只为让更多年轻人购买到心仪的实木家具。</p>
       </div>
       <div class="cherry">
-        <img src="./assets/images/cherry.svg">
+        <img src="../../assets/logo_full.svg">
       </div>
     </div>
   </div>
@@ -62,7 +62,7 @@
 
   .cherry img {
     width: 120px;
-    margin: auto;
+    margin: 40px auto 0 auto;
     display: block;
   }
 

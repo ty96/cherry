@@ -9,7 +9,7 @@
         </a>
         <a href="#/cases">案例</a>
       </div>
-      <a class="logo" href="#/"><img src="../../assets/logo.png"></a>
+      <a class="logo" href="#/"><img src="../../assets/logo_simplify.svg"></a>
       <div>
         <a href="#/craft">工艺</a>
         <a href="#/about">关于</a>
@@ -83,7 +83,8 @@
   }
 
   .logo img {
-    margin-top: 12px;
+    margin-top: 18px;
+    width: 75px;
   }
 
   .admin img {

@@ -26,7 +26,7 @@
       </span>
     </div>
     <div class="mask" @click="warning" v-if="!name">
-      <img src="../../assets/logo.png">
+      <img src="../../assets/logo_simplify.svg">
       <h1>后台管理系统</h1>
     </div>
   </div>

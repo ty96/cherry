@@ -68,7 +68,7 @@
 
     methods: {
       showDetail () {
-        fetch(`${root}client/furnitureDetail/?fid=${this.fid}`, {
+        fetch(`${root}backend/furniture/get/?fid=${this.fid}`, {
           method: 'GET',
           credentials: 'include'
         })
@@ -77,10 +77,24 @@
           })
           .then((data) => {
             if (!data.error) {
-              this.base = data.body.base
-              this.params = data.body.params
-              this.intro = data.body.detail
-              this.maintain = data.body.maintain
+              this.base = data.body.info.base
+              this.params = data.body.info.params
+              this.maintain = data.body.info.maintain
+              this.showDesc()
+            }
+          })
+      },
+      showDesc () {
+        fetch(`${root}backend/furniture/detail/?fid=${this.fid}`, {
+          method: 'GET',
+          credentials: 'include'
+        })
+          .then((res) => {
+            return res.json()
+          })
+          .then((data) => {
+            if (!data.error) {
+              this.intro = data.body.info.detail
             }
           })
       },
