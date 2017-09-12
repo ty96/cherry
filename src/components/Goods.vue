@@ -101,7 +101,7 @@
           })
       },
       showRec () {
-        fetch(`${root}client/furnitureRecommend/`, {
+        fetch(`${root}client/furnitureRecommend/?fid=${this.fid}`, {
           method: 'GET',
           credentials: 'include'
         })
