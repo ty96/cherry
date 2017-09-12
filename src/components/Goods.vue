@@ -74,6 +74,7 @@
     methods: {
       goTo (e) {
         window.location.hash = e
+        window.scrollTo(0, 0)
         window.location.reload()
       },
       showDetail () {
