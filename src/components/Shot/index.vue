@@ -55,7 +55,7 @@
       },
       desc: {
         type: String,
-        default: '描述'
+        default: ''
       },
       price: {
         type: String,
