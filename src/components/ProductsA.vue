@@ -90,13 +90,14 @@
       <Params :isAdmin="true" :data="params" @paramsSave="paramHandle"></Params>
 
       <p> 详细信息: </p>
-      <quill-editor
+      <vue-editor
         class="editor"
         ref="myTextEditor"
         v-model="content"
-        :options="editorOption"
+        @imageAdded="handleImageAdded"
+        :useCustomImageHandler="true"
       >
-      </quill-editor>
+      </vue-editor>
 
       <p>维护保养: </p>
       <Service :admin="true" :fix="true" :data="maintain" @maintainSave="maintainHandle" class="service"></Service>
@@ -120,26 +121,13 @@
   import PictureInput from 'vue-picture-input'
   import 'whatwg-fetch'
   import { root } from '../utils'
-  import { quillEditor } from 'vue-quill-editor'
-  import Quill from 'quill'
-  import { ImageImport } from './QuillEditor/modules/ImageImport.js'
-  import { ImageResize } from './QuillEditor/modules/ImageResize.js'
-  Quill.register('modules/imageImport', ImageImport)
-  Quill.register('modules/imageResize', ImageResize)
+  import VueEditor from './Editor/VueEditor.vue'
 
   export default {
     name: 'cases-admin',
     data () {
       return {
         position: window.sessionStorage.getItem('position') || '橱柜',
-        editorOption: {
-          modules: {
-            imageImport: true,
-            imageResize: {
-              displaySize: true
-            }
-          }
-        },
         now: 0,
         total: 0,
         insNum: 2,
@@ -173,7 +161,7 @@
       Params,
       CButton,
       PictureInput,
-      quillEditor
+      VueEditor
     },
     mounted () {
       this.request()
@@ -327,7 +315,6 @@
         info.params = this.params
         info.detail = this.content
         info.maintain = this.maintain
-        console.log(base)
 
         let formData = new FormData()
         formData.append('info', JSON.stringify(info))
@@ -353,6 +340,22 @@
         let parent = e.target.parentNode.parentNode
         parent.style.display = confirm('确定删除该项吗？') ? 'none' : 'block'
         this.insNum--
+      },
+      handleImageAdded (file, Editor, cursorLocation) {
+        let formData = new FormData()
+        formData.append('image', file)
+
+        fetch(`${root}backend/richtext/upload/`, {
+          method: 'POST',
+          credentials: 'include',
+          body: formData
+        })
+          .then((res) => {
+            return res.json()
+          })
+          .then((data) => {
+            Editor.insertEmbed(cursorLocation, 'image', data.body.url)
+          })
       }
     }
   }
@@ -468,8 +471,9 @@
   }
 
   .editor {
-    height: 500px;
+    height: 640px;
     margin-bottom: 100px;
+    position: relative;
   }
 
   .select {
@@ -513,7 +517,7 @@
     background: white;
     border: 1px solid #efefef;
     border-radius: 15px;
-    z-index: 99999;
+    z-index: 8;
     padding: 0 40px 40px;
     box-sizing: border-box;
     overflow: hidden scroll;
@@ -594,7 +598,7 @@
     top: 0;
     left: 0;
     background: rgba(0, 0, 0, 0.6);
-    z-index: 99998;
+    z-index: 7;
   }
 
   .service {

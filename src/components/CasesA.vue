@@ -14,7 +14,7 @@
           </div>
         </div>
         <div>
-          <input placeholder="标题@label label label" v-model="input[index]">
+          <input placeholder="标题" v-model="input[index]">
 
           <textarea v-model="desc1[index]">
             这里填充简介，上面填充标题和 label。标题与 label 用 @ 分割，label 与 label 之间用空格分割，形如『标题@label babel』即可。
@@ -37,6 +37,16 @@
       <h1>{{input[now] && input[now].split('@')[0]}} 案例详情 </h1>
       <div>
         <p>标题: </p><input placeholder="标题@label label label" v-model="input[now]">
+
+        <p>标签: </p>
+        <div class="labels">
+          <input placeholder="" v-model="labels[now][0]" class="label">
+          <input placeholder="" v-model="labels[now][1]" class="label">
+          <input placeholder="" v-model="labels[now][2]" class="label">
+          <input placeholder="" v-model="labels[now][3]" class="label">
+          <input placeholder="" v-model="labels[now][4]" class="label">
+          <input placeholder="" v-model="labels[now][5]" class="label">
+        </div>
 
         <p>标题简述: </p>
         <textarea v-model="desc1[now]">
@@ -218,7 +228,7 @@
       </div>
 
       <p class="button add" @click="addInstance"><CButton color="pink" text="增加一项"></CButton></p>
-      <p>樱桃建议: </p><input placeholder="户型描述" v-model="suggestion">
+      <p>樱桃建议: </p><textarea placeholder="户型描述" v-model="suggestion"></textarea>
       <p class="submit" @click="save"><CButton color="#333" text="保存"></CButton></p>
     </div>
     <div class="mask" v-if="detail" @click="hideDetail"></div>
@@ -250,7 +260,14 @@
         detail: false,
         input: [],
         title: [],
-        labels: [],
+        labels: [
+          [],
+          [],
+          [],
+          [],
+          [],
+          []
+        ],
         desc1: [],
         image: [],
         desc2: '',
@@ -296,7 +313,8 @@
               for (let i = 0; i < this.data.length; i++) {
                 this.image[i] = this.data[i].image_cover
                 this.desc1[i] = this.data[i].desc
-                this.input[i] = this.data[i].title + '@' + this.data[i].labels.join(' ')
+                this.input[i] = this.data[i].title
+                this.labels[i] = this.data[i].labels
               }
             }
           })
@@ -425,8 +443,8 @@
         let style = {}
         let instances = []
 
-        info.title = this.input[this.now] && this.input[this.now].split('@')[0] || ''
-        info.labels = this.input[this.now].split('@')[1] && this.input[this.now].split('@')[1].split(' ') || []
+        info.title = this.input[this.now] || ''
+        info.labels = this.labels[this.now] || []
         info.desc1 = this.desc1[this.now] || ''
         info.desc2 = this.desc2
         info.image_cover = this.image[this.now] || ''
@@ -650,6 +668,17 @@
     border-radius: 10px;
     border: 1px solid #efefef;
   }
+
+  .detail .labels {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .detail .label {
+    width: 150px;
+    text-align: center;
+  }
+
 
   .detail textarea {
     width: 960px;

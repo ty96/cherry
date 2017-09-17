@@ -4,7 +4,7 @@
       <h1>{{data.name}}</h1>
       <p>{{data.intro}}</p>
       <p>可选木材材质：</p>
-      <Wood :select="JSON.stringify(data.material)" class="type"></Wood>
+      <Wood :select="data.material" class="type"></Wood>
       <p>可选尺寸：<span>{{data.size}}</span></p>
       <a @click="buy"><CButton text="购买咨询"></CButton></a>
       <span class="price">￥{{data.price}}</span>

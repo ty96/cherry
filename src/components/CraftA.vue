@@ -1,6 +1,52 @@
 <template>
   <div>
     <AHeader></AHeader>
+
+    <h1>材质精选</h1>
+    <div class="box wood">
+      <div v-for="(item, index) in wood.info" :key="index">
+        <span>{{item.name}}</span>
+        <img :src="item.image">
+        <a @click="removeWood(item)"><CButton :small="true" color="hotpink" text="移除"></CButton></a>
+        <a :href="item" :download="item"><CButton :small="true" color="#666" text="下载"></CButton></a>
+      </div>
+      <div class="select">
+        <input v-model="newWood.name">
+        <span class="upload" v-if="uploadMaterial" @click="upload('material', 'wood')">上传</span>
+        <span class="success" v-if="uploadSuc.indexOf('wood') + 1">成功</span>
+        <picture-input
+          ref="wood"
+          @change="onChange('material')"
+          @remove="onRemove('material')"
+          width="180"
+          height="356"
+          margin="0"
+          class="banner"
+          style="margin: 0"
+          accept="image/*"
+          size="10"
+          buttonClass="btn changeBtn"
+          removeButtonClass="btn"
+          :plain="true"
+          :removable="true"
+          :customStrings="{
+            change: '更换',
+            remove: '移除'
+          }"
+        >
+        </picture-input>
+      </div>
+      <div class="blank"></div>
+      <div class="blank"></div>
+      <div class="blank"></div>
+      <div class="blank"></div>
+      <div class="blank"></div>
+      <div class="blank"></div>
+    </div>
+    <p class="button woodButton">
+      <a @click="saveWood"><CButton color="#333" text="提交改动"></CButton></a>
+    </p>
+
     <h1>配件细节</h1>
     <div class="cards">
       <div class="card" v-for="(item,index) in data.accessoryDetail" :key="index">
@@ -10,6 +56,7 @@
           <picture-input
             :ref="'detail' + index"
             @change="onChange('detail' + index)"
+            @remove="onRemove('detail' + index)"
             width="180"
             height="180"
             margin="0"
@@ -42,6 +89,7 @@
           <picture-input
             :ref="'new'"
             @change="onChange('new')"
+            @remove="onRemove('new')"
             width="180"
             height="180"
             margin="0"
@@ -83,6 +131,7 @@
         <picture-input
           ref="bannerInput"
           @change="onChange('bannerInput')"
+          @remove="onRemove('bannerInput')"
           width="180"
           height="180"
           margin="0"
@@ -130,14 +179,17 @@
       return {
         uploadBanner: false,
         uploadSale: false,
+        uploadMaterial: false,
         data: {},
+        wood: {},
         uploadSuc: '',
         uploadBtn: '',
         newItem: {
           title: '',
           desc: '',
           url: ''
-        }
+        },
+        newWood: {}
       }
     },
     components: {
@@ -166,6 +218,19 @@
           .then((data) => {
             if (!data.error) {
               this.data = data.body
+            }
+          })
+
+        fetch(`${root}backend/material/get/`, {
+          method: 'GET',
+          credentials: 'include'
+        })
+          .then((res) => {
+            return res.json()
+          })
+          .then((data) => {
+            if (!data.error) {
+              this.wood = data.body
             }
           })
       },
@@ -218,17 +283,27 @@
         }
       },
       onChange (e) {
-        if (this.$refs[e].image) {
+        if (e === 'material') {
+          this.uploadMaterial = true
+        } else if (e === 'bannerInput') {
           this.uploadBanner = true
-          this.uploadBtn = this.uploadBtn + e
         } else {
-//          alert('您的浏览器不支持 FileReader API')
+          this.uploadBtn = this.uploadBtn + e
         }
+      },
+      onRemove (e) {
+        if (e === 'material') {
+          this.uploadMaterial = false
+        } else if (e === 'bannerInput') {
+          this.uploadBanner = false
+        } else {
+          this.uploadBtn = this.uploadBtn.replace(e, '')
+        }
+        this.uploadSuc = ''
       },
       upload (type, e, index) {
         let formData = new FormData()
-        console.log(this.$refs[e])
-        const image = this.$refs[e].file
+        const image = this.$refs[e] && this.$refs[e].file
         formData.append('image', image)
         fetch(`${root}backend/${type}/upload/`, {
           method: 'POST',
@@ -243,14 +318,16 @@
               if (type === 'shot') {
                 alert('上传成功！')
                 window.location.reload()
-              } else {
+              } else if (type === 'craftdetail') {
                 if (e === 'new') {
                   this.newItem.url = data.body.url
                 } else {
                   this.data.accessoryDetail[index].image = data.body.url
                 }
-                this.uploadSuc = this.uploadSuc + e
+              } else if (type === 'material') {
+                this.newWood.url = data.body.url
               }
+              this.uploadSuc = this.uploadSuc + e
             }
           })
       },
@@ -280,6 +357,50 @@
               window.location.reload()
             }
           })
+      },
+      saveWood () {
+        let formData = new FormData()
+        if (!this.newWood.name || !this.newWood.url) {
+          alert('请保证材质图片和材质名称不为空')
+        } else {
+          formData.append('name', this.newWood.name)
+          formData.append('url', this.newWood.url)
+          fetch(`${root}backend/material/new/`, {
+            method: 'POST',
+            credentials: 'include',
+            body: formData
+          })
+            .then((res) => {
+              return res.json()
+            })
+            .then((data) => {
+              if (!data.error) {
+                alert('上传成功！')
+                window.location.reload()
+              }
+            })
+        }
+      },
+      removeWood (item) {
+        if (window.confirm('确认删除吗？')) {
+          let formData = new FormData()
+          formData.append('mid', item.mid)
+          formData.append('url', this.newWood.url)
+          fetch(`${root}backend/material/delete/`, {
+            method: 'POST',
+            credentials: 'include',
+            body: formData
+          })
+            .then((res) => {
+              return res.json()
+            })
+            .then((data) => {
+              if (!data.error) {
+                alert('删除成功！')
+                window.location.reload()
+              }
+            })
+        }
       }
     }
   }
@@ -295,6 +416,10 @@
   .button {
     margin: 0 30px 30px;
     text-align: center;
+  }
+
+  .woodButton {
+    margin-top: -100px;
   }
 
   .cards {
@@ -356,6 +481,10 @@
     background: #fef5f5;
   }
 
+  .wood {
+    background: white;
+  }
+
   .box img {
     width: 180px;
     height: 180px;
@@ -368,15 +497,49 @@
     text-align: center;
   }
 
+  .wood div {
+    height: 400px;
+  }
+
+  .wood img {
+    width: 180px;
+    height: 356px;
+  }
+
   .box button {
     color: #444;
     width: 80px;
     margin: 7px 2px;
   }
 
+  .box input {
+    width: 120px;
+    height: 36px;
+    padding: 0 20px;
+    font-size: 14px;
+    box-sizing: border-box;
+    outline: none;
+    border-radius: 10px;
+    border: 1px solid #efefef;
+    margin: 0 auto 20px;
+    text-align: center;
+  }
+
+  .box > div > span {
+    color: #666;
+    width: 120px;
+    height: 36px;
+    padding: 0 20px;
+    font-size: 14px;
+    box-sizing: border-box;
+    display: inline-block;
+    margin: 0 auto 20px;
+    text-align: center;
+  }
+
   .box .blank {
-    height: 0;
-    margin: 0 10px;
+    height: 1px;
+    margin: 0 20px;
   }
 
   .banner {
@@ -399,12 +562,19 @@
     top: 0;
   }
 
+  .wood .banner:after {
+    height: 356px;
+    line-height: 354px;
+  }
+
   .select {
     position: relative;
   }
 
   .upload,
-  .success {
+  .success,
+  .box > div > .upload,
+  .box > div > .success {
     content: "上传";
     color: white;
     line-height: 30px;
@@ -420,13 +590,22 @@
     z-index: 100003;
     background: rgba(0, 0, 0, 0.5);
     cursor: pointer;
+    padding: 0;
   }
+
+  .wood > div > .upload,
+  .wood > div > .success {
+    top: 56px;
+  }
+
 
   .pink {
     background: #fef5f5;
   }
 
-  .success {
+  .success,
+  .box > div > .success,
+  .wood > div > .success {
     color: white;
     background: green;
     cursor: not-allowed;

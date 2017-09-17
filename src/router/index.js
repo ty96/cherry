@@ -13,7 +13,6 @@ import ProductsA from '@/components/ProductsA'
 import CasesA from '@/components/CasesA'
 import CraftA from '@/components/CraftA'
 import AboutA from '@/components/AboutA'
-import JoinA from '@/components/JoinA'
 import Visitors from '@/components/Visitors'
 
 Vue.use(Router)
@@ -84,11 +83,6 @@ export default new Router({
       path: '/admin/about',
       name: 'AboutA',
       component: AboutA
-    },
-    {
-      path: '/admin/join',
-      name: 'JoinA',
-      component: JoinA
     },
     {
       path: '/admin/visitors',

@@ -1,25 +1,12 @@
 <template>
   <div class="wood">
     <h1 v-if="!select">精选材质</h1>
-    <div class="box" :class="{'type': select}">
-      <div v-if="!select || select.indexOf('橡胶木') + 1">
-        <img src="./assets/images/1.png">
-        <p>橡胶木</p>
+    <div class="box" :class="{'type': select.length}">
+      <div v-for="(item, index) in select">
+        <div :style="{'background': 'url(' + item.image + ')'}"></div>
+        <p>{{item.name}}</p>
       </div>
-      <div v-if="!select || select.indexOf('白橡木') + 1">
-        <img src="./assets/images/2.png">
-        <p>白橡木</p>
-      </div>
-      <div v-if="!select || select.indexOf('樱桃木') + 1">
-        <img src="./assets/images/3.png">
-        <p>樱桃木</p>
-      </div>
-      <div v-if="
-        select
-        && !(select.indexOf('橡胶木') + 1)
-        && !(select.indexOf('白橡木') + 1)
-        && !(select.indexOf('樱桃木') + 1)
-      ">
+      <div v-if="!select.length">
         <p>暂无</p>
       </div>
     </div>
@@ -32,8 +19,10 @@
 
     props: {
       select: {
-        type: String,
-        default: ''
+        type: Array,
+        default: function () {
+          return []
+        }
       }
     }
   }
@@ -73,9 +62,11 @@
     vertical-align: top;
   }
 
-  .box img {
+  .box > div > div {
     width: 60px;
     height: 60px;
+    background-size: cover;
+    border-radius: 30px;
   }
 
   .box p {

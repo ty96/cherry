@@ -5,7 +5,7 @@
       title="工艺"
       desc="来自樱桃家具的工艺保证，还原最优质实木体验"
     ></CTitle>
-    <Wood></Wood>
+    <Shot :images="wood.info" title="工艺实拍" :desc="data.desc" :wood="true"></Shot>
     <Material :data="data.accessoryDetail"></Material>
     <CStyle></CStyle>
     <Shot :images="data.craftShot" title="工艺实拍" :desc="data.desc"></Shot>
@@ -63,13 +63,27 @@
               this.data = data.body
             }
           })
+
+        fetch(`${root}backend/material/get/`, {
+          method: 'GET',
+          credentials: 'include'
+        })
+          .then((res) => {
+            return res.json()
+          })
+          .then((data) => {
+            if (!data.error) {
+              this.wood = data.body
+            }
+          })
       }
     },
 
     data () {
       return {
         order: false,
-        data: {}
+        data: {},
+        wood: {}
       }
     }
   }

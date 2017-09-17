@@ -3,16 +3,14 @@
     <AHeader></AHeader>
 
     <h1>关于我们 - 简介</h1>
-    <quill-editor
+    <vue-editor
       class="editor"
       ref="myTextEditor"
       v-model="content"
-      :options="editorOption"
-      @blur="onEditorBlur($event)"
-      @focus="onEditorFocus($event)"
-      @ready="onEditorReady($event)"
+      @imageAdded="handleImageAdded"
+      :useCustomImageHandler="true"
     >
-    </quill-editor>
+    </vue-editor>
     <p class="button" @click="submit"><CButton color="#333" text="提交改动"></CButton></p>
 
     <h1>人才招聘</h1>
@@ -77,14 +75,9 @@
   import Wechat from './Wechat'
   import Service from './Service'
   import CFooter from './CFooter'
-  import { quillEditor } from 'vue-quill-editor'
   import 'whatwg-fetch'
   import { root } from '../utils'
-  import Quill from 'quill'
-  import { ImageImport } from './QuillEditor/modules/ImageImport.js'
-  import { ImageResize } from './QuillEditor/modules/ImageResize.js'
-  Quill.register('modules/imageImport', ImageImport)
-  Quill.register('modules/imageResize', ImageResize)
+  import VueEditor from './Editor/VueEditor.vue'
 
   export default {
     name: 'join-admin',
@@ -98,20 +91,12 @@
       Wechat,
       Service,
       CFooter,
-      quillEditor,
-      CButton
+      CButton,
+      VueEditor
     },
     data () {
       return {
         content: '',
-        editorOption: {
-          modules: {
-            imageImport: true,
-            imageResize: {
-              displaySize: true
-            }
-          }
-        },
         showAdd: false,
         name: '',
         titleA: '',
@@ -267,22 +252,23 @@
             })
         }
       },
-      onEditorBlur (editor) {
-        console.log('editor blur!', editor)
-      },
-      onEditorFocus (editor) {
-        console.log('editor focus!', editor)
-      },
-      onEditorReady (editor) {
-        console.log('editor ready!', editor)
-      },
-      onEditorChange ({ editor, html, text }) {
-        // console.log('editor change!', editor, html, text)
-        this.content = html
+      handleImageAdded (file, Editor, cursorLocation) {
+        let formData = new FormData()
+        formData.append('image', file)
+
+        fetch(`${root}backend/richtext/upload/`, {
+          method: 'POST',
+          credentials: 'include',
+          body: formData
+        })
+          .then((res) => {
+            return res.json()
+          })
+          .then((data) => {
+            Editor.insertEmbed(cursorLocation, 'image', data.body.url)
+          })
       }
     },
-    // if you need to get the current editor object, you can find the editor object like this, the $ref object is a ref attribute corresponding to the dom redefined
-    // 如果你需要得到当前的editor对象来做一些事情，你可以像下面这样定义一个方法属性来获取当前的editor对象，实际上这里的$refs对应的是当前组件内所有关联了ref属性的组件元素对象
     computed: {
       editor () {
         return this.$refs.myTextEditor.quillEditor
@@ -296,7 +282,7 @@
 
 <style scoped>
   .editor {
-    height: 500px;
+    height: 640px;
     margin: 0 150px 100px;
   }
 

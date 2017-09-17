@@ -18,6 +18,7 @@
     "vue-quill-editor": "^2.3.0",
     "vue-router": "^2.6.0",
     "vue-simple-pager": "^1.0.3",
+    "vue2-editor": "^2.0.26",
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {

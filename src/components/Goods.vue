@@ -5,9 +5,6 @@
       <Show :base="base" :data="base"></Show>
       <Params :data="params"></Params>
       <div class="intro ql-editor" v-html="intro"></div>
-      <div class="loading" v-if="!intro">
-        <img src="../assets/loading.gif">
-      </div>
       <Service :fix="true" :data="maintain"></Service>
 
       <h1>精选推荐</h1>

@@ -3,10 +3,21 @@
     <h1 :style="{'font-size': small ? '20px' : '32px'}">
       {{title}}
     </h1>
-    <template v-if="!price">
+    <template v-if="!price && !wood">
       <swiper :options="swiperOption" class="box">
         <swiper-slide v-for="(image, index) in images" class="swiper" :key="index" :style="{'width': width}">
           <img :src="image">
+        </swiper-slide>
+      </swiper>
+      <div class="pagination"></div>
+      <div class="prev arr" slot="button-prev">&lt;</div>
+      <div class="next arr" slot="button-next">&gt;</div>
+    </template>
+    <template v-if="wood">
+      <swiper :options="swiperOption" class="box">
+        <swiper-slide v-for="(image, index) in images" class="swiper wood" :key="index" :style="{'width': width}">
+          <img :src="image.image">
+          <span :style="{'left': (width - 180) / 2 + 'px'}">{{image.name}}</span>
         </swiper-slide>
       </swiper>
       <div class="pagination"></div>
@@ -64,6 +75,10 @@
       info: {
         type: String,
         default: ''
+      },
+      wood: {
+        type: Boolean,
+        default: false
       }
     },
     data () {
@@ -116,6 +131,7 @@
 
   .swiper {
     display: inline-block;
+    position: relative;
   }
 
   .images img,
@@ -123,6 +139,30 @@
     width: 240px;
     height: 240px;
     margin: 45px auto 55px;
+  }
+
+  .wood img {
+    width: 180px;
+    height: 356px;
+  }
+
+  .wood span {
+    position: absolute;
+    display: block;
+    width: 180px;
+    height: 356px;
+    background: rgba(240, 50, 50, 0.2);
+    top: 0;
+    margin: 45px auto 55px;
+    font-size: 32px;
+    color: rgba(255, 255, 255, 0.8);
+    box-sizing: border-box;
+    padding: 70px;
+    line-height: 72px;
+  }
+
+  .wood:hover span {
+    display: none;
   }
 
   .pagination {
