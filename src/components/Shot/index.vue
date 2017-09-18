@@ -153,6 +153,7 @@
     width: 180px;
     height: 356px;
     position: relative;
+    margin: auto;
   }
 
   .wood span {
