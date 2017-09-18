@@ -69,10 +69,10 @@
   }
 
   .header a {
-    width: 80px;
+    width: 88px;
     height: 100px;
     line-height: 100px;
-    margin: 0 20px;
+    padding: 0 16px;
     text-align: center;
     display: inline-block;
     vertical-align: middle;

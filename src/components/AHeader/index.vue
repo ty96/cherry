@@ -14,8 +14,8 @@
         <span>账号</span>
         <input v-model="username">
         <span>密码</span>
-        <input v-model="password" type="password">
-        <a @click="login"><CButton text="登入" :small="true" color="#aaa"></CButton></a>
+        <input v-model="password" type="password" @keydown="keyDown">
+        <a @click="login"><CButton text="登入" :small="true" color="#ffafaf"></CButton></a>
       </div>
       <span
         v-else="!name"
@@ -70,6 +70,11 @@
       }
     },
     methods: {
+      keyDown (e) {
+        if (e.keyCode === 13) {
+          this.login()
+        }
+      },
       noScroll (bool) {
         let body = document.getElementsByTagName('body')[0]
         let html = document.getElementsByTagName('html')[0]
@@ -142,10 +147,10 @@
   }
 
   .header a {
-    width: 64px;
+    width: 72px;
     height: 100px;
     line-height: 100px;
-    margin: 0 20px;
+    margin: 0 16px;
     text-align: center;
     display: inline-block;
     vertical-align: middle;
@@ -172,6 +177,7 @@
     font-size: 14px;
     color: #636363;
     text-align: center;
+    outline: none;
   }
 
   .mask {

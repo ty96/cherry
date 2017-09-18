@@ -2,7 +2,7 @@
   <div>
     <AHeader></AHeader>
 
-    <h1>材质精选</h1>
+    <h1>精选材质</h1>
     <div class="box wood">
       <div v-for="(item, index) in wood.info" :key="index">
         <span>{{item.name}}</span>
@@ -44,7 +44,7 @@
       <div class="blank"></div>
     </div>
     <p class="button woodButton">
-      <a @click="saveWood"><CButton color="#333" text="提交改动"></CButton></a>
+      <a @click="saveWood"><CButton color="#333" text="保存新增"></CButton></a>
     </p>
 
     <h1>配件细节</h1>
@@ -419,7 +419,7 @@
   }
 
   .woodButton {
-    margin-top: -100px;
+    margin-top: -10px;
   }
 
   .cards {

@@ -282,7 +282,7 @@
 
 <style scoped>
   .editor {
-    height: 640px;
+    height: 800px;
     margin: 0 150px 100px;
   }
 

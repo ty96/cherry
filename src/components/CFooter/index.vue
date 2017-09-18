@@ -15,16 +15,16 @@
         </div>
       </div>
       <div class="why">
-        <h3>为何选择樱桃</h3>
+        <h3>为何选择碧樱</h3>
         <div>
-          <p>	樱桃利用互联网优势，与传统实木家具行业相结合，节省中间多层经销商环节，以降低家具渠道成本，从而消费者能够以更加合理的价格享受到实木家具带来的绿色环保、工艺美观的生活品质。</p>
+          <p>碧樱利用互联网优势，与传统实木家具行业相结合，节省中间多层经销商环节，以降低家具渠道成本，从而消费者能够以更加合理的价格享受到实木家具带来的绿色环保、工艺美观的生活品质。</p>
         </div>
       </div>
       <div class="qr">
         <h3>微信公众号</h3>
         <div>
           <img src="../../assets/qr.png">
-          <p>微信扫码关注 · 樱桃家具官方</p>
+          <p>微信扫码关注 · 碧樱家具官方</p>
         </div>
       </div>
     </div>
@@ -35,7 +35,7 @@
       <a href="#/join">人才招聘</a>
       <a href="#/about">关于</a>
     </div>
-    <p class="copyright">Copyright © 2017 www.cherrieshome.com 保留所有权利 川ICP备1700523号 樱桃实木家具有限公司</p>
+    <p class="copyright">Copyright © 2017 www.beinghouse.com 保留所有权利 川ICP备1700523号 成都乐铠印记科技有限公司</p>
   </div>
 </template>
 

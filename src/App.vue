@@ -60,4 +60,8 @@
   .btn:hover {
     opacity: 1;
   }
+
+  .intro img {
+    border: none !important;
+  }
 </style>

@@ -16,8 +16,10 @@
     <template v-if="wood">
       <swiper :options="swiperOption" class="box">
         <swiper-slide v-for="(image, index) in images" class="swiper wood" :key="index" :style="{'width': width}">
-          <img :src="image.image">
-          <span :style="{'left': (width - 180) / 2 + 'px'}">{{image.name}}</span>
+          <div class="container">
+            <img :src="image.image">
+            <span>{{image.name}}</span>
+          </div>
         </swiper-slide>
       </swiper>
       <div class="pagination"></div>
@@ -94,7 +96,8 @@
           nextButton: '.next',
           paginationClickable: true,
           speed: 1000,
-          slidesPerView: 4
+          slidesPerView: 4,
+          loop: true
         }
       }
     }
@@ -146,6 +149,12 @@
     height: 356px;
   }
 
+  .wood .container {
+    width: 180px;
+    height: 356px;
+    position: relative;
+  }
+
   .wood span {
     position: absolute;
     display: block;
@@ -153,11 +162,12 @@
     height: 356px;
     background: rgba(240, 50, 50, 0.2);
     top: 0;
+    left: 0;
     margin: 45px auto 55px;
     font-size: 32px;
     color: rgba(255, 255, 255, 0.8);
     box-sizing: border-box;
-    padding: 70px;
+    padding: 60px;
     line-height: 72px;
   }
 
