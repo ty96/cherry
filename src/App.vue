@@ -61,6 +61,11 @@
     opacity: 1;
   }
 
+  #quill-container {
+    height: 800px !important;
+  }
+
+  .desc img,
   .intro img {
     border: none !important;
   }
