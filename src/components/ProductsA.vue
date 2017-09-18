@@ -256,16 +256,11 @@
       },
       changePosition () {
         window.sessionStorage.setItem('position', this.position)
-        this.request()
+        window.location.reload()
       },
       appendItem () {
         this.now = this.total + 1
         this.fid = -1
-        this.size = ''
-        this.material = [0, 0, 0]
-        this.params = {}
-        this.content = ''
-        this.maintain = {}
         this.detail = true
       },
       delItem (e) {
