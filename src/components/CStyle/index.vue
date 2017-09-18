@@ -1,41 +1,52 @@
 <template>
   <div class="style">
     <h2>部件样式</h2>
-    <div class="tri">
-      <div>
-        <img src="./assets/images/style-a.jpg">
-        <h4>顶冒线</h4>
-        <p>工艺细腻精湛，明朗大气</p>
+    <template v-for="i in Math.ceil(data.length / 5)">
+      <div class="tri">
+        <div v-if="data[(i - 1) * 5]">
+          <img :src="data[(i - 1) * 5].image">
+          <h4>{{data[(i - 1) * 5].title}}</h4>
+          <p>{{data[(i - 1) * 5].desc}}</p>
+        </div>
+        <div v-if="data[(i - 1) * 5 + 1]">
+          <img :src="data[(i - 1) * 5 + 1].image">
+          <h4>{{data[(i - 1) * 5 + 1].title}}</h4>
+          <p>{{data[(i - 1) * 5 + 1].desc}}</p>
+        </div>
+        <div v-if="data[(i - 1) * 5 + 2]">
+          <img :src="data[(i - 1) * 5 + 2].image">
+          <h4>{{data[(i - 1) * 5 + 2].title}}</h4>
+          <p>{{data[(i - 1) * 5 + 2].desc}}</p>
+        </div>
       </div>
-      <div>
-        <img src="./assets/images/style-b.jpg">
-        <h4>抽屉</h4>
-        <p>科学置物，整洁有序</p>
+      <div class="double">
+        <div v-if="data[(i - 1) * 5 + 3]">
+          <img :src="data[(i - 1) * 5 + 3].image">
+          <h4>{{data[(i - 1) * 5 + 3].title}}</h4>
+          <p>{{data[(i - 1) * 5 + 3].desc}}</p>
+        </div>
+        <div v-if="data[(i - 1) * 5 + 4]">
+          <img :src="data[(i - 1) * 5 + 4].image">
+          <h4>{{data[(i - 1) * 5 + 4].title}}</h4>
+          <p>{{data[(i - 1) * 5 + 4].desc}}</p>
+        </div>
       </div>
-      <div>
-        <img src="./assets/images/style-c.jpg">
-        <h4>挂衣通</h4>
-        <p>坚固稳实，承压性强，使用寿命长</p>
-      </div>
-    </div>
-    <div class="double">
-      <div>
-        <img src="./assets/images/style-d.jpg">
-        <h4>拉手</h4>
-        <p>根据家具的款式、功能和场所。百款欧式仿古风格、田园风格、陶瓷系列实用拉手任意搭</p>
-      </div>
-      <div>
-        <img src="./assets/images/style-e.jpg">
-        <h4>罗马柱</h4>
-        <p>精致的立体雕花、层次感丰富、纹理流畅美观，章显高档品质</p>
-      </div>
-    </div>
+    </template>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'style'
+    name: 'style',
+
+    props: {
+      data: {
+        type: Array,
+        default: function () {
+          return []
+        }
+      }
+    }
   }
 </script>
 

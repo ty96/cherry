@@ -6,8 +6,8 @@
       desc="来自樱桃家具的工艺保证，还原最优质实木体验"
     ></CTitle>
     <Shot :images="wood.info" title="精选材质" :desc="data.desc" :wood="true"></Shot>
-    <Material :data="data.accessoryDetail"></Material>
-    <CStyle></CStyle>
+    <!--<Material :data="data.accessoryDetail"></Material>-->
+    <CStyle :data="data.accessoryDetail"></CStyle>
     <Shot :images="data.craftShot" title="工艺实拍" :desc="data.desc"></Shot>
     <CFooter></CFooter>
   </div>
