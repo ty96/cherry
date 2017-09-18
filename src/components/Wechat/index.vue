@@ -3,7 +3,7 @@
     <template v-if="!join">
       <h1>樱桃家具 · 微信公众号</h1>
       <p>指尖掌握最新动态，查询并了解更多资讯，尽在移动端微信公众号，敬请扫描微信二维码关注。</p>
-      <img src="../../assets/qr.png">
+      <img src="../../assets/qr.jpg">
     </template>
     <template v-else="!join">
       <h1 class="join">人才招聘</h1>

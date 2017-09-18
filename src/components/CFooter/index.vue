@@ -8,8 +8,8 @@
           <p>客服服务时间： 8:00 - 23:00</p>
           <div class="media">
             <span>关注：</span>
-            <a><img class="qq" src="./assets/images/qq.png"></a>
-            <a><img src="./assets/images/wechat.png"></a>
+            <!--<a><img class="qq" src="./assets/images/qq.png"></a>-->
+            <!--<a><img src="./assets/images/wechat.png"></a>-->
             <a href="http://weibo.com/u/6324661983/home?topnav=1&wvr=6"><img src="./assets/images/weibo.png"></a>
           </div>
         </div>
@@ -23,7 +23,7 @@
       <div class="qr">
         <h3>微信公众号</h3>
         <div>
-          <img src="../../assets/qr.png">
+          <img src="../../assets/qr.jpg">
           <p>微信扫码关注 · 碧樱家具官方</p>
         </div>
       </div>
