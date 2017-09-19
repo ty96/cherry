@@ -1,6 +1,6 @@
 <template>
   <div class="style">
-    <h2>部件样式</h2>
+    <h2>配件细节</h2>
     <template v-for="i in Math.ceil(data.length / 5)">
       <div class="tri">
         <div v-if="data[(i - 1) * 5]">
@@ -95,6 +95,10 @@
     line-height: 1.8em;
   }
 
+  .tri p {
+    max-width: 360px;
+  }
+
   @media (max-width: 1366px) {
     .style {
       padding: 40px 120px;
@@ -111,7 +115,10 @@
       height: 200px;
     }
 
-    .tri p,
+    .tri p {
+      max-width: 300px;
+    }
+
     .double p {
       max-width: 458px;
     }

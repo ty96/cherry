@@ -51,7 +51,7 @@
     <div class="cards">
       <div class="card" v-for="(item,index) in data.accessoryDetail" :key="index">
         <div class="select">
-          <span class="upload" v-if="uploadBtn.indexOf('detail' + index) + 1" @click="upload('craftdetail', 'detail' + index, index)">上传</span>
+          <span class="upload" v-if="(uploadBtn.indexOf('detail' + index) + 1) && operate" @click="upload('craftdetail', 'detail' + index, index)">上传</span>
           <span class="success" v-if="uploadSuc.indexOf('detail' + index) + 1">成功</span>
           <picture-input
             :ref="'detail' + index"
@@ -82,7 +82,7 @@
         </div>
         <p class="delBtn"><a @click="delItem(index)"><CButton text="删除该项" :small="true" color="#666"></CButton></a></p>
       </div>
-      <div class="card">
+      <div class="card" id="newCard">
         <div class="select">
           <span class="upload" v-if="uploadBtn.indexOf('new') + 1" @click="upload('craftdetail', 'new')">上传</span>
           <span class="success" v-if="uploadSuc.indexOf('new') + 1">成功</span>
@@ -189,7 +189,8 @@
           desc: '',
           url: ''
         },
-        newWood: {}
+        newWood: {},
+        operate: false
       }
     },
     components: {
@@ -305,6 +306,7 @@
         let formData = new FormData()
         const image = this.$refs[e] && this.$refs[e].file
         formData.append('image', image)
+        this.operate = true
         fetch(`${root}backend/${type}/upload/`, {
           method: 'POST',
           credentials: 'include',
@@ -353,7 +355,10 @@
           })
           .then((data) => {
             if (!data.error) {
-              alert('上传成功！')
+              document.getElementById('newCard').style.display = 'none'
+              setTimeout(function () {
+                alert('上传成功！')
+              }, 10)
               window.location.reload()
             }
           })
