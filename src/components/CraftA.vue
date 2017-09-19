@@ -286,6 +286,7 @@
       onChange (e) {
         if (e === 'new') {
           this.operate = true
+          this.uploadBtn = this.uploadBtn + 'new'
         } else if (e === 'material') {
           this.uploadMaterial = true
         } else if (e === 'bannerInput') {
