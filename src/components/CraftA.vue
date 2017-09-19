@@ -284,7 +284,9 @@
         }
       },
       onChange (e) {
-        if (e === 'material') {
+        if (e === 'new') {
+          this.operate = true
+        } else if (e === 'material') {
           this.uploadMaterial = true
         } else if (e === 'bannerInput') {
           this.uploadBanner = true
@@ -309,7 +311,6 @@
         let formData = new FormData()
         const image = this.$refs[e] && this.$refs[e].file
         formData.append('image', image)
-        this.operate = true
         fetch(`${root}backend/${type}/upload/`, {
           method: 'POST',
           credentials: 'include',
