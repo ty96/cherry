@@ -82,7 +82,7 @@
         </div>
         <p class="delBtn"><a @click="delItem(index)"><CButton text="删除该项" :small="true" color="#666"></CButton></a></p>
       </div>
-      <div class="card" id="newCard">
+      <div class="card">
         <div class="select">
           <span class="upload" v-if="uploadBtn.indexOf('new') + 1" @click="upload('craftdetail', 'new')">上传</span>
           <span class="success" v-if="uploadSuc.indexOf('new') + 1">成功</span>
@@ -289,6 +289,9 @@
         } else if (e === 'bannerInput') {
           this.uploadBanner = true
         } else {
+          if (!this.operate) {
+            return void 0
+          }
           this.uploadBtn = this.uploadBtn + e
         }
       },
@@ -355,10 +358,7 @@
           })
           .then((data) => {
             if (!data.error) {
-              document.getElementById('newCard').style.display = 'none'
-              setTimeout(function () {
-                alert('上传成功！')
-              }, 10)
+              alert('上传成功！')
               window.location.reload()
             }
           })
