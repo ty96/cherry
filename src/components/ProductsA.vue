@@ -61,7 +61,7 @@
       </div>
 
       <p>题图: </p>
-      <div class="select">
+      <div class="select" @click="onOperate">
         <span class="upload" v-if="(uploadBtn.indexOf('main' + now) + 1) && operate" @click="upload('main' + now)">上传</span>
         <span class="success" v-if="uploadSuc.indexOf('main' + now) + 1">成功</span>
         <picture-input
@@ -213,8 +213,10 @@
       maintainHandle (e) {
         this.maintain = e
       },
-      onChange (e) {
+      onOperate () {
         this.operate = true
+      },
+      onChange (e) {
         if (this.$refs[e].image || this.$refs[e][0].image) {
           this.uploadBtn = this.uploadBtn + e
         } else {
