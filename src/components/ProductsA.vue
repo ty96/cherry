@@ -54,18 +54,20 @@
         <p>价格: </p><input placeholder="" v-model="price[now]">
         <p>尺寸: </p><input placeholder="" v-model="size">
         <p>材质:</p>
-        <span>橡胶木：</span><input class="checkbox" type="checkbox" v-model="material[0]">
-        <span>白橡木：</span><input class="checkbox" type="checkbox" v-model="material[1]">
-        <span>樱桃木：</span><input class="checkbox" type="checkbox" v-model="material[2]">
+        <template v-for="(item, index) in wood">
+          <span>{{item.name}}：</span>
+          <input class="checkbox" type="checkbox" v-model="material[index]" :checked="true">
+        </template>
       </div>
 
       <p>题图: </p>
       <div class="select">
-        <span class="upload" v-if="uploadBtn.indexOf('main' + now) + 1" @click="upload('main' + now)">上传</span>
+        <span class="upload" v-if="(uploadBtn.indexOf('main' + now) + 1) && operate" @click="upload('main' + now)">上传</span>
         <span class="success" v-if="uploadSuc.indexOf('main' + now) + 1">成功</span>
         <picture-input
           :ref="'main' + now"
           @change="onChange('main' + now)"
+          @remove="onRemove"
           width="180"
           height="180"
           margin="0"
@@ -147,7 +149,10 @@
         material: [],
         params: {},
         maintain: {},
-        serial: []
+        serial: [],
+        wood: [],
+        allWood: '',
+        operate: false
       }
     },
     components: {
@@ -188,6 +193,19 @@
               }
             }
           })
+
+        fetch(`${root}backend/material/get/`, {
+          method: 'GET',
+          credentials: 'include'
+        })
+          .then((res) => {
+            return res.json()
+          })
+          .then((data) => {
+            if (!data.error) {
+              this.wood = data.body.info
+            }
+          })
       },
       paramHandle (e) {
         this.params = e
@@ -196,11 +214,15 @@
         this.maintain = e
       },
       onChange (e) {
+        this.operate = true
         if (this.$refs[e].image || this.$refs[e][0].image) {
           this.uploadBtn = this.uploadBtn + e
         } else {
           alert('您的浏览器不支持 FileReader API')
         }
+      },
+      onRemove () {
+        this.operate = false
       },
       upload (e) {
         let formData = new FormData()
@@ -222,9 +244,7 @@
               }
               this.uploadBtn.replace(e, '')
               this.uploadSuc = this.uploadSuc + e
-              console.log(this.images)
             }
-            // TODO refresh()
           })
       },
       hideDetail () {
@@ -243,9 +263,9 @@
           .then((data) => {
             if (!data.error) {
               this.size = data.body.base.size
-              this.material[0] = JSON.stringify(data.body.base.material).indexOf('橡胶木') + 1
-              this.material[1] = JSON.stringify(data.body.base.material).indexOf('白橡木') + 1
-              this.material[2] = JSON.stringify(data.body.base.material).indexOf('樱桃木') + 1
+              for (let i = 0; i < this.wood.length; i++) {
+                this.material[i] = JSON.stringify(data.body.base.material).indexOf(this.wood[i].name) + 1
+              }
               this.params = data.body.params
               this.content = data.body.detail
               this.maintain = data.body.maintain
@@ -294,14 +314,10 @@
         base.serial = this.serial[this.now] || ''
         base.size = this.size
         base.material = []
-        if (this.material[0]) {
-          base.material.push('橡胶木')
-        }
-        if (this.material[1]) {
-          base.material.push('白橡木')
-        }
-        if (this.material[2]) {
-          base.material.push('樱桃木')
+        for (let i = 0; i < this.material.length; i++) {
+          if (this.material[i]) {
+            base.material.push(this.wood[i].name)
+          }
         }
 
         base.images = []

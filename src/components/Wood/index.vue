@@ -3,7 +3,7 @@
     <h1 v-if="!select">精选材质</h1>
     <div class="box" :class="{'type': select.length}">
       <div v-for="(item, index) in select">
-        <div :style="{'background': 'url(' + item.image + ')'}"></div>
+        <div :style="{'background-image': 'url(' + item.image + ')'}"></div>
         <p>{{item.name}}</p>
       </div>
       <div v-if="!select.length">
@@ -67,6 +67,7 @@
     height: 60px;
     background-size: cover;
     border-radius: 30px;
+    margin: auto;
   }
 
   .box p {
