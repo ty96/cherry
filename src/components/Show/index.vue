@@ -47,7 +47,7 @@
     padding: 40px 150px;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     background: #f7f7f7;
   }
 
@@ -66,7 +66,7 @@
 
   .show p {
     color: #636363;
-    font-size: 14px;
+    font-size: 16px;
     margin-bottom: 20px;
   }
 

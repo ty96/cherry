@@ -8,8 +8,8 @@
         </swiper-slide>
       </swiper>
     </div>
-    <div class="arr prev" :style="{'left': margin - 60 + 'px'}" slot="button-prev">&lt;</div>
-    <div class="arr next" :style="{'right': margin - 60 + 'px'}"  slot="button-next">&gt;</div>
+    <div class="arr prev" :style="{'left': margin - 60 + 'px'}" slot="button-prev"><img src="../../assets/left.svg"></div>
+    <div class="arr next" :style="{'right': margin - 60 + 'px'}"  slot="button-next"><img src="../../assets/right.svg"></div>
     <a href="#/products/橱柜"><p class="more"><CButton text="更多优品"></CButton></p></a>
   </div>
 </template>
@@ -103,30 +103,17 @@
   }
 
   .arr {
-    font-family: sans-serif;
     width: 50px;
     height: 50px;
-    line-height: 50px;
-    text-align: center;
     top: 45%;
     position: absolute;
-    font-size: 16px;
-    font-weight: 900;
-    color: #636363;
-    border-radius: 50%;
-    border: 2px solid #636363;
-    overflow: hidden;
-    background: white;
     cursor: pointer;
     margin: 10px;
-    user-select: none;
   }
 
-  .arr:hover {
-    width: 60px;
-    height: 60px;
-    line-height: 60px;
-    transition: all 0.2s ease 0s;
+  .arr img {
+    width: 50px;
+    height: 50px;
   }
 
   .more {

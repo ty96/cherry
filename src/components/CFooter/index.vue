@@ -135,7 +135,7 @@
     content: '';
     position: absolute;
     right: 0;
-    height: 14px;
+    height: 16px;
     width: 1px;
     background: #ccc;
     margin: 25px 0;
@@ -146,7 +146,7 @@
   }
 
   .copyright {
-    font-size: 14px;
+    font-size: 16px;
     color: #636363;
     text-align: center;
     margin: 20px auto 25px;

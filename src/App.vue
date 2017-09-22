@@ -43,7 +43,7 @@
     font-family: serif;
     width: 65px;
     border: 1px solid #636363;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 26px;
     text-align: center;
     opacity: 0.6;

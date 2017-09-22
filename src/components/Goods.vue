@@ -147,7 +147,7 @@
     color: #444444;
     font-size: 32px;
     text-align: center;
-    padding: 72px 0 60px;
+    padding: 72px 0 20px;
   }
 
   .items {
@@ -155,7 +155,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
   }
 
   @media (max-width: 1366px) {

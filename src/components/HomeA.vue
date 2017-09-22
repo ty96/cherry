@@ -267,7 +267,7 @@
     content: "上传";
     color: white;
     line-height: 30px;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: lighter;
     text-align: center;
     position: absolute;

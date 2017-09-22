@@ -6,8 +6,8 @@
       </swiper-slide>
     </swiper>
     <div class="pagination"></div>
-    <div class="prev arr" slot="button-prev">&lt;</div>
-    <div class="next arr" slot="button-next">&gt;</div>
+    <div class="prev arr" slot="button-prev"><img src="../../assets/left.svg"></div>
+    <div class="next arr" slot="button-next"><img src="../../assets/right.svg"></div>
   </div>
 </template>
 
@@ -94,30 +94,18 @@
   }
 
   .arr {
-    font-family: sans-serif;
     width: 50px;
     height: 50px;
-    line-height: 50px;
-    text-align: center;
     top: 40%;
     position: absolute;
-    font-size: 16px;
-    font-weight: 900;
-    color: white;
-    border-radius: 50%;
     overflow: hidden;
-    background: rgba(0, 0, 0, 0.05);
     cursor: pointer;
     margin: 10px;
-    user-select: none;
   }
 
-  .arr:hover {
-    width: 60px;
-    height: 60px;
-    line-height: 60px;
-    transition: all 0.2s ease 0s;
-    background: rgba(0, 0, 0, 0.15);
+  .arr img {
+    width: 50px;
+    height: 50px;
   }
 
   .prev {

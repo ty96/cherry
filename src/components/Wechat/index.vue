@@ -51,7 +51,8 @@
     width: 420px;
     margin: auto;
     color: white;
-    font-size: 14px;
+    font-size: 16px;
+    line-height: 2em;
   }
 
   .wechat img {

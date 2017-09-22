@@ -54,7 +54,7 @@
   .detail p {
     color: #999;
     margin: 30px 0;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 100;
   }
 
@@ -63,9 +63,9 @@
     vertical-align: top;
     height: 30px;
     line-height: 30px;
-    font-size: 14px;
+    font-size: 16px;
     color: #ccc;
-    padding: 0 14px;
+    padding: 0 16px;
     margin: 3px 6px 3px 0;
     border: 2px solid #fef5f5;
   }

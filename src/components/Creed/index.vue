@@ -55,7 +55,7 @@
 
   .box > div > p {
     color: #636363;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 2em;
     margin: 30px auto 100px;
   }

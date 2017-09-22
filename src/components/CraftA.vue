@@ -523,7 +523,7 @@
     width: 120px;
     height: 36px;
     padding: 0 20px;
-    font-size: 14px;
+    font-size: 16px;
     box-sizing: border-box;
     outline: none;
     border-radius: 10px;
@@ -537,7 +537,7 @@
     width: 120px;
     height: 36px;
     padding: 0 20px;
-    font-size: 14px;
+    font-size: 16px;
     box-sizing: border-box;
     display: inline-block;
     margin: 0 auto 20px;
@@ -585,7 +585,7 @@
     content: "上传";
     color: white;
     line-height: 30px;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: lighter;
     text-align: center;
     position: absolute;

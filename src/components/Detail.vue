@@ -123,6 +123,7 @@
   .house h2 {
     color: #444;
     font-size: 28px;
+    margin-bottom: 20px;
   }
 
   .house p {

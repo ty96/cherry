@@ -610,7 +610,7 @@
     content: "上传";
     color: white;
     line-height: 30px;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: lighter;
     text-align: center;
     position: absolute;
@@ -662,7 +662,7 @@
     width: 960px;
     height: 50px;
     padding: 0 20px;
-    font-size: 14px;
+    font-size: 16px;
     box-sizing: border-box;
     outline: none;
     border-radius: 10px;
@@ -684,7 +684,7 @@
     width: 960px;
     height: 120px;
     padding: 10px 20px;
-    font-size: 14px;
+    font-size: 16px;
     box-sizing: border-box;
     outline: none;
     border-radius: 10px;

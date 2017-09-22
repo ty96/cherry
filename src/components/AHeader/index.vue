@@ -166,7 +166,7 @@
 
   .form span {
     color: #999;
-    font-size: 14px;
+    font-size: 16px;
     margin: auto 10px;
   }
 
@@ -174,7 +174,7 @@
     height: 20px;
     line-height: 20px;
     width: 100px;
-    font-size: 14px;
+    font-size: 16px;
     color: #636363;
     text-align: center;
     outline: none;

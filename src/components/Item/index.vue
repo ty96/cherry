@@ -63,7 +63,7 @@
 
   .detail p {
     color: #999;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 100;
   }
 </style>

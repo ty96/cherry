@@ -136,9 +136,10 @@
 
   .order > div > p {
     color: #636363;
-    font-size: 14px;
+    font-size: 16px;
     text-align: left;
     margin: 30px auto 100px;
+    line-height: 2em;
   }
 
   @media (max-width: 1366px) {

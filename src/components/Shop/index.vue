@@ -62,8 +62,9 @@
 
   .address p {
     color: #636363;
-    font-size: 14px;
+    font-size: 16px;
     margin-bottom: 5px;
+    line-height: 2em;
   }
 
   .address .info {

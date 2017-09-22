@@ -1,22 +1,25 @@
 <template>
   <div>
-    <div class="header">
-      <div>
-        <a href="#/">首页</a>
-        <a href="#/products/橱柜" @mouseover="showOrder" @mouseout="hideOrder">
-          家具产品
-          <Order :show="order" :form="false" class="menu"></Order>
-        </a>
-        <a href="#/cases">案例</a>
+    <div class="fixBox">
+      <div class="header">
+        <div>
+          <a href="#/">首页</a>
+          <a href="#/products/橱柜" @mouseover="showOrder" @mouseout="hideOrder">
+            家具产品
+            <Order :show="order" :form="false" class="menu"></Order>
+          </a>
+          <a href="#/cases">案例</a>
+        </div>
+        <a class="logo" href="#/"><img src="../../assets/logo_simplify.svg"></a>
+        <div>
+          <a href="#/craft">工艺</a>
+          <a href="#/about">关于</a>
+          <a class="admin" id="admin" @click="toggleSelect"><img src="./assets/images/admin.svg"></a>
+        </div>
       </div>
-      <a class="logo" href="#/"><img src="../../assets/logo_simplify.svg"></a>
-      <div>
-        <a href="#/craft">工艺</a>
-        <a href="#/about">关于</a>
-        <a class="admin" id="admin" @click="toggleSelect"><img src="./assets/images/admin.svg"></a>
-      </div>
+      <Order :show="form" :form="true" class="menu"></Order>
     </div>
-    <Order :show="form" :form="true" class="menu"></Order>
+    <div class="shape"></div>
   </div>
 </template>
 
@@ -57,6 +60,13 @@
 </script>
 
 <style scoped>
+  .fixBox {
+    position: fixed;
+    width: 100%;
+    background: white;
+    z-index: 999;
+  }
+
   .header {
     height: 100px;
     padding: 0 70px;
@@ -91,6 +101,11 @@
     width: 24px;
     height: 24px;
     margin-bottom: -5px;
+  }
+
+  .shape {
+    width: 100%;
+    height: 100px;
   }
 
   .menu {

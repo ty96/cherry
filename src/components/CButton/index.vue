@@ -54,7 +54,7 @@
     width: 65px;
     height: 26px;
     border: 1px solid #636363;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 26px;
   }
 </style>

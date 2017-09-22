@@ -50,11 +50,14 @@
   .type {
     width: auto;
     display: block;
+    padding-right: 30px;
   }
 
   .box > div {
     width: 72px;
     text-align: center;
+    margin-top: 30px;
+    margin-right: 30px;
   }
 
   .type > div {
@@ -72,7 +75,7 @@
 
   .box p {
     color: #999;
-    font-size: 14px;
+    font-size: 16px;
     margin-top: 12px;
   }
 </style>
