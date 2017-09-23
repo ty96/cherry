@@ -63,6 +63,7 @@
   .fixBox {
     position: fixed;
     width: 100%;
+    min-width: 1280px;
     background: white;
     z-index: 999;
   }
@@ -106,6 +107,7 @@
   .shape {
     width: 100%;
     height: 100px;
+    min-width: 1280px;
   }
 
   .menu {
