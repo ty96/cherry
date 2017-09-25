@@ -408,7 +408,6 @@
               this.suggestion = data.body.advise
               this.detail = true
             }
-            console.log(this.images)
           })
       },
       appendItem () {

@@ -27,7 +27,7 @@
           <textarea v-model="intro[index]">
             这里填充简介，上面填充标题和 label。标题与 label 用 @ 分割，label 与 label 之间用空格分割，形如『标题@label babel』即可。
           </textarea>
-          <span>价格： </span><input class="priceInput" placeholder="" type="number" v-model="price[index]">
+          <span>价格： </span><input class="priceInput" placeholder="" v-model="price[index]">
         </div>
         <p class="button">
           <a @click="showDetail(index)"><CButton text="编辑" color="#666" :small="true"></CButton></a>
