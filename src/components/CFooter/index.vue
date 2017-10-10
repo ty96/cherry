@@ -4,7 +4,7 @@
       <div class="tel">
         <h3>联系方式</h3>
         <div>
-          <p class="num">400-3763-218</p>
+          <p class="num">028-63160613</p>
           <p>客服服务时间： 8:00 - 23:00</p>
           <div class="media">
             <span>关注：</span>
