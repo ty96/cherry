@@ -66,6 +66,7 @@
     min-width: 1280px;
     background: white;
     z-index: 999;
+    border-bottom: 1px solid #fefefe;
   }
 
   .header {
