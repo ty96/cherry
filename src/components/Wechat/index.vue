@@ -7,7 +7,7 @@
     </template>
     <template v-else="!join">
       <h1 class="join">人才招聘</h1>
-      <p>招聘优秀人才，让樱桃家居不断成长</p>
+      <p>招聘优秀人才，让碧樱家居不断成长</p>
       <a href="#/join"><CButton text="详情" color="white" class="more"></CButton></a>
     </template>
   </div>

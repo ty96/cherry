@@ -1,6 +1,6 @@
 <template>
   <div class="creed">
-    <h1 v-if="unique">关于樱桃</h1>
+    <h1 v-if="unique">关于碧樱</h1>
     <div class="box">
       <div>
         <img v-if="!unique" src="./assets/images/leaf.svg">

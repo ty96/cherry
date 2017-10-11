@@ -3,7 +3,7 @@
     <CHeader></CHeader>
     <CTitle
       title="工艺"
-      desc="来自樱桃家具的工艺保证，还原最优质实木体验"
+      desc="来自碧樱家具的工艺保证，还原最优质实木体验"
     ></CTitle>
     <Shot :images="wood.info" title="精选材质" :desc="data.desc" :wood="true"></Shot>
     <!--<Material :data="data.accessoryDetail"></Material>-->
