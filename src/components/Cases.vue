@@ -79,7 +79,6 @@
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: flex-start;
-    min-height: 1140px;
   }
 
   @media (max-width: 1366px) {

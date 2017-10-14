@@ -87,7 +87,6 @@
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: flex-start;
-    min-height: 1140px;
   }
 
   .blank {
