@@ -8,19 +8,19 @@
       <div class="order">
         <div>
           <img src="./assets/images/paper.svg">
-          <p>通过网页或电话预约服务，记录基本联系信息。</p>
+          <p>通过网页或电话免费预约服务，碧樱客服记录基本联系信息。</p>
         </div>
         <div>
           <img src="./assets/images/ruler.svg">
-          <p>樱桃团队上门进行专业测量，为您的需求量“房”定制。</p>
+          <p>碧樱设计师团队免费上门测量，与您面对面沟通深度了解需求，全程一对一服务。</p>
         </div>
         <div>
           <img src="./assets/images/copy.svg">
-          <p>提供多种优质解决方案，您可到店内与我们共同确定合适之选。</p>
+          <p>碧樱设计师提供多种优质解决方案，并与您一起核实尺寸、选定风格与摆放的位置，确认最终定制方案。</p>
         </div>
         <div>
           <img src="./assets/images/tools.svg">
-          <p>家装材料准备，樱桃团队将进场施工，完毕后将享受最优售后服务。</p>
+          <p>碧樱安装团队免费上门安装，高品质售后服务，五年保修，终身维护。</p>
         </div>
       </div>
     </template>

@@ -3,7 +3,7 @@
     <CHeader></CHeader>
     <CTitle
       title="人才招聘"
-      desc="招聘优秀人才，让樱桃家居不断成长"
+      desc="招聘优秀人才，让碧樱家居不断成长"
     ></CTitle>
     <Recruit v-for="(item, index) in data" :data="item" :pink="index % 2" :id="item.id" :key="index" v-if="item.name"></Recruit>
     <CFooter></CFooter>

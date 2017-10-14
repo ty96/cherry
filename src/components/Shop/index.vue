@@ -3,15 +3,15 @@
     <div class="address">
       <h1>家具体验馆</h1>
       <template v-if="!unique">
-        <p>四川省成都市成华区建设北路2段4号樱桃家具体验馆（营业时间：8:30 至 11:00）</p>
+        <p>四川省成都市武侯区七里大道红星欧力洛雅3楼C8075（营业时间：10:00-18:30）</p>
         <a href="#/about"><CButton text="详情" class="more"></CButton></a>
       </template>
       <template v-else="!unique">
-        <p class="info">地址：四川省成都市成华区建设北路2段4号樱桃家具体验馆</p>
+        <p class="info">地址：四川省成都市武侯区七里大道红星欧力洛雅3楼C8075</p>
         <p>营业时间：</p>
-        <p class="info">上午8:30 至 晚上11:00（周一 至 周六）</p>
-        <p>咨询电话：</p>
-        <p class="info">400-3145-218（客服） 17713558847（某先生）</p>
+        <p class="info">全周无休 10:00-18:30</p>
+        <p>预约电话：</p>
+        <p class="info">028-63160613</p>
       </template>
     </div>
     <img src="./assets/images/shop-a.jpg">

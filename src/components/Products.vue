@@ -3,7 +3,7 @@
     <CHeader></CHeader>
     <CTitle
       :title="this.position"
-      desc="源自樱桃木的魅力，展现真实木质纹理效果"
+      desc="源自碧樱家的魅力，真实展现实木家具质感"
     ></CTitle>
     <div
       class="items"

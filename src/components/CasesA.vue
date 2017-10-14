@@ -228,7 +228,7 @@
       </div>
 
       <p class="button add" @click="addInstance"><CButton color="pink" text="增加一项"></CButton></p>
-      <p>樱桃建议: </p><textarea placeholder="户型描述" v-model="suggestion"></textarea>
+      <p>碧樱建议: </p><textarea placeholder="户型描述" v-model="suggestion"></textarea>
       <p class="submit" @click="save"><CButton color="#333" text="保存"></CButton></p>
     </div>
     <div class="mask" v-if="detail" @click="hideDetail"></div>

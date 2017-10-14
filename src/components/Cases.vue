@@ -3,7 +3,7 @@
     <CHeader></CHeader>
     <CTitle
       title="案例"
-      desc="樱桃家具成功案例，让你感受不同的视觉盛宴"
+      desc="碧樱家具成功案例，让你感受不同的视觉盛宴"
     ></CTitle>
     <div class="cards">
       <a v-for="(item, index) in data" :href="'#/detail/' + item.cid" :key="index">

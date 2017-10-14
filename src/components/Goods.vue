@@ -155,7 +155,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
   }
 
   @media (max-width: 1366px) {

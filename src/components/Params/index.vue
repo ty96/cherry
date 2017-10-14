@@ -79,16 +79,25 @@
     </div>
     <div class="tips" v-if="!isAdmin">
       <div>
-        <h4>满88元免邮费</h4>
-        <p>单笔订单金额（不含运费）满88元可免邮费，不满88元，单笔订单收取10元邮费。</p>
+        <img src="./assets/images/direct.svg">
+        <div>
+          <h4>产地直供</h4>
+          <p>世界名优供应商</p>
+        </div>
       </div>
       <div>
-        <h4>樱桃自营品牌</h4>
-        <p>樱桃原创生活类电商品牌，所有商品均为网易自营，品质保证。</p>
+        <img src="./assets/images/exchange.svg">
+        <div>
+          <h4>流程透明</h4>
+          <p>产业链全打通</p>
+        </div>
       </div>
       <div>
-        <h4>部分地区无法配送</h4>
-        <p>该商品不支持配送至澳门、台湾、香港。</p>
+        <img src="./assets/images/factory.svg">
+        <div>
+          <h4>自有工厂</h4>
+          <p>砍掉中间环节</p>
+        </div>
       </div>
     </div>
   </div>
@@ -222,6 +231,19 @@
 
   .tips > div {
     width: 300px;
+  }
+
+  .tips > div > div {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .tips img {
+    width: 50px;
+    height: 50px;
+    margin: auto 50px;
+    display: inline-block;
+    vertical-align: middle;
   }
 
   .tips h4 {

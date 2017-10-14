@@ -1,13 +1,13 @@
 <template>
   <div class="wechat">
     <template v-if="!join">
-      <h1>樱桃家具 · 微信公众号</h1>
+      <h1>碧樱家具 · 微信公众号</h1>
       <p>指尖掌握最新动态，查询并了解更多资讯，尽在移动端微信公众号，敬请扫描微信二维码关注。</p>
       <img src="../../assets/qr.jpg">
     </template>
     <template v-else="!join">
       <h1 class="join">人才招聘</h1>
-      <p>招聘优秀人才，让樱桃家居不断成长</p>
+      <p>招聘优秀人才，让碧樱家居不断成长</p>
       <a href="#/join"><CButton text="详情" color="white" class="more"></CButton></a>
     </template>
   </div>

@@ -3,7 +3,7 @@
     <CHeader></CHeader>
     <CTitle
       title="关于"
-      desc="樱桃家具，真诚为您提供每一个细节服务"
+      desc="碧樱家具，真诚为您提供每一个细节服务"
     ></CTitle>
     <Creed :unique="true"></Creed>
     <Shop :unique="true"></Shop>

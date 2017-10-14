@@ -26,7 +26,7 @@
       :info="item.price_desc"
       :desc="item.desc"
     ></Shot>
-    <h1>樱桃建议</h1>
+    <h1>碧樱建议</h1>
     <p class="advise">{{data.advise}}</p>
     <CFooter></CFooter>
   </div>

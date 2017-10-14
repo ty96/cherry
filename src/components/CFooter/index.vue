@@ -4,20 +4,19 @@
       <div class="tel">
         <h3>联系方式</h3>
         <div>
-          <p class="num">400-3763-218</p>
+          <p class="num">028-63160613</p>
           <p>客服服务时间： 8:00 - 23:00</p>
           <div class="media">
             <span>关注：</span>
-            <!--<a><img class="qq" src="./assets/images/qq.png"></a>-->
-            <!--<a><img src="./assets/images/wechat.png"></a>-->
-            <a href="http://weibo.com/u/6324661983/home?topnav=1&wvr=6"><img src="./assets/images/weibo.png"></a>
+            <a target="_blank" href="https://www.douban.com/people/beinghouse"><img class="douban" src="./assets/images/douban.png"></a>
+            <a target="_blank" href="http://weibo.com/u/6324661983"><img src="./assets/images/weibo.png"></a>
           </div>
         </div>
       </div>
       <div class="why">
         <h3>为何选择碧樱</h3>
         <div>
-          <p>碧樱利用互联网优势，与传统实木家具行业相结合，节省中间多层经销商环节，以降低家具渠道成本，从而消费者能够以更加合理的价格享受到实木家具带来的绿色环保、工艺美观的生活品质。</p>
+          <p>碧樱利用O2O经营模式来平衡实木定制的价格，节省中间多层经销商环节，降低渠道成本，从而让消费者能以更合理的价格享受实木定制家居带来的绿色环保和高品质的个性化体验。</p>
         </div>
       </div>
       <div class="qr">
@@ -87,8 +86,8 @@
     vertical-align: middle;
   }
 
-  .media .qq {
-    margin-right: 26px;
+  .media .douban {
+    margin-right: 20px;
   }
 
   .media span {
