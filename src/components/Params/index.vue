@@ -6,73 +6,73 @@
         <div class="item">
           <img src="./assets/images/param-a.svg">
           <h5>油漆工艺</h5>
-          <p v-if="!isAdmin">{{data['油漆工艺']}}</p>
+          <p v-if="!isAdmin" v-html="data['油漆工艺']"></p>
           <input v-if="isAdmin" v-model="params.油漆工艺" @change="save">
         </div>
         <div class="item">
           <img src="./assets/images/param-b.svg">
           <h5>颜色</h5>
-          <p v-if="!isAdmin">{{data['颜色']}}</p>
+          <p v-if="!isAdmin" v-html="data['颜色']"></p>
           <input v-if="isAdmin" v-model="params.颜色" @change="save">
         </div>
         <div class="item">
           <img src="./assets/images/param-c.svg">
           <h5>发货时间</h5>
-          <p v-if="!isAdmin">{{data['发货时间']}}</p>
+          <p v-if="!isAdmin" v-html="data['发货时间']"></p>
           <input v-if="isAdmin" v-model="params.发货时间" @change="save">
         </div>
         <div class="item">
           <img src="./assets/images/param-d.svg">
           <h5>物流配送</h5>
-          <p v-if="!isAdmin">{{data['物流配送']}}</p>
+          <p v-if="!isAdmin" v-html="data['物流配送']"></p>
           <input v-if="isAdmin" v-model="params.物流配送" @change="save">
         </div>
         <div class="item">
           <img src="./assets/images/param-e.svg">
           <h5>质量保证</h5>
-          <p v-if="!isAdmin">{{data['质量保证']}}</p>
+          <p v-if="!isAdmin" v-html="data['质量保证']"></p>
           <input v-if="isAdmin" v-model="params.质量保证" @change="save">
         </div>
         <div class="item">
           <img src="./assets/images/param-f.svg">
           <h5>环保评测</h5>
-          <p v-if="!isAdmin">{{data['环保评测']}}</p>
+          <p v-if="!isAdmin" v-html="data['环保评测']"></p>
           <input v-if="isAdmin" v-model="params.环保评测" @change="save">
         </div>
         <div class="item">
           <img src="./assets/images/param-g.svg">
           <h5>尺寸</h5>
-          <p v-if="!isAdmin">{{data['尺寸']}}</p>
+          <p v-if="!isAdmin" v-html="data['尺寸']"></p>
           <input v-if="isAdmin" v-model="params.尺寸" @change="save">
         </div>
         <div class="item">
           <img src="./assets/images/param-h.svg">
           <h5>材质</h5>
-          <p v-if="!isAdmin">{{data['材质']}}</p>
+          <p v-if="!isAdmin" v-html="data['材质']"></p>
           <input v-if="isAdmin" v-model="params.材质" @change="save">
         </div>
         <div class="item">
           <img src="./assets/images/param-i.svg">
           <h5>拼接工艺</h5>
-          <p v-if="!isAdmin">{{data['拼接工艺']}}</p>
+          <p v-if="!isAdmin" v-html="data['拼接工艺']"></p>
           <input v-if="isAdmin" v-model="params.拼接工艺" @change="save">
         </div>
         <div class="item">
           <img src="./assets/images/param-j.svg">
           <h5>安装需求</h5>
-          <p v-if="!isAdmin">{{data['安装需求']}}</p>
+          <p v-if="!isAdmin" v-html="data['安装需求']"></p>
           <input v-if="isAdmin" v-model="params.安装需求" @change="save">
         </div>
         <div class="item">
           <img src="./assets/images/param-k.svg">
           <h5>款式</h5>
-          <p v-if="!isAdmin">{{data['款式']}}</p>
+          <p v-if="!isAdmin" v-html="data['款式']"></p>
           <input v-if="isAdmin" v-model="params.款式" @change="save">
         </div>
         <div class="item">
           <img src="./assets/images/param-l.svg">
           <h5>生产周期</h5>
-          <p v-if="!isAdmin">{{data['生产周期']}}</p>
+          <p v-if="!isAdmin" v-html="data['生产周期']"></p>
           <input v-if="isAdmin" v-model="params.生产周期" @change="save">
         </div>
       </div>
