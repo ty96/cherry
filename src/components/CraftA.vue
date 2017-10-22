@@ -284,23 +284,16 @@
         }
       },
       onChange (e) {
-        console.log(e)
         if (e === 'new') {
           this.operate = true
-          this.uploadBtn = this.uploadBtn + 'new'
+          this.uploadBtn = this.uploadBtn + e
         } else if (/detail[0-9]+/.test(e)) {
-          console.log('inner')
+          this.uploadBtn = this.uploadBtn + e
           this.operate = true
         } else if (e === 'material') {
           this.uploadMaterial = true
         } else if (e === 'bannerInput') {
           this.uploadBanner = true
-        } else {
-          if (!this.operate) {
-            return void 0
-          }
-          this.uploadBtn = this.uploadBtn + e
-          console.log(this.uploadBtn)
         }
       },
       onRemove (e) {
