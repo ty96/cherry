@@ -307,7 +307,10 @@
       },
       upload (type, e, index) {
         let formData = new FormData()
-        const image = this.$refs[e] && this.$refs[e].file
+        let image = this.$refs[e] && this.$refs[e].file
+        if (!image) {
+          image = this.$refs[e] && this.$refs[e][0].file
+        }
         formData.append('image', image)
         fetch(`${root}backend/${type}/upload/`, {
           method: 'POST',
