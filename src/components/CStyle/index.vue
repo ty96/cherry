@@ -69,8 +69,8 @@
   }
 
   .tri img {
-    width: 360px;
-    height: 240px;
+    width: 340px;
+    height: 230px;
     margin-top: 40px;
   }
 
