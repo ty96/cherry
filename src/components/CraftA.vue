@@ -287,6 +287,8 @@
         if (e === 'new') {
           this.operate = true
           this.uploadBtn = this.uploadBtn + 'new'
+        } else if (/detail[0-9]+/.test(e)) {
+          this.operate = true
         } else if (e === 'material') {
           this.uploadMaterial = true
         } else if (e === 'bannerInput') {
