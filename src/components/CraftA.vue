@@ -51,8 +51,8 @@
     <div class="cards">
       <div class="card" v-for="(item,index) in data.accessoryDetail" :key="index">
         <div class="select" @click="showUpload">
-          <span class="upload" v-if="(uploadBtn.indexOf('detail' + index) + 1) && operate" @click="upload('craftdetail', 'detail' + index, index)">上传</span>
-          <span class="success" v-if="uploadSuc.indexOf('detail' + index) + 1">成功</span>
+          <span class="upload" v-if="(uploadBtn.indexOf('detail' + index + '@') + 1) && operate" @click="upload('craftdetail', 'detail' + index, index)">上传</span>
+          <span class="success" v-if="uploadSuc.indexOf('detail' + index + '@') + 1">成功</span>
           <picture-input
             :ref="'detail' + index"
             @change="onChange('detail' + index)"
@@ -84,8 +84,8 @@
       </div>
       <div class="card">
         <div class="select">
-          <span class="upload" v-if="uploadBtn.indexOf('new') + 1" @click="upload('craftdetail', 'new')">上传</span>
-          <span class="success" v-if="uploadSuc.indexOf('new') + 1">成功</span>
+          <span class="upload" v-if="uploadBtn.indexOf('new@') + 1" @click="upload('craftdetail', 'new')">上传</span>
+          <span class="success" v-if="uploadSuc.indexOf('new@') + 1">成功</span>
           <picture-input
             :ref="'new'"
             @change="onChange('new')"
@@ -286,9 +286,9 @@
       },
       onChange (e) {
         if (e === 'new') {
-          this.uploadBtn = this.uploadBtn + e
+          this.uploadBtn = this.uploadBtn + e + '@'
         } else if (/detail[0-9]+/.test(e)) {
-          this.uploadBtn = this.uploadBtn + e
+          this.uploadBtn = this.uploadBtn + e + '@'
         } else if (e === 'material') {
           this.uploadMaterial = true
         } else if (e === 'bannerInput') {
@@ -334,7 +334,7 @@
               } else if (type === 'material') {
                 this.newWood.url = data.body.url
               }
-              this.uploadSuc = this.uploadSuc + e
+              this.uploadSuc = this.uploadSuc + e + '@'
             }
           })
       },

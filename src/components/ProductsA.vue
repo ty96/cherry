@@ -62,8 +62,8 @@
 
       <p>题图: </p>
       <div class="select" @click="onOperate">
-        <span class="upload" v-if="(uploadBtn.indexOf('main' + now) + 1) && operate" @click="upload('main' + now)">上传</span>
-        <span class="success" v-if="uploadSuc.indexOf('main' + now) + 1">成功</span>
+        <span class="upload" v-if="(uploadBtn.indexOf('main' + now + '@') + 1) && operate" @click="upload('main' + now)">上传</span>
+        <span class="success" v-if="uploadSuc.indexOf('main' + now + '@') + 1">成功</span>
         <picture-input
           :ref="'main' + now"
           @change="onChange('main' + now)"
@@ -218,7 +218,7 @@
       },
       onChange (e) {
         if (this.$refs[e].image || this.$refs[e][0].image) {
-          this.uploadBtn = this.uploadBtn + e
+          this.uploadBtn = this.uploadBtn + e + '@'
         } else {
           alert('您的浏览器不支持 FileReader API')
         }
@@ -240,12 +240,12 @@
           })
           .then((data) => {
             if (!data.error) {
-              let num = e.match(/[0-9]/) || 0
+              let num = e.match(/[0-9]+/) || 0
               if (e.indexOf('main') !== -1) {
                 this.image[num] = data.body.url
               }
               this.uploadBtn.replace(e, '')
-              this.uploadSuc = this.uploadSuc + e
+              this.uploadSuc = this.uploadSuc + e + '@'
             }
           })
       },
