@@ -411,6 +411,11 @@
       },
       showUpload () {
         if (this.switch) {
+          if (this.uploadBtn.indexOf('new') + 1) {
+            this.uploadBtn = 'new'
+          } else {
+            this.uploadBtn = ''
+          }
           this.operate = true
         }
         this.switch = false
