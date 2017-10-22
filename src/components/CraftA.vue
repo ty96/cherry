@@ -50,7 +50,7 @@
     <h1>配件细节</h1>
     <div class="cards">
       <div class="card" v-for="(item,index) in data.accessoryDetail" :key="index">
-        <div class="select">
+        <div class="select" @click="showUpload">
           <span class="upload" v-if="(uploadBtn.indexOf('detail' + index) + 1) && operate" @click="upload('craftdetail', 'detail' + index, index)">上传</span>
           <span class="success" v-if="uploadSuc.indexOf('detail' + index) + 1">成功</span>
           <picture-input
@@ -190,7 +190,8 @@
           url: ''
         },
         newWood: {},
-        operate: false
+        operate: false,
+        switch: true
       }
     },
     components: {
@@ -285,11 +286,9 @@
       },
       onChange (e) {
         if (e === 'new') {
-          this.operate = true
           this.uploadBtn = this.uploadBtn + e
         } else if (/detail[0-9]+/.test(e)) {
           this.uploadBtn = this.uploadBtn + e
-          this.operate = true
         } else if (e === 'material') {
           this.uploadMaterial = true
         } else if (e === 'bannerInput') {
@@ -406,6 +405,12 @@
               }
             })
         }
+      },
+      showUpload () {
+        if (this.switch) {
+          this.operate = true
+        }
+        this.switch = false
       }
     }
   }
