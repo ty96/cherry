@@ -284,8 +284,8 @@
         }
       },
       onChange (e) {
+        console.log(e)
         if (e === 'new') {
-          console.log(e)
           this.operate = true
           this.uploadBtn = this.uploadBtn + 'new'
         } else if (/detail[0-9]+/.test(e)) {
@@ -300,6 +300,7 @@
             return void 0
           }
           this.uploadBtn = this.uploadBtn + e
+          console.log(this.uploadBtn)
         }
       },
       onRemove (e) {
