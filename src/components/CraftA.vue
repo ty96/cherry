@@ -285,9 +285,11 @@
       },
       onChange (e) {
         if (e === 'new') {
+          console.log(e)
           this.operate = true
           this.uploadBtn = this.uploadBtn + 'new'
         } else if (/detail[0-9]+/.test(e)) {
+          console.log('inner')
           this.operate = true
         } else if (e === 'material') {
           this.uploadMaterial = true
