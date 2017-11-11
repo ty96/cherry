@@ -129,10 +129,6 @@
     max-width: 100%;
   }
 
-  .intro img {
-    max-width: 100%;
-  }
-
   .opacity {
     transition: opacity 1s ease 0s;
   }
@@ -167,5 +163,11 @@
     .intro {
       padding: 40px 120px;
     }
+  }
+</style>
+
+<style>
+  .ql-editor img {
+    max-width: 100%;
   }
 </style>

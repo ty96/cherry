@@ -71,8 +71,8 @@
   }
 
   .show img {
-    width: 420px;
-    height: 420px;
+    width: 460px;
+    height: 460px;
   }
 
   .price {
