@@ -126,6 +126,11 @@
 <style scoped>
   .intro {
     padding: 40px 150px;
+    max-width: 100%;
+  }
+
+  .intro img {
+    max-width: 100%;
   }
 
   .opacity {
